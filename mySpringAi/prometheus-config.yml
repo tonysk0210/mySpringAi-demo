@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 5s # 每 5 秒抓一次所有 target
+  evaluation_interval: 5s # 每 5 秒評估一次告警規則
+
+scrape_configs:
+  - job_name: 'spring-ai-prometheus' # 這個抓取任務的名稱
+    metrics_path: '/actuator/prometheus' # 抓這個路徑 GET http://host.docker.internal:8080/actuator/prometheus
+    scrape_interval: 5s # 每 5 秒抓一次
+    static_configs:
+      - targets: [ 'host.docker.internal:8080' ] # 抓這個位置
