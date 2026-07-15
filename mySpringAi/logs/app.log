@@ -7196,3 +7196,232 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x16
 2026-07-15T17:30:57.477+08:00  INFO 9336 --- [mySpringAi] [http-nio-8080-exec-1] [                                                 ] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
 2026-07-15T17:30:57.640+08:00  INFO 9336 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.MySpringAiApplication     : Started MySpringAiApplication in 39.627 seconds (process running for 43.472)
 2026-07-15T17:45:03.491+08:00  WARN 9336 --- [mySpringAi] [HikariPool-1:housekeeper] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m4s594ms92µs).
+2026-07-15T21:44:59.488+08:00  INFO 24052 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.MySpringAiApplication     : Starting MySpringAiApplication using Java 25.0.1 with PID 24052 (D:\IdeaProjects\mySpringAi-demo\mySpringAi\target\classes started by tony.shangkuan in D:\IdeaProjects\mySpringAi-demo\mySpringAi)
+2026-07-15T21:44:59.492+08:00  INFO 24052 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.MySpringAiApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-07-15T21:44:59.568+08:00  INFO 24052 --- [mySpringAi] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-07-15T21:44:59.568+08:00  INFO 24052 --- [mySpringAi] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-07-15T21:44:59.595+08:00  INFO 24052 --- [mySpringAi] [restartedMain] [                                                 ] .s.b.d.c.l.DockerComposeLifecycleManager : Using Docker Compose file D:\IdeaProjects\mySpringAi-demo\mySpringAi\compose.yml
+2026-07-15T21:45:16.563+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Network myspringai_default Creating 
+2026-07-15T21:45:16.755+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Network myspringai_default Created 
+2026-07-15T21:45:16.794+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Creating 
+2026-07-15T21:45:16.899+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Creating 
+2026-07-15T21:45:16.900+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Creating 
+2026-07-15T21:45:16.900+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Creating 
+2026-07-15T21:45:16.900+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Creating 
+2026-07-15T21:45:19.970+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Created 
+2026-07-15T21:45:20.359+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Created 
+2026-07-15T21:45:20.359+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Created 
+2026-07-15T21:45:20.359+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Created 
+2026-07-15T21:45:20.391+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Created 
+2026-07-15T21:45:20.435+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Starting 
+2026-07-15T21:45:20.435+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Starting 
+2026-07-15T21:45:20.435+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Starting 
+2026-07-15T21:45:20.435+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Starting 
+2026-07-15T21:45:20.435+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Starting 
+2026-07-15T21:45:24.494+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Started 
+2026-07-15T21:45:24.496+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Started 
+2026-07-15T21:45:24.799+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Started 
+2026-07-15T21:45:25.079+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Started 
+2026-07-15T21:45:25.303+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Started 
+2026-07-15T21:45:25.304+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Waiting 
+2026-07-15T21:45:25.305+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Waiting 
+2026-07-15T21:45:25.305+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Waiting 
+2026-07-15T21:45:25.305+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Waiting 
+2026-07-15T21:45:25.306+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Waiting 
+2026-07-15T21:45:25.812+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Healthy 
+2026-07-15T21:45:25.813+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Healthy 
+2026-07-15T21:45:25.814+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Healthy 
+2026-07-15T21:45:25.818+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Healthy 
+2026-07-15T21:45:25.818+08:00  INFO 24052 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Healthy 
+2026-07-15T21:46:05.660+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.MySpringAiApplication     : Starting MySpringAiApplication using Java 25.0.1 with PID 20868 (D:\IdeaProjects\mySpringAi-demo\mySpringAi\target\classes started by tony.shangkuan in D:\IdeaProjects\mySpringAi-demo\mySpringAi)
+2026-07-15T21:46:05.664+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.MySpringAiApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-07-15T21:46:05.727+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-07-15T21:46:05.727+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-07-15T21:46:05.761+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] .s.b.d.c.l.DockerComposeLifecycleManager : Using Docker Compose file D:\IdeaProjects\mySpringAi-demo\mySpringAi\compose.yml
+2026-07-15T21:46:07.238+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Network myspringai_default Creating 
+2026-07-15T21:46:07.417+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Network myspringai_default Created 
+2026-07-15T21:46:07.449+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Creating 
+2026-07-15T21:46:07.449+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Creating 
+2026-07-15T21:46:07.449+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Creating 
+2026-07-15T21:46:07.449+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Creating 
+2026-07-15T21:46:07.449+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Creating 
+2026-07-15T21:46:10.157+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Created 
+2026-07-15T21:46:10.264+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Created 
+2026-07-15T21:46:10.300+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Created 
+2026-07-15T21:46:10.481+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Created 
+2026-07-15T21:46:10.483+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Created 
+2026-07-15T21:46:10.547+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Starting 
+2026-07-15T21:46:10.547+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Starting 
+2026-07-15T21:46:10.548+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Starting 
+2026-07-15T21:46:10.549+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Starting 
+2026-07-15T21:46:10.549+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Starting 
+2026-07-15T21:46:13.228+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Started 
+2026-07-15T21:46:13.983+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Started 
+2026-07-15T21:46:13.984+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Started 
+2026-07-15T21:46:14.133+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Started 
+2026-07-15T21:46:14.344+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Started 
+2026-07-15T21:46:14.344+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Waiting 
+2026-07-15T21:46:14.344+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Waiting 
+2026-07-15T21:46:14.344+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Waiting 
+2026-07-15T21:46:14.345+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Waiting 
+2026-07-15T21:46:14.345+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Waiting 
+2026-07-15T21:46:14.857+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Healthy 
+2026-07-15T21:46:14.857+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Healthy 
+2026-07-15T21:46:14.858+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Healthy 
+2026-07-15T21:46:14.861+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Healthy 
+2026-07-15T21:46:14.865+08:00  INFO 20868 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Healthy 
+2026-07-15T21:46:44.192+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-07-15T21:46:44.196+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-15T21:46:44.710+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 494 ms. Found 1 JPA repository interface.
+2026-07-15T21:46:46.344+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-15T21:46:46.364+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-15T21:46:46.364+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-15T21:46:46.477+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4691 ms
+2026-07-15T21:46:46.993+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-15T21:46:47.350+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./h2db/chatmemory user=SA
+2026-07-15T21:46:47.352+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-15T21:46:47.471+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-15T21:46:47.566+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-15T21:46:50.464+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-15T21:46:50.608+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./h2db/chatmemory]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: CHATMEMORY/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-15T21:46:52.297+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-15T21:46:52.376+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15T21:47:00.629+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.config.VectorStoreConfig  : VectorStore Bean 建立完成：beanName=pdfVectorStore, provider=Qdrant, collection=pdf-collection, initializeSchema=true, batchingStrategy=TokenCountBatchingStrategy, observationRegistry=SimpleObservationRegistry
+2026-07-15T21:47:02.112+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.config.VectorStoreConfig  : VectorStore Bean 建立完成：beanName=cachingVectorStore, provider=Qdrant, collection=caching-collection, initializeSchema=true, batchingStrategy=TokenCountBatchingStrategy, observationRegistry=SimpleObservationRegistry
+2026-07-15T21:47:04.013+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-15T21:47:06.458+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] c.e.m.util.component.rag.RagDataLoader   : rag-collection 載入完成，共 54 筆 Documents.
+2026-07-15T21:47:07.821+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] c.e.m.util.component.rag.RagDataLoader   : PDF 讀取完成，共 1 份文件
+2026-07-15T21:47:07.948+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.s.a.transformer.splitter.TextSplitter  : Splitting up document into 6 chunks.
+2026-07-15T21:47:08.725+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] c.e.m.util.component.rag.RagDataLoader   : pdf-collection 載入完成，共 6 筆 Documents.
+2026-07-15T21:47:08.756+08:00  WARN 20868 --- [mySpringAi] [restartedMain] [                                                 ] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-15T21:47:09.411+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-07-15T21:47:09.485+08:00  WARN 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.s.a.m.a.p.s.SyncMcpSamplingProvider    : No sampling methods found
+2026-07-15T21:47:09.486+08:00  WARN 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.s.a.m.a.p.e.SyncMcpElicitationProvider : No elicitation methods found
+2026-07-15T21:47:09.565+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-07-15T21:47:09.848+08:00  INFO 20868 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.MySpringAiApplication     : Started MySpringAiApplication in 65.125 seconds (process running for 67.067)
+2026-07-15T21:47:09.994+08:00  INFO 20868 --- [mySpringAi] [RMI TCP Connection(7)-192.168.50.58] [                                                 ] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-15T21:47:09.994+08:00  INFO 20868 --- [mySpringAi] [RMI TCP Connection(7)-192.168.50.58] [                                                 ] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-15T21:47:09.998+08:00  INFO 20868 --- [mySpringAi] [RMI TCP Connection(7)-192.168.50.58] [                                                 ] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-07-15T21:49:55.707+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-5] [3180b1e44cdce47e14506598f23562da-be99bec0a52be00a] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #1 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T21:49:58.131+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-5] [3180b1e44cdce47e14506598f23562da-be99bec0a52be00a] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #1 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！有什麼我可以幫忙的呢？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T21:49:58.132+08:00  INFO 20868 --- [mySpringAi] [http-nio-8080-exec-5] [3180b1e44cdce47e14506598f23562da-b31f3aa6f723baf1] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=29, completionTokens=13, totalTokens=42, cacheReadInputTokens=0}
+2026-07-15T21:50:29.970+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-2] [467ba50fb4594b696262b8b3dce6652b-bfcfa70462aa1a3e] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #2 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+║ [ASSISTANT]   您好！有什麼我可以幫忙的呢？
+║ [USER]        hell
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T21:50:31.347+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-2] [467ba50fb4594b696262b8b3dce6652b-bfcfa70462aa1a3e] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #2 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！請問有什麼我可以協助您的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T21:50:31.348+08:00  INFO 20868 --- [mySpringAi] [http-nio-8080-exec-2] [467ba50fb4594b696262b8b3dce6652b-9ec293adf09b6a56] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=51, completionTokens=14, totalTokens=65, cacheReadInputTokens=0}
+2026-07-15T22:01:51.386+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-10] [4cd5efbb269ed27ceb646f1dffc585d0-d3f0604c23fb95e7] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #3 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+║ [ASSISTANT]   您好！有什麼我可以幫忙的呢？
+║ [USER]        hell
+║ [ASSISTANT]   您好！請問有什麼我可以協助您的嗎？
+║ [USER]        hi
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:01:53.360+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-10] [4cd5efbb269ed27ceb646f1dffc585d0-d3f0604c23fb95e7] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #3 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！很高興再次與您交流。請問有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:01:53.360+08:00  INFO 20868 --- [mySpringAi] [http-nio-8080-exec-10] [4cd5efbb269ed27ceb646f1dffc585d0-8d1d41003cb2eb45] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=74, completionTokens=23, totalTokens=97, cacheReadInputTokens=0}
+2026-07-15T22:03:17.352+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-8] [813d6d37418cd0309483e5ceea8f6345-8791b32daaeae397] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #4 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+║ [ASSISTANT]   您好！有什麼我可以幫忙的呢？
+║ [USER]        hell
+║ [ASSISTANT]   您好！請問有什麼我可以協助您的嗎？
+║ [USER]        hi
+║ [ASSISTANT]   您好！很高興再次與您交流。請問有什麼我可以幫忙的嗎？
+║ [USER]        hi
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:03:18.369+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-8] [813d6d37418cd0309483e5ceea8f6345-8791b32daaeae397] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #4 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！很高興再次見到您。請問有什麼我可以為您效勞的呢？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:03:18.370+08:00  INFO 20868 --- [mySpringAi] [http-nio-8080-exec-8] [813d6d37418cd0309483e5ceea8f6345-89628d8cef0011c6] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=106, completionTokens=25, totalTokens=131, cacheReadInputTokens=0}
+2026-07-15T22:16:03.068+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-3] [14969f5c2d5880307e354d25b2c91311-304e0d81325e393f] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #5 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+║ [ASSISTANT]   您好！有什麼我可以幫忙的呢？
+║ [USER]        hell
+║ [ASSISTANT]   您好！請問有什麼我可以協助您的嗎？
+║ [USER]        hi
+║ [ASSISTANT]   您好！很高興再次與您交流。請問有什麼我可以幫忙的嗎？
+║ [USER]        hi
+║ [ASSISTANT]   您好！很高興再次見到您。請問有什麼我可以為您效勞的呢？
+║ [USER]        hello
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:16:04.537+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-3] [14969f5c2d5880307e354d25b2c91311-304e0d81325e393f] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #5 ══════════════════════════════════════════════════
+║ [ASSISTANT]   Hello！很高興與您交流。請問有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:16:04.537+08:00  INFO 20868 --- [mySpringAi] [http-nio-8080-exec-3] [14969f5c2d5880307e354d25b2c91311-0340801db3442985] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=140, completionTokens=22, totalTokens=162, cacheReadInputTokens=0}
+2026-07-15T22:27:14.740+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-7] [01ba6abb4bbf4527d525f5fc49a17ab7-a901d16a351e9b54] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #6 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+║ [ASSISTANT]   您好！有什麼我可以幫忙的呢？
+║ [USER]        hell
+║ [ASSISTANT]   您好！請問有什麼我可以協助您的嗎？
+║ [USER]        hi
+║ [ASSISTANT]   您好！很高興再次與您交流。請問有什麼我可以幫忙的嗎？
+║ [USER]        hi
+║ [ASSISTANT]   您好！很高興再次見到您。請問有什麼我可以為您效勞的呢？
+║ [USER]        hello
+║ [ASSISTANT]   Hello！很高興與您交流。請問有什麼我可以幫忙的嗎？
+║ [USER]        hi
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:27:16.193+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-7] [01ba6abb4bbf4527d525f5fc49a17ab7-a901d16a351e9b54] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #6 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！很高興再次與您聯繫。請問有什麼我可以幫忙的地方嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:27:16.193+08:00  INFO 20868 --- [mySpringAi] [http-nio-8080-exec-7] [01ba6abb4bbf4527d525f5fc49a17ab7-afb4c65233d613bf] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=171, completionTokens=26, totalTokens=197, cacheReadInputTokens=0}
+2026-07-15T22:28:45.058+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-6] [475055aaf3aa13345bde6ebfabca4850-9dbd35bca6a7a059] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #7 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+║ [ASSISTANT]   您好！有什麼我可以幫忙的呢？
+║ [USER]        hell
+║ [ASSISTANT]   您好！請問有什麼我可以協助您的嗎？
+║ [USER]        hi
+║ [ASSISTANT]   您好！很高興再次與您交流。請問有什麼我可以幫忙的嗎？
+║ [USER]        hi
+║ [ASSISTANT]   您好！很高興再次見到您。請問有什麼我可以為您效勞的呢？
+║ [USER]        hello
+║ [ASSISTANT]   Hello！很高興與您交流。請問有什麼我可以幫忙的嗎？
+║ [USER]        hi
+║ [ASSISTANT]   您好！很高興再次與您聯繫。請問有什麼我可以幫忙的地方嗎？
+║ [USER]        adsfasdf
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:28:45.977+08:00 DEBUG 20868 --- [mySpringAi] [http-nio-8080-exec-6] [475055aaf3aa13345bde6ebfabca4850-9dbd35bca6a7a059] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #7 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！看起來您的訊息可能是測試或打字錯誤。如果您有任何問題或需要協助的地方，請隨時告訴我！
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T22:28:45.977+08:00  INFO 20868 --- [mySpringAi] [http-nio-8080-exec-6] [475055aaf3aa13345bde6ebfabca4850-05fdc66fb7c26e67] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=208, completionTokens=39, totalTokens=247, cacheReadInputTokens=0}

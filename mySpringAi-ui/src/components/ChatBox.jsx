@@ -42,6 +42,8 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
   const controllerRef = useRef(null);
   // messagesEndRef：訊息區底部 DOM，供自動捲動使用。
   const messagesEndRef = useRef(null);
+  // textareaRef：輸入框 DOM，供送出訊息後自動聚焦使用。
+  const textareaRef = useRef(null);
   // userKey：整理 userName；空白名稱統一歸類為 anonymous。
   const userKey = userName.trim() || "anonymous";
   // messages：目前使用者在目前 endpoint 的歷史訊息。
@@ -54,6 +56,11 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
+
+  // 進入頁面或送出完成時將焦點放回輸入框，方便使用者連續輸入。
+  useEffect(() => {
+    if (!isLoading) textareaRef.current?.focus();
+  }, [isLoading]);
 
   // 掛載時註冊 cleanup；ChatBox 卸載時讀取最新 controllerRef 並取消未完成的 request。清理副作用並避免處理過期回應。
   useEffect(() => () => controllerRef.current?.abort(), []);
@@ -118,6 +125,7 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
     }
   }
 
+  // Enter 送出、Shift+Enter 換行；preventDefault 擋掉 textarea 預設換行，requestSubmit 才會觸發 form 的 onSubmit。
   function handleKeyDown(event) {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
@@ -125,6 +133,7 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
     }
   }
 
+  // 清空目前 userName -> endpoint 的訊息；層層 spread 以保留其他使用者與其他端點的資料。
   function clearMessages() {
     setMessagesByUserAndEndpoint((current) => ({
       ...current,
@@ -159,23 +168,27 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
             onClick={clearMessages}
             disabled={!messages.length || isLoading}
           >
-            Clear
+            Clear Chat 清除對話
           </button>
         </div>
 
+        {/* 訊息區由 4 個獨立表達式組成，各自判斷是否顯示；①②互斥、②③可同時顯示（例如：已有訊息且正在等新回應）。 */}
         <div className="messages" aria-live="polite">
+          {/* ① 空狀態：沒有任何訊息時顯示引導畫面。 */}
           {!messages.length && (
             <div className="empty-chat">
               <span>✦</span>
-              <h2>Start testing this endpoint</h2>
-              <p>Type a message below to send your first request.</p>
+              <h2>開始測試這個API</h2>
+              <p>在下方輸入訊息，送出你的第一個請求。</p>
             </div>
           )}
+          {/* ② 訊息列表：逐一渲染每則訊息；空陣列 map 回傳空結果，自然不顯示。key 用於 React 辨識列表元素。 */}
           {messages.map((message, index) => (
             <div
               className={`message ${message.role}`}
               key={`${message.role}-${index}`}
             >
+              {/* 依 role 決定發話者標籤：user→You、error→Error、其他→Assistant。 */}
               <strong>
                 {message.role === "user"
                   ? "You"
@@ -183,9 +196,11 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
                     ? "Error"
                     : "Assistant"}
               </strong>
+              {/* pre 保留換行與空白，適合顯示多行文字或 JSON。 */}
               <pre>{message.content}</pre>
             </div>
           ))}
+          {/* ③ 打字中動畫：等待後端回應時顯示三個閃動的點。 */}
           {isLoading && (
             <div className="message assistant typing">
               <i />
@@ -193,19 +208,22 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
               <i />
             </div>
           )}
+          {/* ④ 捲動錨點：永遠存在的空 div，供 useEffect 呼叫 scrollIntoView 捲到底部。 */}
           <div ref={messagesEndRef} />
         </div>
 
         <form className="composer" onSubmit={handleSubmit}>
+          {/* 送出前的驗證錯誤提示（例如 "請先在 Demo 欄位中 輸入使用者名稱。"）；有訊息時才顯示。 */}
           {validationError && (
             <p className="validation-error">{validationError}</p>
           )}
           <div>
             <textarea
+              ref={textareaRef}
               value={input}
               onChange={(event) => setInput(event.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Enter a message…"
+              placeholder="輸入訊息…"
               rows="3"
               disabled={isLoading}
             />
@@ -217,7 +235,7 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
               {isLoading ? "…" : "↑"}
             </button>
           </div>
-          <small>Enter to send · Shift + Enter for a new line</small>
+          <small>Enter 送出 · Shift + Enter 換行</small>
         </form>
       </section>
     </article>
