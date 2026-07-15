@@ -6083,3 +6083,852 @@ Caused by: java.net.ConnectException: Connection timed out: getsockopt
 	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
 	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
 
+2026-07-15T11:38:50.394+08:00  WARN 19720 --- [mySpringAi] [http-nio-8080-exec-3] [fb05b418bd65245d677e96e5684dadd0-aa73248bd57b32d7] o.s.a.r.a.SpringAiRetryAutoConfiguration : Retry error. Retry count:5
+
+org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:11434/api/chat": Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.body(DefaultRestClient.java:833) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.ai.ollama.api.OllamaApi.chat(OllamaApi.java:119) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$1(OllamaChatModel.java:237) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.core.retry.RetryTemplate.execute(RetryTemplate.java:174) ~[spring-core-7.0.8.jar:7.0.8]
+	at org.springframework.ai.retry.RetryUtils.execute(RetryUtils.java:172) ~[spring-ai-retry-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$3(OllamaChatModel.java:236) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.ollama.OllamaChatModel.internalCall(OllamaChatModel.java:234) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.call(OllamaChatModel.java:219) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ChatModelCallAdvisor.adviseCall(ChatModelCallAdvisor.java:58) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.PrettyLoggerAdvisor.adviseCall(PrettyLoggerAdvisor.java:37) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.TokenUsageAuditAdvisor.adviseCall(TokenUsageAuditAdvisor.java:19) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ToolCallingAdvisor.adviseCall(ToolCallingAdvisor.java:150) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.api.BaseAdvisor.adviseCall(BaseAdvisor.java:52) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.lambda$doGetObservableChatClientResponse$1(DefaultChatClient.java:658) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:656) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:636) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.content(DefaultChatClient.java:631) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.controller.GenericChatController.ollamaChat(GenericChatController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1272) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+Caused by: java.net.ConnectException: Connection timed out: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1046) ~[na:na]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:384) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:432) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysPlain(NioIoHandler.java:541) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:514) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-07-15T11:42:11.438+08:00  WARN 19720 --- [mySpringAi] [http-nio-8080-exec-3] [fb05b418bd65245d677e96e5684dadd0-aa73248bd57b32d7] o.s.a.r.a.SpringAiRetryAutoConfiguration : Retry error. Retry count:6
+
+org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:11434/api/chat": Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.body(DefaultRestClient.java:833) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.ai.ollama.api.OllamaApi.chat(OllamaApi.java:119) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$1(OllamaChatModel.java:237) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.core.retry.RetryTemplate.execute(RetryTemplate.java:174) ~[spring-core-7.0.8.jar:7.0.8]
+	at org.springframework.ai.retry.RetryUtils.execute(RetryUtils.java:172) ~[spring-ai-retry-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$3(OllamaChatModel.java:236) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.ollama.OllamaChatModel.internalCall(OllamaChatModel.java:234) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.call(OllamaChatModel.java:219) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ChatModelCallAdvisor.adviseCall(ChatModelCallAdvisor.java:58) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.PrettyLoggerAdvisor.adviseCall(PrettyLoggerAdvisor.java:37) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.TokenUsageAuditAdvisor.adviseCall(TokenUsageAuditAdvisor.java:19) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ToolCallingAdvisor.adviseCall(ToolCallingAdvisor.java:150) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.api.BaseAdvisor.adviseCall(BaseAdvisor.java:52) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.lambda$doGetObservableChatClientResponse$1(DefaultChatClient.java:658) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:656) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:636) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.content(DefaultChatClient.java:631) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.controller.GenericChatController.ollamaChat(GenericChatController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1272) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+Caused by: java.net.ConnectException: Connection timed out: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1046) ~[na:na]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:384) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:432) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysPlain(NioIoHandler.java:541) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:514) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-07-15T11:45:32.482+08:00  WARN 19720 --- [mySpringAi] [http-nio-8080-exec-3] [fb05b418bd65245d677e96e5684dadd0-aa73248bd57b32d7] o.s.a.r.a.SpringAiRetryAutoConfiguration : Retry error. Retry count:7
+
+org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:11434/api/chat": Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.body(DefaultRestClient.java:833) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.ai.ollama.api.OllamaApi.chat(OllamaApi.java:119) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$1(OllamaChatModel.java:237) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.core.retry.RetryTemplate.execute(RetryTemplate.java:174) ~[spring-core-7.0.8.jar:7.0.8]
+	at org.springframework.ai.retry.RetryUtils.execute(RetryUtils.java:172) ~[spring-ai-retry-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$3(OllamaChatModel.java:236) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.ollama.OllamaChatModel.internalCall(OllamaChatModel.java:234) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.call(OllamaChatModel.java:219) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ChatModelCallAdvisor.adviseCall(ChatModelCallAdvisor.java:58) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.PrettyLoggerAdvisor.adviseCall(PrettyLoggerAdvisor.java:37) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.TokenUsageAuditAdvisor.adviseCall(TokenUsageAuditAdvisor.java:19) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ToolCallingAdvisor.adviseCall(ToolCallingAdvisor.java:150) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.api.BaseAdvisor.adviseCall(BaseAdvisor.java:52) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.lambda$doGetObservableChatClientResponse$1(DefaultChatClient.java:658) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:656) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:636) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.content(DefaultChatClient.java:631) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.controller.GenericChatController.ollamaChat(GenericChatController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1272) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+Caused by: java.net.ConnectException: Connection timed out: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1046) ~[na:na]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:384) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:432) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysPlain(NioIoHandler.java:541) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:514) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-07-15T11:48:53.549+08:00  WARN 19720 --- [mySpringAi] [http-nio-8080-exec-3] [fb05b418bd65245d677e96e5684dadd0-aa73248bd57b32d7] o.s.a.r.a.SpringAiRetryAutoConfiguration : Retry error. Retry count:8
+
+org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:11434/api/chat": Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.body(DefaultRestClient.java:833) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.ai.ollama.api.OllamaApi.chat(OllamaApi.java:119) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$1(OllamaChatModel.java:237) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.core.retry.RetryTemplate.execute(RetryTemplate.java:174) ~[spring-core-7.0.8.jar:7.0.8]
+	at org.springframework.ai.retry.RetryUtils.execute(RetryUtils.java:172) ~[spring-ai-retry-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$3(OllamaChatModel.java:236) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.ollama.OllamaChatModel.internalCall(OllamaChatModel.java:234) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.call(OllamaChatModel.java:219) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ChatModelCallAdvisor.adviseCall(ChatModelCallAdvisor.java:58) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.PrettyLoggerAdvisor.adviseCall(PrettyLoggerAdvisor.java:37) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.TokenUsageAuditAdvisor.adviseCall(TokenUsageAuditAdvisor.java:19) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ToolCallingAdvisor.adviseCall(ToolCallingAdvisor.java:150) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.api.BaseAdvisor.adviseCall(BaseAdvisor.java:52) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.lambda$doGetObservableChatClientResponse$1(DefaultChatClient.java:658) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:656) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:636) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.content(DefaultChatClient.java:631) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.controller.GenericChatController.ollamaChat(GenericChatController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1272) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+Caused by: java.net.ConnectException: Connection timed out: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1046) ~[na:na]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:384) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:432) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysPlain(NioIoHandler.java:541) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:514) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-07-15T11:52:14.605+08:00  WARN 19720 --- [mySpringAi] [http-nio-8080-exec-3] [fb05b418bd65245d677e96e5684dadd0-aa73248bd57b32d7] o.s.a.r.a.SpringAiRetryAutoConfiguration : Retry error. Retry count:9
+
+org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:11434/api/chat": Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.body(DefaultRestClient.java:833) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.ai.ollama.api.OllamaApi.chat(OllamaApi.java:119) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$1(OllamaChatModel.java:237) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.core.retry.RetryTemplate.execute(RetryTemplate.java:174) ~[spring-core-7.0.8.jar:7.0.8]
+	at org.springframework.ai.retry.RetryUtils.execute(RetryUtils.java:172) ~[spring-ai-retry-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$3(OllamaChatModel.java:236) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.ollama.OllamaChatModel.internalCall(OllamaChatModel.java:234) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.call(OllamaChatModel.java:219) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ChatModelCallAdvisor.adviseCall(ChatModelCallAdvisor.java:58) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.PrettyLoggerAdvisor.adviseCall(PrettyLoggerAdvisor.java:37) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.TokenUsageAuditAdvisor.adviseCall(TokenUsageAuditAdvisor.java:19) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ToolCallingAdvisor.adviseCall(ToolCallingAdvisor.java:150) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.api.BaseAdvisor.adviseCall(BaseAdvisor.java:52) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.lambda$doGetObservableChatClientResponse$1(DefaultChatClient.java:658) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:656) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:636) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.content(DefaultChatClient.java:631) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.controller.GenericChatController.ollamaChat(GenericChatController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1272) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+Caused by: java.net.ConnectException: Connection timed out: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1046) ~[na:na]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:384) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:432) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysPlain(NioIoHandler.java:541) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:514) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-07-15T11:55:35.648+08:00  WARN 19720 --- [mySpringAi] [http-nio-8080-exec-3] [fb05b418bd65245d677e96e5684dadd0-aa73248bd57b32d7] o.s.a.r.a.SpringAiRetryAutoConfiguration : Retry error. Retry count:10
+
+org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:11434/api/chat": Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.body(DefaultRestClient.java:833) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.ai.ollama.api.OllamaApi.chat(OllamaApi.java:119) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$1(OllamaChatModel.java:237) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.core.retry.RetryTemplate.execute(RetryTemplate.java:174) ~[spring-core-7.0.8.jar:7.0.8]
+	at org.springframework.ai.retry.RetryUtils.execute(RetryUtils.java:172) ~[spring-ai-retry-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.lambda$internalCall$3(OllamaChatModel.java:236) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.ollama.OllamaChatModel.internalCall(OllamaChatModel.java:234) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.ollama.OllamaChatModel.call(OllamaChatModel.java:219) ~[spring-ai-ollama-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ChatModelCallAdvisor.adviseCall(ChatModelCallAdvisor.java:58) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.PrettyLoggerAdvisor.adviseCall(PrettyLoggerAdvisor.java:37) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.advisor.TokenUsageAuditAdvisor.adviseCall(TokenUsageAuditAdvisor.java:19) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.ToolCallingAdvisor.adviseCall(ToolCallingAdvisor.java:150) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.api.BaseAdvisor.adviseCall(BaseAdvisor.java:52) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:117) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:116) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.lambda$doGetObservableChatClientResponse$1(DefaultChatClient.java:658) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at io.micrometer.observation.Observation.observe(Observation.java:634) ~[micrometer-observation-1.17.0.jar:1.17.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:656) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:636) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.content(DefaultChatClient.java:631) ~[spring-ai-client-chat-2.0.0.jar:2.0.0]
+	at com.example.mySpringAi.controller.GenericChatController.ollamaChat(GenericChatController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.8.jar:7.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.22.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.8.jar:7.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1272) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434
+Caused by: java.net.ConnectException: Connection timed out: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1046) ~[na:na]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:384) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:432) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysPlain(NioIoHandler.java:541) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:514) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-07-15T11:55:35.656+08:00 ERROR 19720 --- [mySpringAi] [http-nio-8080-exec-3] [                                                 ] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:11434/api/chat": Connection timed out: getsockopt: localhost/[fe80:0:0:0:0:0:0:1]:11434] with root cause
+
+java.net.ConnectException: Connection timed out: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:639) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:1046) ~[na:na]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:384) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.handle(AbstractNioChannel.java:432) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler$DefaultNioRegistration.handle(NioIoHandler.java:388) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKey(NioIoHandler.java:596) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeysPlain(NioIoHandler.java:541) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.processSelectedKeys(NioIoHandler.java:514) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:484) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196) ~[netty-transport-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.2.15.Final.jar:4.2.15.Final]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-07-15T11:55:35.674+08:00  WARN 19720 --- [mySpringAi] [http-nio-8080-exec-3] [                                                 ] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: 連線已被您主機上的軟體中止。
+2026-07-15T13:18:13.314+08:00  INFO 19720 --- [mySpringAi] [SpringApplicationShutdownHook] [                                                 ] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-15T13:18:13.335+08:00  INFO 19720 --- [mySpringAi] [tomcat-shutdown] [                                                 ] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-07-15T13:18:13.371+08:00  INFO 19720 --- [mySpringAi] [SpringApplicationShutdownHook] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15T13:18:13.385+08:00  INFO 19720 --- [mySpringAi] [SpringApplicationShutdownHook] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-15T13:18:13.388+08:00  INFO 19720 --- [mySpringAi] [SpringApplicationShutdownHook] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-15T13:18:19.764+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.MySpringAiApplication     : Starting MySpringAiApplication using Java 25 with PID 15208 (D:\Fork\mySpringAi-demo\mySpringAi\target\classes started by E3378 in D:\Fork\mySpringAi-demo\mySpringAi)
+2026-07-15T13:18:19.769+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.MySpringAiApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-07-15T13:18:19.828+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-07-15T13:18:19.828+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-07-15T13:18:19.846+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] .s.b.d.c.l.DockerComposeLifecycleManager : Using Docker Compose file D:\Fork\mySpringAi-demo\mySpringAi\compose.yml
+2026-07-15T13:18:20.718+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Network myspringai_default Creating 
+2026-07-15T13:18:20.764+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Network myspringai_default Created 
+2026-07-15T13:18:20.780+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Creating 
+2026-07-15T13:18:20.780+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Creating 
+2026-07-15T13:18:20.780+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Creating 
+2026-07-15T13:18:20.780+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Creating 
+2026-07-15T13:18:20.781+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Creating 
+2026-07-15T13:18:20.952+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Created 
+2026-07-15T13:18:20.986+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Created 
+2026-07-15T13:18:20.989+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Created 
+2026-07-15T13:18:21.003+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Created 
+2026-07-15T13:18:21.005+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Created 
+2026-07-15T13:18:21.097+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Starting 
+2026-07-15T13:18:21.097+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Starting 
+2026-07-15T13:18:21.098+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Starting 
+2026-07-15T13:18:21.098+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Starting 
+2026-07-15T13:18:21.099+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Starting 
+2026-07-15T13:18:21.966+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Started 
+2026-07-15T13:18:22.049+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Started 
+2026-07-15T13:18:22.115+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Started 
+2026-07-15T13:18:22.150+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Started 
+2026-07-15T13:18:22.252+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Started 
+2026-07-15T13:18:22.252+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Waiting 
+2026-07-15T13:18:22.252+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Waiting 
+2026-07-15T13:18:22.253+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Waiting 
+2026-07-15T13:18:22.253+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Waiting 
+2026-07-15T13:18:22.253+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Waiting 
+2026-07-15T13:18:22.763+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-qdrant-1 Healthy 
+2026-07-15T13:18:22.763+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-grafana-1 Healthy 
+2026-07-15T13:18:22.764+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-prometheus-1 Healthy 
+2026-07-15T13:18:22.772+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-redis-1 Healthy 
+2026-07-15T13:18:22.772+08:00  INFO 15208 --- [mySpringAi] [OutputReader-stderr] [                                                 ] o.s.boot.docker.compose.core.DockerCli   :  Container myspringai-jaeger-1 Healthy 
+2026-07-15T13:18:30.291+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-07-15T13:18:30.292+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-15T13:18:30.491+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 191 ms. Found 1 JPA repository interface.
+2026-07-15T13:18:31.625+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-07-15T13:18:31.648+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-15T13:18:31.648+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-15T13:18:31.707+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2648 ms
+2026-07-15T13:18:32.357+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-15T13:18:32.724+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./h2db/chatmemory user=SA
+2026-07-15T13:18:32.726+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-15T13:18:32.845+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-15T13:18:32.908+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-15T13:18:33.409+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-15T13:18:33.512+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./h2db/chatmemory]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: CHATMEMORY/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-15T13:18:34.646+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-15T13:18:34.699+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15T13:18:40.005+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.config.VectorStoreConfig  : VectorStore Bean 建立完成：beanName=pdfVectorStore, provider=Qdrant, collection=pdf-collection, initializeSchema=true, batchingStrategy=TokenCountBatchingStrategy, observationRegistry=SimpleObservationRegistry
+2026-07-15T13:18:40.756+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.config.VectorStoreConfig  : VectorStore Bean 建立完成：beanName=cachingVectorStore, provider=Qdrant, collection=caching-collection, initializeSchema=true, batchingStrategy=TokenCountBatchingStrategy, observationRegistry=SimpleObservationRegistry
+2026-07-15T13:18:41.170+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-15T13:18:42.892+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] c.e.m.util.component.rag.RagDataLoader   : rag-collection 載入完成，共 54 筆 Documents.
+2026-07-15T13:18:44.041+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] c.e.m.util.component.rag.RagDataLoader   : PDF 讀取完成，共 1 份文件
+2026-07-15T13:18:44.123+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.s.a.transformer.splitter.TextSplitter  : Splitting up document into 6 chunks.
+2026-07-15T13:18:45.226+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] c.e.m.util.component.rag.RagDataLoader   : pdf-collection 載入完成，共 6 筆 Documents.
+2026-07-15T13:18:45.247+08:00  WARN 15208 --- [mySpringAi] [restartedMain] [                                                 ] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-15T13:18:45.999+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-07-15T13:18:46.061+08:00  WARN 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.s.a.m.a.p.s.SyncMcpSamplingProvider    : No sampling methods found
+2026-07-15T13:18:46.063+08:00  WARN 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.s.a.m.a.p.e.SyncMcpElicitationProvider : No elicitation methods found
+2026-07-15T13:18:46.167+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-07-15T13:18:46.472+08:00  INFO 15208 --- [mySpringAi] [restartedMain] [                                                 ] c.e.mySpringAi.MySpringAiApplication     : Started MySpringAiApplication in 27.606 seconds (process running for 29.378)
+2026-07-15T13:18:47.255+08:00  INFO 15208 --- [mySpringAi] [RMI TCP Connection(4)-192.168.20.58] [                                                 ] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-15T13:18:47.256+08:00  INFO 15208 --- [mySpringAi] [RMI TCP Connection(4)-192.168.20.58] [                                                 ] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-15T13:18:47.270+08:00  INFO 15208 --- [mySpringAi] [RMI TCP Connection(4)-192.168.20.58] [                                                 ] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2026-07-15T13:19:09.924+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-3] [80cc1b9341bf5f2b1f8fa980310d1e9a-414b04834ce24ada] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #1 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        helllo
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:19:12.232+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-3] [80cc1b9341bf5f2b1f8fa980310d1e9a-414b04834ce24ada] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #1 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:19:12.233+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-3] [80cc1b9341bf5f2b1f8fa980310d1e9a-b4c046420dea25ca] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=30, completionTokens=13, totalTokens=43, cacheReadInputTokens=0}
+2026-07-15T13:19:18.382+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-9] [03d06cbc64b2d92aa2fa5aa6e765db4d-a870cc90daaad20d] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #1 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:19:19.524+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-9] [03d06cbc64b2d92aa2fa5aa6e765db4d-a870cc90daaad20d] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #1 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！有什麼我可以幫忙的呢？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:19:19.525+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-9] [03d06cbc64b2d92aa2fa5aa6e765db4d-3ed3a66920814f88] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=29, completionTokens=13, totalTokens=42, cacheReadInputTokens=0}
+2026-07-15T13:19:25.336+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-5] [0a6ea8e5fdaeaae0ef56a4a6f59c6bbd-ab8af3c8b4295964] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #2 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+║ [ASSISTANT]   您好！有什麼我可以幫忙的呢？
+║ [USER]        你是誰
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:19:26.788+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-5] [0a6ea8e5fdaeaae0ef56a4a6f59c6bbd-ab8af3c8b4295964] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #2 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！我是由人工智慧技術所打造的語言模型，旨在協助您解答問題、提供資訊和協助完成各種任務。有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:19:26.789+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-5] [0a6ea8e5fdaeaae0ef56a4a6f59c6bbd-96184f52c709474e] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=53, completionTokens=45, totalTokens=98, cacheReadInputTokens=0}
+2026-07-15T13:20:27.848+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-7] [4400ea85b3aebf3d9e8d4d4a373fa170-2c8797b3ae1eb0e2] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #1 ══════════════════════════════════════════════════
+║ [SYSTEM]      【規則】
+║               1. 請根據「文件」中的資訊回答，並使用繁體中文。
+║               2. 只要文件中有任何與問題相關的資訊，就必須整理這些資訊回答。
+║               3. 如果文件只有部分資訊，請根據已有資訊簡短回答，不要說無法確定。
+║               4. 只有在文件完全沒有任何相關資訊時，才回覆：「根據目前文件，我無法確定」。
+║               5. 不要捏造文件中沒有的事實。
+║               文件：
+║               ----------
+║               Remote work offers flexibility but requires clear communication.,
+║               Online courses offer flexibility for remote learners.,
+║               GraphQL enables clients to fetch exactly the data they need.,
+║               REST APIs allow stateless client-server communication.,
+║               Japan is known for its cherry blossoms and advanced technology.
+║               ----------
+║ [USER]        你可以提供什麼服務
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:20:28.938+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-7] [4400ea85b3aebf3d9e8d4d4a373fa170-2c8797b3ae1eb0e2] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #1 ══════════════════════════════════════════════════
+║ [ASSISTANT]   根據文件，我可以提供有關遠端工作、線上課程、GraphQL、REST API以及日本相關資訊的相關解答和說明。
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:20:28.939+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-7] [4400ea85b3aebf3d9e8d4d4a373fa170-c21d54e5b6b9463f] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=191, completionTokens=34, totalTokens=225, cacheReadInputTokens=0}
+2026-07-15T13:21:41.873+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-10] [c1e857118fa5e96795de517aab680d99-04570189bbc477e6] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #2 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi hi
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:21:43.507+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-10] [c1e857118fa5e96795de517aab680d99-04570189bbc477e6] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #2 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:21:43.507+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-10] [c1e857118fa5e96795de517aab680d99-55233c5ea5d56d46] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=30, completionTokens=13, totalTokens=43, cacheReadInputTokens=0}
+2026-07-15T13:21:58.185+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-7] [78224f5ff3bbc6a40f323120046c58bf-51b7d0d69c6cbbb3] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #2 ══════════════════════════════════════════════════
+║ [SYSTEM]      【規則】
+║               1. 請根據「文件」中的資訊回答，並使用繁體中文。
+║               2. 只要文件中有任何與問題相關的資訊，就必須整理這些資訊回答。
+║               3. 如果文件只有部分資訊，請根據已有資訊簡短回答，不要說無法確定。
+║               4. 只有在文件完全沒有任何相關資訊時，才回覆：「根據目前文件，我無法確定」。
+║               5. 不要捏造文件中沒有的事實。
+║               文件：
+║               ----------
+║               Meditation can reduce stress and improve focus.,
+║               Online courses offer flexibility for remote learners.,
+║               Remote work offers flexibility but requires clear communication.,
+║               Setting daily goals increases productivity.,
+║               Deep breathing exercises help regulate anxiety.
+║               ----------
+║ [USER]        what can you do
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:21:59.154+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-7] [78224f5ff3bbc6a40f323120046c58bf-51b7d0d69c6cbbb3] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #2 ══════════════════════════════════════════════════
+║ [ASSISTANT]   根據文件，我可以幫助你了解冥想可以減少壓力和改善專注力，線上課程提供彈性，遠端工作需要清楚的溝通，設定每日目標可以提高生產力，以及深呼吸練習有助於調節焦慮。
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T13:21:59.155+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-7] [78224f5ff3bbc6a40f323120046c58bf-533161725ebd35c6] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=179, completionTokens=70, totalTokens=249, cacheReadInputTokens=0}

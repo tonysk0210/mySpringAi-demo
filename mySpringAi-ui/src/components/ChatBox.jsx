@@ -18,15 +18,16 @@ function errorToText(error) {
 }
 
 function ChatBox({ title, description, endpoint, requiresUserName = false }) {
-  const { userName, messagesByEndpoint, setMessagesByEndpoint } = useDemo()
+  const { userName, messagesByUserAndEndpoint, setMessagesByUserAndEndpoint } = useDemo()
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [validationError, setValidationError] = useState('')
   const controllerRef = useRef(null)
   const messagesEndRef = useRef(null)
+  const userKey = userName.trim() || 'anonymous'
   const messages = useMemo(
-    () => messagesByEndpoint[endpoint] || [],
-    [endpoint, messagesByEndpoint],
+    () => messagesByUserAndEndpoint[userKey]?.[endpoint] || [],
+    [endpoint, messagesByUserAndEndpoint, userKey],
   )
 
   useEffect(() => {
@@ -36,9 +37,12 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
   useEffect(() => () => controllerRef.current?.abort(), [])
 
   function appendMessage(message) {
-    setMessagesByEndpoint((current) => ({
+    setMessagesByUserAndEndpoint((current) => ({
       ...current,
-      [endpoint]: [...(current[endpoint] || []), message],
+      [userKey]: {
+        ...(current[userKey] || {}),
+        [endpoint]: [...(current[userKey]?.[endpoint] || []), message],
+      },
     }))
   }
 
@@ -84,7 +88,13 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
   }
 
   function clearMessages() {
-    setMessagesByEndpoint((current) => ({ ...current, [endpoint]: [] }))
+    setMessagesByUserAndEndpoint((current) => ({
+      ...current,
+      [userKey]: {
+        ...(current[userKey] || {}),
+        [endpoint]: [],
+      },
+    }))
   }
 
   return (
