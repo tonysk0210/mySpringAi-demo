@@ -178,7 +178,7 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
           {!messages.length && (
             <div className="empty-chat">
               <span>✦</span>
-              <h2>開始測試這個API</h2>
+              <h2>開始測試這個 API 端點</h2>
               <p>在下方輸入訊息，送出你的第一個請求。</p>
             </div>
           )}

@@ -13,16 +13,26 @@ public class GenericChatController {
     private final ChatClient openaiCCInMemory;
     private final ChatClient openaiCCJdbcMemory;
     private final ChatClient ollamaCCJdbcMemory;
+    private final ChatClient openaiCCNoMem;
 
     @Autowired
     public GenericChatController(
             @Qualifier("openaiCCInMemory") ChatClient openaiCCInMemory,
             @Qualifier("openaiCCJdbcMemory") ChatClient openaiCCJdbcMemory,
-            @Qualifier("ollamaCCJdbcMemory") ChatClient ollamaCCJdbcMemory
+            @Qualifier("ollamaCCJdbcMemory") ChatClient ollamaCCJdbcMemory,
+            @Qualifier("openaiCCNoMem") ChatClient openaiCCNoMem
     ) {
         this.openaiCCInMemory = openaiCCInMemory;
         this.openaiCCJdbcMemory = openaiCCJdbcMemory;
         this.ollamaCCJdbcMemory = ollamaCCJdbcMemory;
+        this.openaiCCNoMem = openaiCCNoMem;
+    }
+
+    // 0. 使用 OpenAI 模型，不使用任何 chat memory；每次呼叫都是全新對話。
+    @PostMapping("/openai/chat-noMemory")
+    public String openaiChatNoMemory(@RequestBody MessageChatPayload messageChatPayload) {
+        return openaiCCNoMem.prompt(messageChatPayload.message())
+                .call().content();
     }
 
     // 1. 使用 OpenAI 模型，搭配 In-memory chat memory
