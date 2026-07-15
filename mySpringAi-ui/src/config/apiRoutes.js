@@ -1,3 +1,7 @@
+// Navbar 的 API 選單設定：依功能分組並提供顯示名稱、導覽路徑與完成狀態。
+// path：NavLink 前往的網址；label：畫面名稱；ready：是否顯示 SOON。
+// requiresUserName：記錄 API 是否需要 userName，目前實際行為由各 Page 傳給 ChatBox。
+// 此檔案不建立 React Route；URL 對應的 Page 仍在 App.jsx 定義。
 export const apiGroups = [
   {
     label: 'Chat',

@@ -6932,3 +6932,181 @@ java.net.ConnectException: Connection timed out: getsockopt
 ║ [ASSISTANT]   根據文件，我可以幫助你了解冥想可以減少壓力和改善專注力，線上課程提供彈性，遠端工作需要清楚的溝通，設定每日目標可以提高生產力，以及深呼吸練習有助於調節焦慮。
 ╚════════════════════════════════════════════════════════════════════
 2026-07-15T13:21:59.155+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-7] [78224f5ff3bbc6a40f323120046c58bf-533161725ebd35c6] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=179, completionTokens=70, totalTokens=249, cacheReadInputTokens=0}
+2026-07-15T15:40:39.160+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-10] [116f2b1c98d3a402c08fb44264e53901-d9889ab16d647c3a] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #3 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        helllo
+║ [ASSISTANT]   您好！有什麼我可以幫忙的嗎？
+║ [USER]        ｈｉ
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T15:40:41.589+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-10] [116f2b1c98d3a402c08fb44264e53901-d9889ab16d647c3a] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #3 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！很高興見到您，有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T15:40:41.590+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-10] [116f2b1c98d3a402c08fb44264e53901-280205ce8a4f1334] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=55, completionTokens=19, totalTokens=74, cacheReadInputTokens=0}
+2026-07-15T15:41:00.006+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-2] [bdfa32c339ab1ac3d539c792b9893097-a98a5c205c088af3] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #4 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        helllo
+║ [ASSISTANT]   您好！有什麼我可以幫忙的嗎？
+║ [USER]        ｈｉ
+║ [ASSISTANT]   您好！很高興見到您，有什麼我可以幫忙的嗎？
+║ [USER]        hi there
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T15:41:01.055+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-2] [bdfa32c339ab1ac3d539c792b9893097-a98a5c205c088af3] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #4 ══════════════════════════════════════════════════
+║ [ASSISTANT]   Hello! How can I assist you today?
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T15:41:01.055+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-2] [bdfa32c339ab1ac3d539c792b9893097-1c39be5ed03dadd5] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=84, completionTokens=9, totalTokens=93, cacheReadInputTokens=0}
+2026-07-15T15:41:46.182+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-2] [04682255c8053b24d1e9c263b7b030d4-8caf72645398e32a] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #5 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        你好
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T15:41:47.518+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-2] [04682255c8053b24d1e9c263b7b030d4-8caf72645398e32a] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #5 ══════════════════════════════════════════════════
+║ [ASSISTANT]   你好！很高興為您服務。請問有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T15:41:47.520+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-2] [04682255c8053b24d1e9c263b7b030d4-342db5dca8852362] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=29, completionTokens=22, totalTokens=51, cacheReadInputTokens=0}
+2026-07-15T15:42:03.682+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-9] [66795fa69460a7db60f3b33bf4bf2270-79db16ba283292c4] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #3 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T15:42:04.817+08:00 DEBUG 15208 --- [mySpringAi] [http-nio-8080-exec-9] [66795fa69460a7db60f3b33bf4bf2270-79db16ba283292c4] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #3 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-15T15:42:04.817+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-9] [66795fa69460a7db60f3b33bf4bf2270-e89ac553d66c231f] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=29, completionTokens=13, totalTokens=42, cacheReadInputTokens=0}
+2026-07-15T15:58:02.104+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-2] [                                                 ] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x050xa60x010x000x050xa20x030x030x1e0xc8M0xf9V)0xce0xff0x830x100x92IB0x1a,0xa5G0x05'0x840x85]0x0aA0x0f0xb90xa10xe10xcc3Y0x8b ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:391) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:270) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1272) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-07-15T15:58:33.094+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-1] [e1a50dbf086d7afc2ce65297ca2ddc03-4472ede380b34368] o.s.w.s.resource.ResourceHandlerUtils    : "Path contains "../" after call to StringUtils#cleanPath: [.../.../.../.../.../.../.../.../.../windows/win.ini]"
+2026-07-15T15:58:33.102+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [c2cb4885161090ccb4effe0a3598e197-05e6631c98b47457] o.s.w.s.resource.ResourceHandlerUtils    : "Path contains "../" after call to StringUtils#cleanPath: [.../.../.../.../.../.../.../.../.../winnt/win.ini]"
+2026-07-15T15:58:33.116+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-8] [f20b63fa206fa527422f750b24ef99d9-91a056400d14ce72] o.s.w.s.resource.ResourceHandlerUtils    : "Path contains "../" after call to StringUtils#cleanPath: [..../..../..../..../..../..../..../..../..../windows/win.ini]"
+2026-07-15T15:58:33.123+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [72031ffd2f649cc4eb858723fd64b65e-26c48df1c51affe0] o.s.w.s.resource.ResourceHandlerUtils    : "Path contains "../" after call to StringUtils#cleanPath: [..../..../..../..../..../..../..../..../..../winnt/win.ini]"
+2026-07-15T15:58:33.258+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [f6f2edad3c74f84eaea5bed1961d3ff7-e7ef5f2977e70bfd] o.s.w.s.resource.ResourceHandlerUtils    : "Path contains "../" after call to StringUtils#cleanPath: [..../..../..../..../..../..../..../..../..../..../..../..../etc/passwd]"
+2026-07-15T15:58:33.610+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-2] [                                                 ] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
+2026-07-15T15:58:34.196+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-3] [                                                 ] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x060x8a0x010x000x060x860x030x030x8f0x850xf2e0xc4-x0xce0x95m0xf80xb70xbd20xea0x830xc60x7fi0xf60xda\j0x9eH0xfeQ0x090xbb0xce0xb60x10 ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:391) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:270) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1272) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.22.jar:11.0.22]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-07-15T15:58:35.026+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [7c9870aaaea74afa7cd4361ef7a11728-09e3fe9cf7c9feae] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:35.031+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-6] [d6473bb007906b8b6f1d0bb9475bff86-636cd724a00aa499] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:35.038+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-1] [83f67f2e116385fb8e6c869df5f95895-1e3ea9f3d3ca5e90] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:35.044+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [f3901769ae465f941fcec82bd4c28512-fcc942c9817ce1e5] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:35.049+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [e43e1a37fd299accb29ff0ba75dc26d0-f1b7fa5c46598bba] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:38.097+08:00  INFO 15208 --- [mySpringAi] [http-nio-8080-exec-8] [                                                 ] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [${jndi:ldap://log4shell-generic-w62bTYLYMmqe9BB9ifgj${lower:ten}.w.nessus.org/nessus}=${jndi:ldap://log4shell-generic-w62bTYLYMmqe9BB9ifgj${lower:ten}.w.nessus.org/nessus};] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2026-07-15T15:58:38.099+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-8] [0ec3996b355a9dcb7a4b5f23be9302c4-257136010040fe34] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:39.057+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-6] [36397916edea604378ec00a008d93781-cbd1e12dc7da8161] o.a.c.w.AbstractFileResourceSet          : Resource for web application [] at path [/niet1440454916.] was not loaded as the canonical path [/niet1440454916] did not match. Use of symlinks is one possible cause.
+2026-07-15T15:58:41.774+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [a52456a0ac4be52bf5472f959ea46d97-02cbbf304b1db57b] o.s.w.s.resource.ResourceHandlerUtils    : "Path with "WEB-INF" or "META-INF": [WEB-INF./web.xml]"
+2026-07-15T15:58:43.224+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [bc9ba2f294c50c62125ebc2e53a34d53-35840239317787ff] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:43.992+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-6] [163d1738e7fe853b0f609fe80d64c4a0-54d650d5bf8b7620] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:44.335+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [593a67e87e049d9f92a926a6394254fb-bb698a1a17aa70b5] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:48.355+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-6] [496385aa1cbe8b9c6034603e2d278dc0-257e233d6a1db1f5] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:51.524+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [                                                 ] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
+2026-07-15T15:58:53.493+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [84c2ccc28af32e1e09a4eda1ed113fbd-c20c9e77a7aa1245] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:58:58.620+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [bdea2ee8542c9a6c05a9dca3046e6fac-42b0da88dbfb3f10] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:03.750+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [6c28ce7a101b7735ac8632adf3c207b9-c9da581cb7f48091] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:08.881+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [2b750a443fe870639c5dcd30177f1d1c-1d8d7afdd62af1c7] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:14.052+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-8] [bf0a17a836a117b13f201adae33b46cd-12c234e7c85dfda4] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:19.244+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [99f35801e68ab44b7dc8f49e7ab194d8-5894105e8a1dd7e0] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:24.411+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [e006088ecebfb8806b7b88320cf99c30-3047a5361678338a] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:29.552+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-8] [15d0af36a7fc4aa855b82c97e2f11bd7-afc692842c95c55c] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:34.691+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [2802717283cee5980c260e675f9064f9-17a161ee1ba3ae13] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:39.828+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-6] [592f02a12fad69cd38b539a012b542fa-5651e8bc7fb1eff3] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:44.965+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-3] [25fbfc8f4ed1f4e06884beb63b58ceec-50da227374bd679a] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:50.130+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-2] [78c45b4196cd20a21f7ece9b7fcd1cd5-1c335a2d5defa932] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T15:59:55.267+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-5] [28a6286af97d745c9e662b422640e39a-4314f31fe4497850] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:00:05.188+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-3] [add8d3783dc78c251ea8e6418415c29d-368585c3c000b00f] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:00:15.210+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-5] [e874cae90b57f76361351f2344799bcc-328a5216b0fd37ea] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:00:20.356+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [bb93f7d1dcdb9590744bc5ac1999ea87-55febc5ae377d26f] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:00:25.490+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [4b31b75f9731d9e6de0b5eacf8945b67-bfc4ad17cfa39200] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:00:30.623+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-1] [58ba53cfbba3a266713d7a3681876fd2-77c54cbc7a7d90d1] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:00:35.761+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [cfa7419191a344add1a2bf793b8c4d37-1551d599a227b351] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:00:45.133+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [f370320d708511c404941c65bae28bda-2622983d30b4cb9d] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:00:50.283+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-1] [cd18295ee897f8796dd38b346267f6fc-4534ce710068fabc] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:00:55.408+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [3e048ca38649979ebe03c37419a26280-789732330b9c35da] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:00.528+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-8] [fa3ab138ebcf8a3d89bf63c17d36a216-4d7e5fd7a600d4e7] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:05.657+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [954228d55d7ea14d9d45d0204ba3b919-f37ef02323c06cfb] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:10.798+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-6] [f51a77ba9c827a35823937b3370f975e-84e03e91b2ad61ee] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:15.924+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-3] [709eee044725fbd29218419987157193-1042ceb17e97cb9a] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:21.074+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-2] [3eab1878930f71a62b1acf7d86e5c411-cdd47806952ce228] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:26.220+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-5] [6be4bbf2316df78eca90f0106a8202ca-e8247899a14d7feb] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:31.347+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [7e8d6bfdbb676130cbe0b999526d7134-2c01e6c6cd0963fa] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:36.471+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [9a7938f613dcf4bd13e176e1131b2f3b-c0fe0edc860808a6] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:45.957+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-5] [eac0ca2c1ea2164063a36bd8534daae1-6e006b0a5dff74eb] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:51.119+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [0ad822f398cd84b6249a292b7a3df384-9ab004e04db988fb] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:01:56.254+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [264567536471f716ff63a9b46c9ae816-30556ef9f25ad13c] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:01.451+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-1] [c7526c4b520d8ee9d05f3b4c5c7f56a9-db8c32adf5f44962] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:06.582+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [5037424e03b96ed7ba2bbe7812e5758c-74b2451f6d04cf23] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:11.709+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-8] [e2025b49234152937d3ef52c015313a5-cff654f1a79e2133] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:16.838+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [ba398d7f9c98b6eb3be72018d80e4093-42572f72983306db] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:21.968+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-2] [cccc80d6dd683fb6c018b02d84d77156-5404daa27488ae12] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:27.094+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-5] [91c1db0272efce7ef44b5faf1c1899ba-d9a3b6bfb4ee9c51] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:32.219+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-5] [66f2580572db5675679336c1f9c78078-f46929b579570be2] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:37.350+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [16362b8867a8cbbbff91a77ab7f2f227-f9103cda944aceb2] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:42.489+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [f4c34f02c77da4097d76e22c89f3b93c-cbae562318b6d9f3] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:47.615+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-6] [739e7fa6a2c424cd87f1c960b7cc5e18-ebc197b293327fb4] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:52.739+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [5566cc59fb521579071e5aaa41b6e17b-bfd6d640149295fd] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:02:57.863+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-1] [eca5dfe1082ae2c6b60121b3e3adfb29-2febd5eb534fcaac] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:02.997+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [17706d3ce28341c35e00c63d3ea37f7b-5ee269291f0ee5cb] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:08.146+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-5] [e1410269bf3fdef45801d44fc729237d-4d1b54eb6ea998b7] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:13.321+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-2] [a54ce4db5fef6cd6d1e0f4f642c0fb93-9effffbf8b699dc0] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:16.002+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [b850847b783eca4f03af10185f0fefa5-cb8dabea7818f618] o.s.w.s.resource.ResourceHandlerUtils    : "Path with "WEB-INF" or "META-INF": [s/cfx/_/WEB-INF/web.xml]"
+2026-07-15T16:03:16.038+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-8] [a10a5931bcd8cacb08d7ea32de77ce23-3b6d7a346030978e] o.s.w.s.resource.ResourceHandlerUtils    : "Path with "WEB-INF" or "META-INF": [s/cfx/_/WEB-INF/classes/seraph-config.xml]"
+2026-07-15T16:03:16.120+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-1] [5e290e6627d0cceac8567eadc19bfa4c-b8948ed8f5709a06] o.s.w.s.resource.ResourceHandlerUtils    : "Path with "WEB-INF" or "META-INF": [s/cfx/_/WEB-INF/decorators.xml]"
+2026-07-15T16:03:16.154+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [013566457b6aaa21df836b1ea472a3b1-7e6084dcc4194ddd] o.s.w.s.resource.ResourceHandlerUtils    : "Path with "WEB-INF" or "META-INF": [s/cfx/_/META-INF/maven/com.atlassian.jira/jira-webapp-dist/pom.properties]"
+2026-07-15T16:03:16.209+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-3] [ce6fa7f026dc98929b3c4cb9ed99ac7d-132f1bcbebbdfd29] o.s.w.s.resource.ResourceHandlerUtils    : "Path with "WEB-INF" or "META-INF": [s/cfx/_/META-INF/maven/com.atlassian.jira/jira-webapp-dist/pom.xml]"
+2026-07-15T16:03:16.259+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [74336cf8484b3214a22e0f43642d3d32-ddbd84018c84f7e0] o.s.w.s.resource.ResourceHandlerUtils    : "Path with "WEB-INF" or "META-INF": [s/cfx/_/META-INF/maven/com.atlassian.jira/atlassian-jira-webapp/pom.xml]"
+2026-07-15T16:03:16.271+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-1] [9da7deb48687abc3c6458e0cda1af915-595f98487b75f0f9] o.s.w.s.resource.ResourceHandlerUtils    : "Path with "WEB-INF" or "META-INF": [s/cfx/_/META-INF/maven/com.atlassian.jira/atlassian-jira-webapp/pom.properties]"
+2026-07-15T16:03:16.641+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-3] [bad1f7538b99e2561fbfe5adc23fb358-bc6af26203760020] o.s.w.s.resource.ResourceHandlerUtils    : "Path contains "../" after call to StringUtils#cleanPath: [setup/setup-/../../log.jsp]"
+2026-07-15T16:03:18.521+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [83f706694bff46bdd38e2c7918147d7f-233df2fcbd1aeb47] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:23.633+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [adbd2e21cdb88297d9069eda8c2805bb-bd2909cd2ba14321] o.s.w.s.resource.ResourceHandlerUtils    : "Path contains "../" after call to StringUtils#cleanPath: [../../../../windows/win.ini]"
+2026-07-15T16:03:23.639+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-8] [76c085884139291932e9a9cb8f761bd5-b5fb533e22c62e62] o.s.w.s.resource.ResourceHandlerUtils    : "Path contains "../" after call to StringUtils#cleanPath: [../../../../winnt/win.ini]"
+2026-07-15T16:03:23.644+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [ad19ca312202729a831dac9625569351-1effe6088bfa606d] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:23.647+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-3] [c868a1a89b70b3cc50835a7772638bd5-3358c858087a0f68] o.s.w.s.resource.ResourceHandlerUtils    : "Path contains "../" after call to StringUtils#cleanPath: [../../../../../../../etc/passwd]"
+2026-07-15T16:03:23.718+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [739f0435a56a042948224c70a85b5e6b-a504fabbb7f789d5] o.a.c.w.AbstractFileResourceSet          : Resource for web application [] at path [/status.xsl.] was not loaded as the canonical path [/status.xsl] did not match. Use of symlinks is one possible cause.
+2026-07-15T16:03:27.189+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-6] [b703ad2fd17077f0827155b1ded71593-f8ed8277d6092206] o.a.c.w.AbstractFileResourceSet          : Resource for web application [] at path [/default.asp.] was not loaded as the canonical path [/default.asp] did not match. Use of symlinks is one possible cause.
+2026-07-15T16:03:28.770+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [12081f972a0f4191868a51c4f1a168d3-09320dc2e273165a] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:37.668+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [ed332f04d2056e1ba35dcf7b5b57706f-c5af027911bae6e3] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:40.929+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [                                                 ] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
+2026-07-15T16:03:42.824+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-2] [ad82a76e05e0a411f5be92a9138ab1c7-255d04a4533159a1] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:47.962+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [1b78fe8d0e8d370ead100c322b8799d9-a6550b04fbfefa8b] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:53.097+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-1] [ba09771b7fde76d77bb7abdc77c51ecb-33513ad5e3ced30d] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:03:58.231+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-7] [3abcba34d406cb98a110cadcb0c6b012-40d1176dad0283f0] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:03.360+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [d32145b01a9462e80ffc65c08aae4004-754bbbcfbae182a6] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:08.489+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-2] [69e05cfdb18f51d17714834f80026401-dfc3486e4a5a9815] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:13.638+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [08ecaacb6237a6112dc9cf073ef29821-3d247d3d643d0a8a] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:18.767+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [520ba7f58cf627a139cb8b5c62e7c773-1f4eeb6ec646f674] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:23.898+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-2] [78e8857355478f86499a9ede38b414d4-d514b2b03bfd9f61] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:29.040+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-10] [543905290c4b19170831dcab672a33fc-ef10514c7abeb69b] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:34.179+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-9] [37864ab5f74290444e535a2d05ab47a0-ea160b5d763d8024] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:39.317+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-3] [7420c8ffde829b74da14435e489dbfc4-83cfbc91fcc1d0a3] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:44.481+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-5] [92db1a0e8e4d75141a42f4f1c74019e1-c2de780d2109189e] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:49.607+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-6] [5c1e0df67afb21b8f956fd521947025d-f32e870cbc2f3cd6] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
+2026-07-15T16:04:54.731+08:00  WARN 15208 --- [mySpringAi] [http-nio-8080-exec-4] [74fb77711030fff58bd5dde609c90054-751b633f4fed5cad] o.s.b.w.a.WelcomePageHandlerMapping      : Received invalid Accept header. Assuming all media types are accepted
