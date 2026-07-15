@@ -5,8 +5,13 @@ import { useDemo } from "../context/useDemo";
 
 const ENDPOINT = "/image/image-options";
 
+// 後端 ImageController 內建的 fallback 值（前端顯示用；需與後端保持同步）。
+const DEFAULT_MODEL = "gpt-image-1";
+const DEFAULT_QUALITY = "auto";
+const DEFAULT_SIZE = "1024x1024";
+
+// 三個下拉選單的候選值。畫面上會在等於 DEFAULT_* 的那個 option 右邊多顯示 "(default)"。
 const MODELS = [
-  "",
   "gpt-image-1",
   "gpt-image-1-mini",
   "gpt-image-1.5",
@@ -14,9 +19,8 @@ const MODELS = [
   "chatgpt-image-latest",
   "dall-e-3",
 ];
-const QUALITIES = ["", "auto", "low", "medium", "high"];
+const QUALITIES = ["auto", "low", "medium", "high"];
 const SIZES = [
-  "",
   "1024x1024",
   "1024x1536",
   "1536x1024",
@@ -39,8 +43,9 @@ function errorToText(error) {
   return error.message || "建立請求時發生錯誤。";
 }
 
-function optionLabel(value) {
-  return value || "(default)";
+// 對應 DEFAULT_* 的 option 在原字串後標註 "(default)"，其餘照原字串顯示。
+function optionLabel(value, defaultValue) {
+  return value === defaultValue ? `${value} (default)` : value;
 }
 
 export default function ImageImageOptionsPage() {
@@ -58,9 +63,10 @@ export default function ImageImageOptionsPage() {
   );
 
   const [prompt, setPrompt] = useState(savedInput?.prompt || "");
-  const [model, setModel] = useState(savedInput?.model || "");
-  const [quality, setQuality] = useState(savedInput?.quality || "");
-  const [size, setSize] = useState(savedInput?.size || "");
+  // options 三個下拉框的 state；初始值優先從 savedInput 回填，否則落到 DEFAULT_*。
+  const [model, setModel] = useState(savedInput?.model || DEFAULT_MODEL);
+  const [quality, setQuality] = useState(savedInput?.quality || DEFAULT_QUALITY);
+  const [size, setSize] = useState(savedInput?.size || DEFAULT_SIZE);
   const [isLoading, setIsLoading] = useState(false);
   const [validationError, setValidationError] = useState("");
   const controllerRef = useRef(null);
@@ -98,16 +104,13 @@ export default function ImageImageOptionsPage() {
     controllerRef.current = controller;
 
     try {
+      // 三個 options 直接送當前值（初始就是 DEFAULT_*，等同於不覆寫；user 改過則送新值）。
       const response = await apiClient.post(
         ENDPOINT,
-        {
-          message,
-          model: model || null,
-          quality: quality || null,
-          size: size || null,
-        },
+        { message, model, quality, size },
         { signal: controller.signal },
       );
+      // slot 的 user 物件多存三個 options 欄位；下次進頁面能一併回填下拉選單。
       writeSlot([
         { role: "user", prompt: message, model, quality, size },
         {
@@ -129,17 +132,23 @@ export default function ImageImageOptionsPage() {
     }
   }
 
+  // 比 ImagePage 多重置三個 options（回到 DEFAULT_* 的初始狀態）。
   function clearAll() {
     setPrompt("");
-    setModel("");
-    setQuality("");
-    setSize("");
+    setModel(DEFAULT_MODEL);
+    setQuality(DEFAULT_QUALITY);
+    setSize(DEFAULT_SIZE);
     setValidationError("");
     writeSlot([]);
   }
 
   const hasResult = !!latestResult;
-  const hasAnyInput = !!(prompt || model || quality || size);
+  // 「與預設狀態不同」才需要 Clear——prompt 有值 或 任一 option 被改過。
+  const hasChanges =
+    !!prompt ||
+    model !== DEFAULT_MODEL ||
+    quality !== DEFAULT_QUALITY ||
+    size !== DEFAULT_SIZE;
 
   return (
     <article className="api-page">
@@ -160,7 +169,7 @@ export default function ImageImageOptionsPage() {
           <button
             type="button"
             onClick={clearAll}
-            disabled={isLoading || (!hasResult && !hasAnyInput)}
+            disabled={isLoading || (!hasResult && !hasChanges)}
           >
             Clear 清除
           </button>
@@ -204,6 +213,9 @@ export default function ImageImageOptionsPage() {
           {validationError && (
             <p className="validation-error">{validationError}</p>
           )}
+          {/* Options 下拉列：三個 select 讓使用者指定 model / quality / size。
+              用 <label> 包 select 讓文字提示與控制項綁定，點文字也能聚焦下拉。
+              等於 DEFAULT_* 的 option 會在右邊顯示 "(default)" 標記。 */}
           <div className="composer-options">
             <label>
               Model
@@ -213,8 +225,8 @@ export default function ImageImageOptionsPage() {
                 disabled={isLoading}
               >
                 {MODELS.map((value) => (
-                  <option key={value || "default-model"} value={value}>
-                    {optionLabel(value)}
+                  <option key={value} value={value}>
+                    {optionLabel(value, DEFAULT_MODEL)}
                   </option>
                 ))}
               </select>
@@ -227,8 +239,8 @@ export default function ImageImageOptionsPage() {
                 disabled={isLoading}
               >
                 {QUALITIES.map((value) => (
-                  <option key={value || "default-quality"} value={value}>
-                    {optionLabel(value)}
+                  <option key={value} value={value}>
+                    {optionLabel(value, DEFAULT_QUALITY)}
                   </option>
                 ))}
               </select>
@@ -241,8 +253,8 @@ export default function ImageImageOptionsPage() {
                 disabled={isLoading}
               >
                 {SIZES.map((value) => (
-                  <option key={value || "default-size"} value={value}>
-                    {optionLabel(value)}
+                  <option key={value} value={value}>
+                    {optionLabel(value, DEFAULT_SIZE)}
                   </option>
                 ))}
               </select>

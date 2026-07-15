@@ -26,8 +26,8 @@ import java.util.Base64;
 @RequestMapping("/image")
 public class ImageController {
 
-    private static final String DEFAULT_MODEL = "gpt-image-2";
-    private static final String DEFAULT_QUALITY = "low";
+    private static final String DEFAULT_MODEL = "gpt-image-1";
+    private static final String DEFAULT_QUALITY = "auto";
     private static final String DEFAULT_SIZE = "1024x1024";
 
     private final ImageModel imageModel;
@@ -63,7 +63,7 @@ public class ImageController {
         String model = orDefault(payload.model(), DEFAULT_MODEL);
         String quality = orDefault(payload.quality(), DEFAULT_QUALITY);
         String size = orDefault(payload.size(), DEFAULT_SIZE);
-        
+
         log.info("圖片生成請求 (options): message={}, model={}, quality={}, size={}",
                 payload.message(), model, quality, size);
 
