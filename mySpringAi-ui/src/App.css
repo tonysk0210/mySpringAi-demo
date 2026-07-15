@@ -83,6 +83,16 @@
 .composer textarea { width: 100%; max-height: 150px; resize: vertical; padding: 12px 14px; color: #edf1f8; background: #151b26; border: 1px solid #293244; border-radius: 11px; outline: none; line-height: 1.5; }
 .composer textarea:focus { border-color: #655bba; box-shadow: 0 0 0 3px rgba(139,124,255,.1); }
 .composer textarea::placeholder { color: #667086; }
+.composer input { width: 100%; padding: 12px 14px; color: #edf1f8; background: #151b26; border: 1px solid #293244; border-radius: 11px; outline: none; line-height: 1.5; }
+.composer input:focus { border-color: #655bba; box-shadow: 0 0 0 3px rgba(139,124,255,.1); }
+.composer input::placeholder { color: #667086; }
+.composer-stack { flex: 1; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.composer-options { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.composer-options label { display: flex; flex: 1 1 140px; min-width: 140px; flex-direction: column; gap: 4px; color: #8f9aae; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.composer-options select { width: 100%; padding: 10px 12px; color: #edf1f8; background: #151b26; border: 1px solid #293244; border-radius: 11px; outline: none; font-size: 13px; }
+.composer-options select:focus { border-color: #655bba; box-shadow: 0 0 0 3px rgba(139,124,255,.1); }
+.generated-image { display: block; max-width: 100%; width: 512px; margin-top: 6px; border-radius: 12px; border: 1px solid #283143; background: #171e2a; }
+.saved-path { margin: 8px 0 0; color: #6e788c; font-size: 11px; word-break: break-all; }
 .composer button { flex: 0 0 42px; width: 42px; height: 42px; color: #0b0d13; background: linear-gradient(135deg, var(--cyan), var(--accent-strong)); border: 0; border-radius: 11px; font-size: 21px; font-weight: 700; }
 .composer button:disabled { opacity: .3; cursor: default; }
 .composer small { display: block; margin: 8px 2px 0; color: #596377; font-size: 10px; }

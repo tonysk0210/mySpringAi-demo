@@ -80,14 +80,14 @@ export const apiGroups = [
   {
     label: "Email",
     routes: [
-      { path: "/email/emailResponse", label: "Email Response", ready: false },
+      { path: "/email/emailResponse", label: "Email Response", ready: true },
     ],
   },
   {
     label: "Image",
     routes: [
-      { path: "/image/image", label: "Generate Image", ready: false },
-      { path: "/image/image-options", label: "Image Options", ready: false },
+      { path: "/image/image", label: "Generate Image", ready: true },
+      { path: "/image/image-options", label: "Image Options", ready: true },
     ],
   },
   {
