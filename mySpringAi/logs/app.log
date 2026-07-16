@@ -1966,3 +1966,56 @@ You may need to update both your build tool settings as well as your IDE.
 2026-07-16T17:05:21.217+08:00  INFO 25788 --- [mySpringAi] [http-nio-8080-exec-7] [e2b5cbc2aea5796b2ba585b7d4f53d5a-a3ff6a96c12dc6c5] c.e.m.controller.AudioController         : TTS 請求: characters=6
 2026-07-16T17:05:28.642+08:00  INFO 25788 --- [mySpringAi] [http-nio-8080-exec-2] [f75265125658f638a896656e87e60ec8-613a15d1ba892bb8] c.e.m.controller.AudioController         : TTS 請求 (options): characters=9, voice=alloy, speed=1.0, format=mp3
 2026-07-16T17:07:07.662+08:00  INFO 25788 --- [mySpringAi] [http-nio-8080-exec-2] [3d3c7bc50993f6ef594f29610fc0485c-75d6ac432a957889] c.e.m.controller.AudioController         : TTS 請求: characters=8
+2026-07-16T17:21:45.736+08:00 DEBUG 25788 --- [mySpringAi] [http-nio-8080-exec-8] [939a50e82dd7b9f82a976dbdd5040f89-8938b37e42467283] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #1 ══════════════════════════════════════════════════
+║ [SYSTEM]      你是一位虛擬客服助理，負責協助員工處理問題並管理服務工單。
+║               ## 可用工具
+║               - getTicketStatus：查詢目前使用者的所有工單
+║               - createTicket：建立新的服務工單
+║               ## 處理流程（每次請嚴格依序執行）
+║               1. 先呼叫 getTicketStatus 取得使用者現有工單
+║               2. 比對現有工單的 issue 欄位，判斷是否有語意相近的問題
+║               3. 若已有相似工單 → 不建立新工單，直接告知使用者現有工單的 id 與狀態
+║               4. 若無相似工單 → 呼叫 createTicket 建立新工單，並回傳工單 id 給使用者
+║               ## 回覆原則
+║               - 建立工單後，回覆工單 id 與預計處理時間（eta）
+║               - 每次使用者詢問工單狀態時，必須重新呼叫 getTicketStatus，不得使用對話記憶中的舊資料
+║               - 查詢工單狀態時，列出 id、issue、status、eta
+║               - 若問題可直接解答，優先解答，不需建立工單
+║               - 保持簡短、禮貌，以解決問題為導向
+║ [USER]        你說什麼
+╚════════════════════════════════════════════════════════════════════
+2026-07-16T17:21:47.771+08:00 DEBUG 25788 --- [mySpringAi] [http-nio-8080-exec-8] [939a50e82dd7b9f82a976dbdd5040f89-8938b37e42467283] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #1 ══════════════════════════════════════════════════
+║ [TOOL_CALL]   getTicketStatus({})
+╚════════════════════════════════════════════════════════════════════
+2026-07-16T17:21:47.772+08:00  INFO 25788 --- [mySpringAi] [http-nio-8080-exec-8] [939a50e82dd7b9f82a976dbdd5040f89-eb0263df5f792932] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=475, completionTokens=11, totalTokens=486, cacheReadInputTokens=0}
+2026-07-16T17:21:47.781+08:00  INFO 25788 --- [mySpringAi] [http-nio-8080-exec-8] [939a50e82dd7b9f82a976dbdd5040f89-fb43b559a2e9ae5a] c.e.mySpringAi.tools.HelpDeskTicketTool  : 取得 demo-user 的所有「服務工單」: 
+2026-07-16T17:21:48.425+08:00  INFO 25788 --- [mySpringAi] [http-nio-8080-exec-8] [939a50e82dd7b9f82a976dbdd5040f89-fb43b559a2e9ae5a] c.e.mySpringAi.tools.HelpDeskTicketTool  : 共 0 張「服務工單」 for userName: demo-user
+2026-07-16T17:21:48.429+08:00 DEBUG 25788 --- [mySpringAi] [http-nio-8080-exec-8] [939a50e82dd7b9f82a976dbdd5040f89-5a79a8f2d59435fd] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #2 ══════════════════════════════════════════════════
+║ [SYSTEM]      你是一位虛擬客服助理，負責協助員工處理問題並管理服務工單。
+║               ## 可用工具
+║               - getTicketStatus：查詢目前使用者的所有工單
+║               - createTicket：建立新的服務工單
+║               ## 處理流程（每次請嚴格依序執行）
+║               1. 先呼叫 getTicketStatus 取得使用者現有工單
+║               2. 比對現有工單的 issue 欄位，判斷是否有語意相近的問題
+║               3. 若已有相似工單 → 不建立新工單，直接告知使用者現有工單的 id 與狀態
+║               4. 若無相似工單 → 呼叫 createTicket 建立新工單，並回傳工單 id 給使用者
+║               ## 回覆原則
+║               - 建立工單後，回覆工單 id 與預計處理時間（eta）
+║               - 每次使用者詢問工單狀態時，必須重新呼叫 getTicketStatus，不得使用對話記憶中的舊資料
+║               - 查詢工單狀態時，列出 id、issue、status、eta
+║               - 若問題可直接解答，優先解答，不需建立工單
+║               - 保持簡短、禮貌，以解決問題為導向
+║ [USER]        你說什麼
+║ [TOOL_CALL]   getTicketStatus({})
+║ [TOOL_RESP]   getTicketStatus → []
+╚════════════════════════════════════════════════════════════════════
+2026-07-16T17:21:49.107+08:00 DEBUG 25788 --- [mySpringAi] [http-nio-8080-exec-8] [939a50e82dd7b9f82a976dbdd5040f89-5a79a8f2d59435fd] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #2 ══════════════════════════════════════════════════
+║ [ASSISTANT]   目前沒有任何待處理的工單。請問有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-16T17:21:49.108+08:00  INFO 25788 --- [mySpringAi] [http-nio-8080-exec-8] [939a50e82dd7b9f82a976dbdd5040f89-359cbd0fd05e4aff] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=496, completionTokens=24, totalTokens=520, cacheReadInputTokens=0}
+2026-07-16T17:21:54.806+08:00  INFO 25788 --- [mySpringAi] [http-nio-8080-exec-10] [0eccf8067ad765a1228b037eccb02540-8c8ad5eb09b6f08a] c.e.m.controller.AudioController         : TTS 請求 (options): characters=4, voice=alloy, speed=1.0, format=mp3
