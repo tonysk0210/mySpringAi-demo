@@ -58,7 +58,7 @@ public class RagController {
         SearchRequest searchRequest = SearchRequest.builder()
                 .query(messageChatPayload.message())
                 .topK(5)                                 // 最多取前 5 筆最相似的 Document
-                .similarityThreshold(.5)             // 搜尋的相似度門檻
+                .similarityThreshold(.8)             // 搜尋的相似度門檻
                 .build();
 
         // 2. 用建好的 SearchRequest 從 ragVectorStore 找相關文件

@@ -66,6 +66,15 @@
 .empty-chat > span { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 17px; color: var(--accent-strong); background: rgba(139,124,255,.1); border: 1px solid rgba(139,124,255,.22); border-radius: 15px; font-size: 21px; }
 .empty-chat h2 { margin: 0 0 7px; color: #dfe5f2; font-size: 16px; }
 .empty-chat p { margin: 0; color: #6e788c; font-size: 13px; }
+.test-guide { width: min(560px, 90%); margin-top: 20px; padding: 16px 20px; text-align: left; background: rgba(139, 124, 255, 0.06); border: 1px solid rgba(139, 124, 255, 0.25); border-radius: 12px; color: #c8cfdd; font-size: 13px; line-height: 1.65; }
+.test-guide-summary { margin: 0 0 12px !important; padding: 0 0 10px; color: #dfe5f2 !important; font-size: 13px !important; font-weight: 500; border-bottom: 1px dashed rgba(139, 124, 255, 0.2); }
+.test-guide-heading { margin: 12px 0 6px !important; color: var(--accent-strong) !important; font-size: 12px !important; font-weight: 600; letter-spacing: 0.03em; }
+.test-guide ul { margin: 0; padding-left: 20px; color: #b8c0d0; }
+.test-guide ul li { margin: 3px 0; }
+.test-guide .sample-query { padding: 3px 8px; margin: 2px 0; color: #b8c0d0; background: rgba(139, 124, 255, 0.08); border: 1px dashed rgba(139, 124, 255, 0.28); border-radius: 6px; font: inherit; text-align: left; cursor: pointer; transition: all 0.15s; }
+.test-guide .sample-query:hover:not(:disabled) { color: #edf1f8; background: rgba(139, 124, 255, 0.16); border-style: solid; }
+.test-guide .sample-query:disabled { opacity: 0.5; cursor: not-allowed; }
+.test-guide-notes { margin: 12px 0 0 !important; padding: 8px 10px; color: #ffb976 !important; background: rgba(255, 165, 89, 0.06); border-left: 2px solid rgba(255, 165, 89, 0.5); border-radius: 4px; font-size: 12px !important; }
 .message { width: fit-content; max-width: min(78%, 720px); margin: 0 0 18px; }
 .message strong { display: block; margin: 0 0 6px 4px; color: #788397; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
 .message pre { margin: 0; padding: 13px 15px; color: #dce2ee; white-space: pre-wrap; overflow-wrap: anywhere; background: #171e2a; border: 1px solid #283143; border-radius: 4px 14px 14px 14px; font: 13px/1.6 "SFMono-Regular", Consolas, monospace; }

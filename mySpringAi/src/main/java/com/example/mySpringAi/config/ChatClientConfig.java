@@ -16,6 +16,7 @@ import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.ollama.api.OllamaChatOptions;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,13 +30,33 @@ public class ChatClientConfig {
     // Ollama 通用參數：所有 Ollama ChatClient 共用同一份 Builder（temperature=0.5, maxTokens=500）
     private final ChatOptions.Builder<OllamaChatOptions.Builder> ollamaChatOptions = OllamaChatOptions.builder().temperature(0.5).maxTokens(500);
 
+    /**
+     * 注入單例 {@link PrettyLoggerAdvisor}，讓所有 ChatClient 共用同一個實例。
+     * <p>
+     * 為什麼要注入而不是 {@code new PrettyLoggerAdvisor()}？
+     * <ul>
+     *   <li><b>共用計數器</b>：PrettyLoggerAdvisor 內部持有 LLM 呼叫序號的計數器。若每個 ChatClient 都用 new 建立，
+     *       就會有 7 個獨立的計數器，無法統一管理。</li>
+     *   <li><b>可被外部 reset</b>：{@code WebMvcConfig} 的 HandlerInterceptor 需要在每次 HTTP 請求進入前呼叫
+     *       {@code prettyLoggerAdvisor.reset()} 讓計數器歸零；只有共用同一實例，reset 才會對「當次請求會用到的 ChatClient」生效。</li>
+     *   <li><b>由 Spring 管理生命週期</b>：PrettyLoggerAdvisor 已標註 {@code @Component}，交給 Spring 建立單例即可，
+     *       避免手動 new 導致 Bean 與非 Bean 混用。</li>
+     * </ul>
+     */
+    private final PrettyLoggerAdvisor prettyLoggerAdvisor;
+
+    @Autowired
+    public ChatClientConfig(PrettyLoggerAdvisor prettyLoggerAdvisor) {
+        this.prettyLoggerAdvisor = prettyLoggerAdvisor;
+    }
+
     // 1. 使用 OpenAI 模型、沒有聊天記憶功能
     @Bean("openaiCCNoMem")
     public ChatClient openaiCCNoMem(OpenAiChatModel openAiChatModel, ObservationRegistry observationRegistry) {
 
         return ChatClient.builder(openAiChatModel, observationRegistry, null, null)
                 .defaultOptions(openAiChatOptions)
-                .defaultAdvisors(new TokenUsageAuditAdvisor(), new PrettyLoggerAdvisor())
+                .defaultAdvisors(new TokenUsageAuditAdvisor(), prettyLoggerAdvisor)
                 .defaultSystem("回答時請使用清楚、易理解且專業的繁體中文。").build();
     }
 
@@ -45,7 +66,7 @@ public class ChatClientConfig {
 
         return ChatClient.builder(openAiChatModel, observationRegistry, null, null)
                 .defaultOptions(openAiChatOptions)
-                .defaultAdvisors(new TokenUsageAuditAdvisor(), new PrettyLoggerAdvisor(), redisSemanticCacheAdvisor)
+                .defaultAdvisors(new TokenUsageAuditAdvisor(), prettyLoggerAdvisor, redisSemanticCacheAdvisor)
                 .defaultSystem("回答時請使用清楚、易理解且專業的繁體中文。").build();
     }
 
@@ -55,7 +76,7 @@ public class ChatClientConfig {
 
         return ChatClient.builder(openAiChatModel, observationRegistry, null, null)
                 .defaultOptions(openAiChatOptions)
-                .defaultAdvisors(new TokenUsageAuditAdvisor(), new PrettyLoggerAdvisor(), qdrantSemanticCacheAdvisor)
+                .defaultAdvisors(new TokenUsageAuditAdvisor(), prettyLoggerAdvisor, qdrantSemanticCacheAdvisor)
                 .defaultSystem("回答時請使用清楚、易理解且專業的繁體中文。").build();
     }
 
@@ -68,7 +89,7 @@ public class ChatClientConfig {
 
         return ChatClient.builder(openAiChatModel, observationRegistry, null, null)
                 .defaultOptions(openAiChatOptions)
-                .defaultAdvisors(new TokenUsageAuditAdvisor(), new PrettyLoggerAdvisor(), inMemoryAdvisor)
+                .defaultAdvisors(new TokenUsageAuditAdvisor(), prettyLoggerAdvisor, inMemoryAdvisor)
                 .defaultSystem("回答時請使用清楚、易理解且專業的繁體中文。").build();
     }
 
@@ -82,7 +103,7 @@ public class ChatClientConfig {
 
         return ChatClient.builder(openAiChatModel, observationRegistry, null, null)
                 .defaultOptions(openAiChatOptions)
-                .defaultAdvisors(new TokenUsageAuditAdvisor(), new PrettyLoggerAdvisor(), jdbcChatMemoryAdvisor)
+                .defaultAdvisors(new TokenUsageAuditAdvisor(), prettyLoggerAdvisor, jdbcChatMemoryAdvisor)
                 .defaultSystem("回答時請使用清楚、易理解且專業的繁體中文。").build();
     }
 
@@ -95,7 +116,7 @@ public class ChatClientConfig {
 
         return ChatClient.builder(ollamaChatModel, observationRegistry, null, null)
                 .defaultOptions(ollamaChatOptions)
-                .defaultAdvisors(new TokenUsageAuditAdvisor(), new PrettyLoggerAdvisor(), jdbcChatMemoryAdvisor)
+                .defaultAdvisors(new TokenUsageAuditAdvisor(), prettyLoggerAdvisor, jdbcChatMemoryAdvisor)
                 .defaultSystem("回答時請使用清楚、易理解且專業的繁體中文。").build();
     }
 
@@ -112,7 +133,7 @@ public class ChatClientConfig {
                 .toolCallingManager(toolCallingManager);
 
         return ChatClient.builder(openAiChatModel, observationRegistry, null, null, toolCallingAdvisorBuilder)
-                .defaultOptions(openAiChatOptions).defaultAdvisors(new TokenUsageAuditAdvisor(), new PrettyLoggerAdvisor(), jdbcChatMemoryAdvisor)
+                .defaultOptions(openAiChatOptions).defaultAdvisors(new TokenUsageAuditAdvisor(), prettyLoggerAdvisor, jdbcChatMemoryAdvisor)
                 .defaultTools(timeTool) // 增加 Tool 支援
                 .defaultSystem("回答時請使用清楚、易理解且專業的繁體中文。").build();
     }

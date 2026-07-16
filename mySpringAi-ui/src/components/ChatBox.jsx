@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
 import apiClient from "../api/client";
 import { useDemo } from "../context/useDemo";
+import { apiTestGuides } from "../config/apiTestGuides";
 
 // 將 API 回應統一轉成 ChatBox 可顯示的文字：字串直接使用，物件或陣列則格式化為 JSON。
 function responseToText(data) {
@@ -174,12 +175,66 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
 
         {/* 訊息區由 4 個獨立表達式組成，各自判斷是否顯示；①②互斥、②③可同時顯示（例如：已有訊息且正在等新回應）。 */}
         <div className="messages" aria-live="polite">
-          {/* ① 空狀態：沒有任何訊息時顯示引導畫面。 */}
+          {/* ① 空狀態：沒有任何訊息時顯示引導畫面 + 該 API 的測試說明（若有設定於 apiTestGuides）。 */}
           {!messages.length && (
             <div className="empty-chat">
               <span>✦</span>
               <h2>開始測試這個 API 端點</h2>
               <p>在下方輸入訊息，送出你的第一個請求。</p>
+              {/*
+                為什麼要用 apiTestGuides[endpoint] 而不是 apiTestGuides.endpoint？
+                1. endpoint 是「變數」（由 props 動態傳入，例如 "/rag/rag"、"/openai/chat-jdbc"）；
+                   點語法只會找字面上叫 "endpoint" 的欄位，永遠回傳 undefined。
+                2. key 名稱含斜線 "/"，斜線不能出現在點語法後面（會被解析成除法），
+                   即使寫死也只能用 apiTestGuides["/rag/rag"]。
+                方括號語法會先「計算」括號內的表達式再拿結果當 key，因此才能正確查到。
+              */}
+              {apiTestGuides[endpoint] && (
+                <div
+                  className="test-guide"
+                  role="note"
+                  aria-label="API 測試說明"
+                >
+                  <p className="test-guide-summary">
+                    {apiTestGuides[endpoint].summary}
+                  </p>
+                  {apiTestGuides[endpoint].testPoints?.length > 0 && (
+                    <>
+                      <p className="test-guide-heading">🎯 測試重點</p>
+                      <ul>
+                        {apiTestGuides[endpoint].testPoints.map((point, i) => (
+                          <li key={`tp-${i}`}>{point}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {apiTestGuides[endpoint].sampleQueries?.length > 0 && (
+                    <>
+                      <p className="test-guide-heading">💬 建議提問</p>
+                      <ul>
+                        {apiTestGuides[endpoint].sampleQueries.map((q, i) => (
+                          <li key={`sq-${i}`}>
+                            <button
+                              type="button"
+                              className="sample-query"
+                              onClick={() => setInput(q)}
+                              disabled={isLoading}
+                              title="點擊填入輸入框"
+                            >
+                              {q}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {apiTestGuides[endpoint].notes && (
+                    <p className="test-guide-notes">
+                      ⚠️ {apiTestGuides[endpoint].notes}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           )}
           {/* ② 訊息列表：逐一渲染每則訊息；空陣列 map 回傳空結果，自然不顯示。key 用於 React 辨識列表元素。 */}
