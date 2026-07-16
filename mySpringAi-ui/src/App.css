@@ -109,7 +109,8 @@
 .file-picker input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .audio-result-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 10px; color: var(--muted); font-size: 12px; }
 .audio-result-actions button, .audio-download { padding: 8px 11px; color: #d7d2ff; background: #17162a; border: 1px solid #39345f; border-radius: 8px; text-decoration: none; }
-.audio-player-card audio { display: block; width: min(560px, 100%); margin: 8px 0 14px; }
+.message.audio-player-card { width: min(680px, 100%); max-width: 100%; }
+.audio-player-card audio { display: block; width: 100%; min-height: 54px; margin: 8px 0 14px; border-radius: 10px; background: #171e2a; }
 .audio-download { display: inline-block; }
 
 .coming-soon-card { display: grid; min-height: 420px; padding: 55px; place-items: center; align-content: center; text-align: center; border: 1px dashed #313a4c; border-radius: 17px; background: rgba(16,21,31,.65); }

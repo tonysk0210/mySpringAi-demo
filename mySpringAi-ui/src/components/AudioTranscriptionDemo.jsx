@@ -2,6 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import apiClient from "../api/client";
 
+/*
+ * Blob 在這個元件中的用途（音訊轉文字）：
+ *
+ * 1. 使用者選取的音訊是 File；File 是帶有檔名等資訊的 Blob，可直接放入 FormData 上傳給後端。
+ * 2. 有進階選項時，程式另建一個 application/json Blob，把 prompt、language 等 JSON 資料當成
+ *    multipart 的 options 區塊送出。以上兩種 Blob 都未建立 Blob URL，請求結束且不再被引用後，
+ *    瀏覽器會自行處理資源，不需要呼叫 URL.revokeObjectURL()。
+ * 3. 後端回傳的是轉錄結果文字；只有使用者按 Download 時，才把文字包成可下載的文字 Blob。
+ * 4. 下載連結需要 URL，所以程式臨時以 URL.createObjectURL(blob) 建立 blob: URL，像替這份文字檔
+ *    取得一次性的取件號碼，再透過隱藏的 <a> 觸發瀏覽器下載。
+ * 5. 這個 URL 不需要像語音播放器一樣留著重播；下載啟動後便立即以 URL.revokeObjectURL() 撤銷，
+ *    所以不需要使用 state 或 ref 保存，也不用等到 Clear 或元件卸載才清理。
+ */
+
 // 後端目前允許的轉錄輸出格式。
 const TRANSCRIPTION_FORMATS = ["text", "srt", "vtt"];
 
@@ -65,7 +79,8 @@ export default function AudioTranscriptionDemo({
     if (withOptions) {
       formData.append(
         "options",
-        // Blob：將 options JSON 包成帶 application/json 型態的檔案型資料。
+        // Blob：將 options JSON 包成帶 application/json 型態的檔案型資料；
+        // 此處未建立 Blob URL，請求結束後由瀏覽器回收，不需呼叫 revokeObjectURL。
         new Blob(
           [
             JSON.stringify({
@@ -103,7 +118,8 @@ export default function AudioTranscriptionDemo({
     // 2. 將轉錄文字包裝成 UTF-8 純文字 Blob（記憶體中的檔案型資料）。
     const blob = new Blob([result.text], { type: "text/plain;charset=utf-8" });
 
-    // 3. 建立瀏覽器可存取該 Blob 的暫時 blob: URL。
+    // 3. 此 Blob URL 只用來觸發一次下載，不需像語音播放器跨 render 保留；
+    // 因此下載啟動後即可立即撤銷，不必使用 state 或 ref 保存。
     const url = URL.createObjectURL(blob);
 
     // 4. 建立暫時下載連結，指定下載來源與 text／srt／vtt 副檔名。
