@@ -9,18 +9,18 @@ export const apiGroups = [
       {
         path: "/openai/chat-noMemory",
         label: "OpenAI · No Memory",
-        model: "gpt-4.1-nano",
+        model: "gpt-4.1-mini",
       },
       {
         path: "/openai/chat-inMemory",
         label: "OpenAI · In-memory",
-        model: "gpt-4.1-nano",
+        model: "gpt-4.1-mini",
         requiresUserName: true,
       },
       {
         path: "/openai/chat-jdbc",
         label: "OpenAI · JDBC",
-        model: "gpt-4.1-nano",
+        model: "gpt-4.1-mini",
         requiresUserName: true,
       },
       {
@@ -34,30 +34,30 @@ export const apiGroups = [
   {
     label: "RAG",
     routes: [
-      { path: "/rag/rag", label: "Manual RAG", model: "gpt-4.1-nano" },
-      { path: "/rag/ragPdf", label: "PDF Advisor", model: "gpt-4.1-nano" },
+      { path: "/rag/rag", label: "Manual RAG", model: "gpt-4.1-mini" },
+      { path: "/rag/ragPdf", label: "PDF Advisor", model: "gpt-4.1-mini" },
       {
         path: "/rag/preAndPostRAAdvisor",
         label: "Pre/Post Advisor",
-        model: "gpt-4.1-nano",
+        model: "gpt-4.1-mini",
       },
-      { path: "/rag/ragTavily", label: "Tavily Search", model: "gpt-4.1-nano" },
+      { path: "/rag/ragTavily", label: "Tavily Search", model: "gpt-4.1-mini" },
     ],
   },
   {
     label: "Semantic Cache",
     routes: [
-      { path: "/cache/redisCaching-chat", label: "Redis Cache", model: "gpt-4.1-nano" },
-      { path: "/cache/qdrantCaching-chat", label: "Qdrant Cache", model: "gpt-4.1-nano" },
+      { path: "/cache/redisCaching-chat", label: "Redis Cache", model: "gpt-4.1-mini" },
+      { path: "/cache/qdrantCaching-chat", label: "Qdrant Cache", model: "gpt-4.1-mini" },
     ],
   },
   {
     label: "Structured Output",
     routes: [
-      { path: "/dto/generateJsonDto", label: "JSON DTO", model: "gpt-4.1-nano" },
-      { path: "/dto/generateListJsonDto", label: "DTO List", model: "gpt-4.1-nano" },
-      { path: "/dto/generateList", label: "String List", model: "gpt-4.1-nano" },
-      { path: "/dto/generateMap", label: "Map", model: "gpt-4.1-nano" },
+      { path: "/dto/generateJsonDto", label: "JSON DTO", model: "gpt-4.1-mini" },
+      { path: "/dto/generateListJsonDto", label: "DTO List", model: "gpt-4.1-mini" },
+      { path: "/dto/generateList", label: "String List", model: "gpt-4.1-mini" },
+      { path: "/dto/generateMap", label: "Map", model: "gpt-4.1-mini" },
     ],
   },
   {
@@ -66,13 +66,13 @@ export const apiGroups = [
       {
         path: "/tool/time",
         label: "Time Tool · JDBC",
-        model: "gpt-4.1-nano",
+        model: "gpt-4.1-mini",
         requiresUserName: true,
       },
       {
         path: "/tool/helpDeskTicket",
         label: "Help Desk · JDBC",
-        model: "gpt-4.1-nano",
+        model: "gpt-4.1-mini",
         requiresUserName: true,
       },
     ],
@@ -80,7 +80,7 @@ export const apiGroups = [
   {
     label: "Email",
     routes: [
-      { path: "/email/emailResponse", label: "Email Response", model: "gpt-4.1-nano" },
+      { path: "/email/emailResponse", label: "Email Response", model: "gpt-4.1-mini" },
     ],
   },
   {
