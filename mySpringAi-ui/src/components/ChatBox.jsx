@@ -41,6 +41,8 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
   const [validationError, setValidationError] = useState("");
   // controllerRef：目前 request 的 AbortController，供離開頁面時取消請求。
   const controllerRef = useRef(null);
+  // messagesContainerRef：訊息區容器 DOM，空狀態時用來捲到頂部顯示 guide bubble。
+  const messagesContainerRef = useRef(null);
   // messagesEndRef：訊息區底部 DOM，供自動捲動使用。
   const messagesEndRef = useRef(null);
   // textareaRef：輸入框 DOM，供送出訊息後自動聚焦使用。
@@ -53,9 +55,15 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
     [endpoint, messagesByUserAndEndpoint, userKey],
   );
 
-  // 訊息或 loading 狀態改變時，平滑捲動到訊息區底部。
+  // 訊息或 loading 狀態改變時的捲動策略：
+  // - 空狀態（沒有訊息且非載入中）：捲到頂部，讓 ✦ 與 guide bubble 完整可見。
+  // - 其他情況：捲到底部，追蹤最新訊息或打字動畫。
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messages.length === 0 && !isLoading) {
+      messagesContainerRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages, isLoading]);
 
   // 進入頁面或送出完成時將焦點放回輸入框，方便使用者連續輸入。
@@ -161,7 +169,9 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
           <div>
             <span className="status-dot" /> Ready
             {requiresUserName && (
-              <span className="user-chip">user: {userName || "not set"}</span>
+              <span className="user-chip">
+                使用者名稱: {userName || "not set"}
+              </span>
             )}
           </div>
           <button
@@ -174,7 +184,7 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
         </div>
 
         {/* 訊息區由 4 個獨立表達式組成，各自判斷是否顯示；①②互斥、②③可同時顯示（例如：已有訊息且正在等新回應）。 */}
-        <div className="messages" aria-live="polite">
+        <div className="messages" aria-live="polite" ref={messagesContainerRef}>
           {/* ① 空狀態：沒有任何訊息時顯示引導畫面 + 該 API 的測試說明（若有設定於 apiTestGuides）。 */}
           {!messages.length && (
             <div className="empty-chat">

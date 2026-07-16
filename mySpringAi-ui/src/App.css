@@ -62,7 +62,7 @@
 .chat-toolbar button:disabled { opacity: .35; cursor: default; }
 
 .messages { height: min(53vh, 530px); min-height: 350px; overflow-y: auto; padding: 25px; scrollbar-color: #343d50 transparent; }
-.empty-chat { display: grid; place-items: center; align-content: center; height: 100%; text-align: center; }
+.empty-chat { display: flex; flex-direction: column; align-items: center; padding-top: 40px; min-height: 100%; text-align: center; }
 .empty-chat > span { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 17px; color: var(--accent-strong); background: rgba(139,124,255,.1); border: 1px solid rgba(139,124,255,.22); border-radius: 15px; font-size: 21px; }
 .empty-chat h2 { margin: 0 0 7px; color: #dfe5f2; font-size: 16px; }
 .empty-chat p { margin: 0; color: #6e788c; font-size: 13px; }

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(git *)",
-      "Skill(explain)"
+      "Skill(explain)",
+      "Bash(npx ctx7@latest *)"
     ]
   }
 }

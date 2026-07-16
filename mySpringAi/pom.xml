@@ -75,6 +75,15 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Spring Boot 4.x 起，H2 console 的 autoconfig 被抽成獨立模組，
+             光靠 h2 driver + spring.h2.console.enabled=true 已不足以啟用 /h2-console。
+             加入此依賴後 Spring Boot 才會註冊 H2 console servlet。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-h2console</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- 讓 Spring Boot 應用啟動時，可以自動偵測並使用專案裡的 Docker Compose 檔案。
         Spring Boot 在執行應用時會嘗試整合 Docker Compose，例如啟動 compose.yml 裡的服務，讓本機開發時不用手動先執行 docker compose up。 -->
         <dependency>

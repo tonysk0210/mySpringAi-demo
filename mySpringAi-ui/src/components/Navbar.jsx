@@ -35,7 +35,7 @@ function Navbar() {
         </div>
 
         <label className="identity-field">
-          <span>Demo 輸入使用者名稱 </span>
+          <span>Demo 輸入使用者名稱 userName </span>
           {/* Controlled input：畫面值與 Context 中的 userName 保持同步。 */}
           <input
             value={userName}
