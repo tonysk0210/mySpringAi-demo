@@ -1,4 +1,5 @@
-import ComingSoonPage from './ComingSoonPage'
+import AudioTranscriptionDemo from "../components/AudioTranscriptionDemo";
+
 export default function AudioTranscribeOptionsPage() {
-  return <ComingSoonPage title="Audio Transcription Options" endpoint="/audio/transcribe-options" description="Transcribe the bundled audio resource with advanced options." />
+  return <AudioTranscriptionDemo endpoint="/audio/transcribe-options" title="Audio Transcription Options" description="上傳音訊並控制提示、語言、temperature 與字幕格式。" withOptions />;
 }

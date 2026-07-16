@@ -1,4 +1,5 @@
-import ComingSoonPage from './ComingSoonPage'
+import AudioSpeechDemo from "../components/AudioSpeechDemo";
+
 export default function AudioTextToSpeechPage() {
-  return <ComingSoonPage title="Text to Speech" endpoint="/audio/text-to-speech" description="Generate an MP3 file from input text using default speech options." />
+  return <AudioSpeechDemo endpoint="/audio/text-to-speech" title="Text to Speech" description="輸入文字，使用預設聲音產生可直接播放及下載的 MP3。" />;
 }

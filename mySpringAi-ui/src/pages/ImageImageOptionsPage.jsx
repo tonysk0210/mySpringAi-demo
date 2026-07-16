@@ -68,7 +68,6 @@ export default function ImageImageOptionsPage() {
   const [quality, setQuality] = useState(savedInput?.quality || DEFAULT_QUALITY);
   const [size, setSize] = useState(savedInput?.size || DEFAULT_SIZE);
   const [isLoading, setIsLoading] = useState(false);
-  const [validationError, setValidationError] = useState("");
   const controllerRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -91,13 +90,7 @@ export default function ImageImageOptionsPage() {
   async function handleSubmit(event) {
     event.preventDefault();
     const message = prompt.trim();
-    if (isLoading) return;
-    if (!message) {
-      setValidationError("請輸入圖片描述。");
-      return;
-    }
-
-    setValidationError("");
+    if (isLoading || !message) return;
     setIsLoading(true);
 
     const controller = new AbortController();
@@ -138,7 +131,6 @@ export default function ImageImageOptionsPage() {
     setModel(DEFAULT_MODEL);
     setQuality(DEFAULT_QUALITY);
     setSize(DEFAULT_SIZE);
-    setValidationError("");
     writeSlot([]);
   }
 
@@ -210,9 +202,6 @@ export default function ImageImageOptionsPage() {
         </div>
 
         <form className="composer" onSubmit={handleSubmit}>
-          {validationError && (
-            <p className="validation-error">{validationError}</p>
-          )}
           {/* Options 下拉列：三個 select 讓使用者指定 model / quality / size。
               用 <label> 包 select 讓文字提示與控制項綁定，點文字也能聚焦下拉。
               等於 DEFAULT_* 的 option 會在右邊顯示 "(default)" 標記。 */}

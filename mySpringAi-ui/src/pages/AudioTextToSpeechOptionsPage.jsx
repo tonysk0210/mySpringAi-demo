@@ -1,4 +1,5 @@
-import ComingSoonPage from './ComingSoonPage'
+import AudioSpeechDemo from "../components/AudioSpeechDemo";
+
 export default function AudioTextToSpeechOptionsPage() {
-  return <ComingSoonPage title="Text to Speech Options" endpoint="/audio/text-to-speech-options" description="Generate an MP3 file with configured voice and speech options." />
+  return <AudioSpeechDemo endpoint="/audio/text-to-speech-options" title="Text to Speech Options" description="選擇聲音、語速及格式後產生語音。" withOptions />;
 }

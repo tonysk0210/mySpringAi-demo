@@ -97,6 +97,20 @@
 .composer button:disabled { opacity: .3; cursor: default; }
 .composer small { display: block; margin: 8px 2px 0; color: #596377; font-size: 10px; }
 .validation-error { margin: 0 0 9px; color: var(--danger); font-size: 12px; }
+.audio-shell { overflow: hidden; }
+.audio-result-area { min-height: 300px; }
+.transcription-loading .typing { margin-bottom: 17px; }
+.audio-composer { display: block; }
+.audio-input-row { display: flex; align-items: flex-end; gap: 10px; }
+.audio-input-row textarea { flex: 1; }
+.file-picker { display: flex; align-items: center; flex: 1; min-height: 44px; padding: 11px 14px; color: #c4cbd8; background: #151b26; border: 1px dashed #39445a; border-radius: 11px; cursor: pointer; overflow: hidden; }
+.file-picker:hover { border-color: #655bba; }
+.file-picker span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-picker input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.audio-result-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 10px; color: var(--muted); font-size: 12px; }
+.audio-result-actions button, .audio-download { padding: 8px 11px; color: #d7d2ff; background: #17162a; border: 1px solid #39345f; border-radius: 8px; text-decoration: none; }
+.audio-player-card audio { display: block; width: min(560px, 100%); margin: 8px 0 14px; }
+.audio-download { display: inline-block; }
 
 .coming-soon-card { display: grid; min-height: 420px; padding: 55px; place-items: center; align-content: center; text-align: center; border: 1px dashed #313a4c; border-radius: 17px; background: rgba(16,21,31,.65); }
 .coming-soon-card > span { display: grid; place-items: center; width: 62px; height: 62px; margin-bottom: 20px; color: var(--accent-strong); background: rgba(139,124,255,.08); border: 1px solid rgba(139,124,255,.2); border-radius: 18px; font-size: 29px; }
