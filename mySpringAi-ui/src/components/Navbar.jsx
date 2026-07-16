@@ -62,8 +62,8 @@ function Navbar() {
                 >
                   {/* 顯示 apiRoutes.js 中設定的 API 導覽名稱。 */}
                   <span>{route.label}</span>
-                  {/* 尚未完成的 API 頁面仍可進入，但會顯示 SOON。 */}
-                  {!route.ready && <small>SOON</small>}
+                  {/* 顯示 apiRoutes.js 為每個 route 設定的預設模型。 */}
+                  <small>{route.model}</small>
                 </NavLink>
               ))}
             </section>
