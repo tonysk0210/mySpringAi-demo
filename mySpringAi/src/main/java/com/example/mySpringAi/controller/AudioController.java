@@ -1,7 +1,11 @@
 package com.example.mySpringAi.controller;
 
+import com.example.mySpringAi.dto.AudioTranscriptionResponseDto;
+import com.example.mySpringAi.payload.AudioSpeechOptionsPayload;
+import com.example.mySpringAi.payload.AudioTranscriptionOptionsPayload;
 import com.example.mySpringAi.payload.MessageChatPayload;
 import com.openai.models.audio.AudioResponseFormat;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.audio.transcription.AudioTranscriptionPrompt;
@@ -12,109 +16,215 @@ import org.springframework.ai.audio.tts.TextToSpeechPrompt;
 import org.springframework.ai.audio.tts.TextToSpeechResponse;
 import org.springframework.ai.openai.OpenAiAudioSpeechOptions;
 import org.springframework.ai.openai.OpenAiAudioTranscriptionOptions;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Locale;
+import java.util.Map;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/audio")
 public class AudioController {
+
+    private static final Map<String, MediaType> AUDIO_MEDIA_TYPES = Map.of(
+            "mp3", MediaType.parseMediaType("audio/mpeg"),
+            "opus", MediaType.parseMediaType("audio/ogg"),
+            "aac", MediaType.parseMediaType("audio/aac"),
+            "flac", MediaType.parseMediaType("audio/flac"),
+            "wav", MediaType.parseMediaType("audio/wav"),
+            "pcm", MediaType.APPLICATION_OCTET_STREAM
+    );
+
     private final TranscriptionModel transcriptionModel;
-    private final TextToSpeechModel textToSpeechModel; // OpenAiAudioSpeechModel implements TextToSpeechModel
+    private final TextToSpeechModel textToSpeechModel;
 
     /**
-     * 基本語音轉文字：丟音檔即可，其他全用 OpenAI Whisper 預設值（輸出純文字、自動偵測語言）。
-     * 對比 /transcribe-options：本 endpoint 不帶 options，適合快速純文字轉錄。
+     * 上傳音訊並使用預設設定轉錄為文字。
      */
-    @GetMapping("/transcribe")
-    String transcribe(@Value("classpath:SpringAI.mp3") Resource audioFile) {
-        log.info("Transcription 請求: {}", audioFile.getFilename());
+    @PostMapping(value = "/transcribe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    AudioTranscriptionResponseDto transcribe(
+            @RequestPart("file") MultipartFile file) {
+        // 1. 驗證上傳的音訊不是空檔案；驗證失敗時回傳 400 Bad Request
+        validateAudioFile(file);
+        log.info("Transcription 請求: file={}, size={}", file.getOriginalFilename(), file.getSize());
 
-        // 1. 呼叫 transcriptionModel 的 call 方法，傳入音檔
-        AudioTranscriptionResponse response = transcriptionModel.call(new AudioTranscriptionPrompt(audioFile));
-        String result = response.getResult().getOutput();
+        // 2. 呼叫 transcriptionModel 的 call 方法，傳入 AudioTranscriptionPrompt
+        AudioTranscriptionResponse response = transcriptionModel.call(
+                new AudioTranscriptionPrompt(file.getResource()));
 
-        log.info("Transcription 回應: {}", result);
-        return result;
+        // 3. 包裝前端回應
+        return transcriptionResponse(response, "text", file);
     }
 
     /**
-     * 進階語音轉文字：帶 OpenAiAudioTranscriptionOptions 精細控制主題提示、語言、隨機性、輸出格式（此處為 VTT 字幕）。
-     * 對比 /transcribe：本 endpoint 適合有專有名詞或需要字幕檔的情境；/transcribe 適合快速純文字轉錄。
+     * 上傳音訊，並依據前端傳入的進階設定進行轉錄。接收音訊檔案和轉錄選項。
      */
-    @GetMapping("/transcribe-options")
-    String transcribeWithOptions(@Value("classpath:SpringAI.mp3") Resource audioFile) {
-        log.info("Transcription 請求 (options): {}", audioFile.getFilename());
+    @PostMapping(value = "/transcribe-options", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    AudioTranscriptionResponseDto transcribeWithOptions(
+            @RequestPart("file") MultipartFile file,
+            @Valid @RequestPart("options") AudioTranscriptionOptionsPayload payload) {
+        // 1. 驗證上傳的音訊不是空檔案；驗證失敗時回傳 400 Bad Request
+        validateAudioFile(file);
 
-        // 1. 呼叫 transcriptionModel 的 call 方法，傳入音檔和轉錄設定
-        AudioTranscriptionResponse response = transcriptionModel.call(new AudioTranscriptionPrompt(
-                audioFile,
-                OpenAiAudioTranscriptionOptions.builder()
-                        .prompt("Talking about Spring AI")       // 主題提示：幫模型正確辨識 "Spring AI" 這類專有名詞
-                        .language("en")                          // 強制語言：跳過自動偵測（短音檔易誤判）
-                        .temperature(0.5f)                       // 隨機性：0 = 最保守可重現、1 = 較有變化
-                        .responseFormat(AudioResponseFormat.VTT) // WebVTT 字幕格式（含時間戳記，非純文字）
-                        .build()));
-        String result = response.getResult().getOutput();
+        // 2. 轉換並建立轉錄 options
+        AudioResponseFormat responseFormat = transcriptionFormat(payload.responseFormat());
+        log.info("Transcription 請求 (options): file={}, size={}, format={}",
+                file.getOriginalFilename(), file.getSize(), payload.responseFormat());
 
-        log.info("Transcription 回應 (options): {}", result);
-        return result;
+        OpenAiAudioTranscriptionOptions options = OpenAiAudioTranscriptionOptions.builder()
+                .prompt(blankToNull(payload.prompt())) // 主題提示：幫模型正確辨識 "Spring AI" 這類專有名詞
+                .language(lowercaseOrNull(payload.language())) // 語言設定
+                .temperature(payload.temperature()) // 隨機性：0 = 最保守可重現、1 = 較有變化
+                .responseFormat(responseFormat) // 轉錄格式
+                .build();
+
+        // 3. 呼叫 transcriptionModel 的 call 方法，傳入 AudioTranscriptionPrompt
+        AudioTranscriptionResponse response = transcriptionModel.call(
+                new AudioTranscriptionPrompt(file.getResource(), options));
+
+        // 4. 包裝前端回應
+        return transcriptionResponse(response, payload.responseFormat(), file);
     }
 
     /**
-     * 基本文字轉語音：丟文字即可，其他全用 OpenAI TTS 預設值（預設聲音、正常語速、MP3 格式）。
-     * 對比 /text-to-speech-options：本 endpoint 不帶 options，適合快速產生語音檔。
+     * 將文字以預設設定轉換為 MP3 音訊。
      */
     @PostMapping("/text-to-speech")
-    String speech(@RequestBody MessageChatPayload payload) throws IOException {
-        log.info("TTS 請求: {}", payload.message());
-        // 1. 呼叫 textToSpeechModel 的 call 方法，傳入要轉成音檔的文字
-        byte[] audioBytes = textToSpeechModel.call(payload.message());
+    ResponseEntity<byte[]> speech(@Valid @RequestBody MessageChatPayload payload) {
+        // 1. 整理輸入文字
+        String message = payload.message().trim();
+        log.info("TTS 請求: characters={}", message.length());
 
-        // 2. 建立輸出檔案路徑
-        Path path = Paths.get("audio-output", "speech.mp3");
+        // 2. 呼叫語音合成模型
+        byte[] audioBytes = textToSpeechModel.call(message);
 
-        // 3. 寫入音檔
-        Files.write(path, audioBytes);
+        // 3. 包裝 MP3 binary 回應
+        return audioResponse(audioBytes, "mp3");
+    }
 
-        log.info("TTS 完成，檔案儲存至: {}", path.toAbsolutePath());
-        // 4. 回應結果
-        return "MP3 已成功儲存至：" + path.toAbsolutePath();
+    /** 依據前端傳入的聲音、語速與格式將文字轉換為音訊。 */
+    @PostMapping("/text-to-speech-options")
+    ResponseEntity<byte[]> speechWithOptions(@Valid @RequestBody AudioSpeechOptionsPayload payload) {
+        // 1. 轉換前端傳入的 options
+        OpenAiAudioSpeechOptions.Voice voice = speechVoice(payload.voice());
+        OpenAiAudioSpeechOptions.AudioResponseFormat responseFormat = speechFormat(payload.responseFormat());
+
+        // 2. 整理輸入文字
+        String message = payload.message().trim();
+        log.info("TTS 請求 (options): characters={}, voice={}, speed={}, format={}",
+                message.length(), payload.voice(), payload.speed(), payload.responseFormat());
+
+        // 3. 建立 Spring AI 語音合成 options
+        OpenAiAudioSpeechOptions options = OpenAiAudioSpeechOptions.builder()
+                .voice(voice)
+                .speed(payload.speed())
+                .responseFormat(responseFormat)
+                .build();
+        // 4. 呼叫語音合成模型
+        TextToSpeechResponse response = textToSpeechModel.call(
+                new TextToSpeechPrompt(message, options));
+
+        // 5. 以指定格式包裝 binary 回應
+        return audioResponse(response.getResult().getOutput(), payload.responseFormat());
+    }
+
+    // ///////////////////////////////////////////////////////////////////
+    // Helper method starts here  使用 static method 是無狀態的純工具操作，不依賴目前的 Controller 物件
+    // ///////////////////////////////////////////////////////////////////
+
+    /**
+     * 取出 Spring AI 轉錄文字，並與格式、原始檔名一起包裝成前端回應 DTO。
+     */
+    private static AudioTranscriptionResponseDto transcriptionResponse(
+            AudioTranscriptionResponse response, String format, MultipartFile file) {
+        return new AudioTranscriptionResponseDto(
+                response.getResult().getOutput(),
+                format.toLowerCase(Locale.ROOT),
+                file.getOriginalFilename());
     }
 
     /**
-     * 進階文字轉語音：帶 OpenAiAudioSpeechOptions 精細控制音色、語速、輸出格式（此處為 NOVA 聲音、1.0 語速、MP3）。
-     * 對比 /text-to-speech：本 endpoint 適合需要特定音色或語速的情境；/text-to-speech 適合快速產生語音檔。
+     * 依音訊格式設定 MIME type 與檔名，並將音訊 bytes 包裝成 HTTP response。
      */
-    @PostMapping("/text-to-speech-options")
-    String speechWithOptions(@RequestBody MessageChatPayload payload) throws IOException {
-        log.info("TTS 請求 (options): {}", payload.message());
-        // 1. 建立 TextToSpeechPrompt，把文字和語音合成 options 打包成請求
-        TextToSpeechResponse speechResponse = textToSpeechModel.call(new TextToSpeechPrompt(payload.message(),
-                OpenAiAudioSpeechOptions.builder()
-                        .voice(OpenAiAudioSpeechOptions.Voice.NOVA) // 指定 TTS 使用 NOVA 聲音
-                        .speed(1.0) // 語速倍率；1.0 代表正常速度
-                        .responseFormat(OpenAiAudioSpeechOptions.AudioResponseFormat.MP3).build())); // 要求回傳 MP3 音訊格式
+    private static ResponseEntity<byte[]> audioResponse(byte[] bytes, String format) {
+        // 1. 取得格式對應的 MIME type
+        String normalizedFormat = format.toLowerCase(Locale.ROOT);
+        MediaType mediaType = AUDIO_MEDIA_TYPES.get(normalizedFormat);
+        if (mediaType == null) {
+            throw new ResponseStatusException(BAD_REQUEST, "不支援的語音格式：" + format);
+        }
 
-        // 2. 建立輸出檔案路徑
-        Path path = Paths.get("audio-output", "speech-options.mp3");
+        // 2. 設定瀏覽器使用的音訊檔名
+        ContentDisposition disposition = ContentDisposition.inline()
+                .filename("speech." + normalizedFormat)
+                .build();
 
-        // 3. 寫入音檔
-        Files.write(path, speechResponse.getResult().getOutput());
+        // 3. 回傳音訊 binary 與 HTTP headers
+        return ResponseEntity.ok()
+                .contentType(mediaType)
+                .contentLength(bytes.length)
+                .header(HttpHeaders.CONTENT_DISPOSITION, disposition.toString())
+                .body(bytes);
+    }
 
-        log.info("TTS 完成 (options)，檔案儲存至: {}", path.toAbsolutePath());
-        // 4. 回應結果
-        return "MP3 已成功儲存至：" + path.toAbsolutePath();
+    /**
+     * 驗證上傳的音訊不是空檔案；驗證失敗時回傳 400 Bad Request。
+     */
+    private static void validateAudioFile(MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new ResponseStatusException(BAD_REQUEST, "請選擇非空白的音訊檔案。");
+        }
+    }
+
+    /** 將前端轉錄格式轉為 OpenAI enum；不支援時回傳 400。 */
+    private static AudioResponseFormat transcriptionFormat(String format) {
+        return switch (format.toLowerCase(Locale.ROOT)) {
+            case "text" -> AudioResponseFormat.TEXT;
+            case "srt" -> AudioResponseFormat.SRT;
+            case "vtt" -> AudioResponseFormat.VTT;
+            default -> throw new ResponseStatusException(BAD_REQUEST, "不支援的轉錄格式：" + format);
+        };
+    }
+
+    /** 將前端聲音名稱轉為 Spring AI Voice enum；不支援時回傳 400。 */
+    private static OpenAiAudioSpeechOptions.Voice speechVoice(String voice) {
+        try {
+            return OpenAiAudioSpeechOptions.Voice.valueOf(voice.toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(BAD_REQUEST, "不支援的聲音：" + voice, exception);
+        }
+    }
+
+    /** 將前端音訊格式轉為 Spring AI AudioResponseFormat enum；不支援時回傳 400。 */
+    private static OpenAiAudioSpeechOptions.AudioResponseFormat speechFormat(String format) {
+        try {
+            return OpenAiAudioSpeechOptions.AudioResponseFormat.valueOf(format.toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(BAD_REQUEST, "不支援的語音格式：" + format, exception);
+        }
+    }
+
+    /** 將 null 或空白字串轉為 null，其餘內容移除頭尾空白。 */
+    private static String blankToNull(String value) {
+        return value == null || value.isBlank() ? null : value.trim();
+    }
+
+    /** 將非空白字串正規化為小寫；null 或空白則回傳 null。 */
+    private static String lowercaseOrNull(String value) {
+        String normalized = blankToNull(value);
+        return normalized == null ? null : normalized.toLowerCase(Locale.ROOT);
     }
 }
