@@ -74,7 +74,10 @@ public class RAAdvisorConfig {
     public RetrievalAugmentationAdvisor tavilyRetrievalAugmentationAdvisor(TavilyWebSearchDocumentRetriever tavilyWebSearchDocumentRetriever) {
         return RetrievalAugmentationAdvisor.builder()
                 // 1. 設定 Tavily 文件檢索器；advisor 收到使用者問題後，會透過它呼叫 Tavily 搜尋並取得相關 Document。
-                .documentRetriever(tavilyWebSearchDocumentRetriever).build();
+                .documentRetriever(tavilyWebSearchDocumentRetriever)
+                // 2. 設定 advisor 執行順序；-10 早於 PrettyLoggerAdvisor(order=-1)，讓 logger 顯示 RAG 增強後的 UserMessage。
+                .order(-10)
+                .build();
     }
 
     /**
@@ -107,7 +110,7 @@ public class RAAdvisorConfig {
                 .documentRetriever(
                         VectorStoreDocumentRetriever.builder()
                                 .vectorStore(vectorStore)
-                                .topK(3)
+                                .topK(5)
                                 .similarityThreshold(0.7)
                                 .build())
                 // 3.2 Post-retrieval：遮罩 email / phone 等 PII，避免敏感資訊送給 LLM

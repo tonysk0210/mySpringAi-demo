@@ -152,8 +152,8 @@ public class RagDataLoader {
         List<Document> documents = reader.get();
         log.info("PDF 讀取完成，共 {} 份文件", documents.size());
 
-        // 3. 使用 TokenTextSplitter，用 token 數量來切文件：每個 chunk 目標大小約為 125 tokens，最多切 400 個 chunk
-        TextSplitter splitter = TokenTextSplitter.builder().withChunkSize(125).withMaxNumChunks(400).build();
+        // 3. 使用 TokenTextSplitter，用 token 數量來切文件：每個 chunk 目標大小約為 250 tokens，最多切 400 個 chunk
+        TextSplitter splitter = TokenTextSplitter.builder().withChunkSize(250).withMaxNumChunks(400).build();
 
         // 4. 把切好的 Document 清單送進 pdfVectorStore，完成建立 pdf-collection
         List<Document> splitDocuments = splitter.split(documents);

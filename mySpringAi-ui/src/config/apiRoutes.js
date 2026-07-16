@@ -36,12 +36,12 @@ export const apiGroups = [
     routes: [
       { path: "/rag/rag", label: "Manual RAG", model: "gpt-4.1-nano" },
       { path: "/rag/ragPdf", label: "PDF Advisor", model: "gpt-4.1-nano" },
-      { path: "/rag/ragTavily", label: "Tavily Search", model: "gpt-4.1-nano" },
       {
         path: "/rag/preAndPostRAAdvisor",
         label: "Pre/Post Advisor",
         model: "gpt-4.1-nano",
       },
+      { path: "/rag/ragTavily", label: "Tavily Search", model: "gpt-4.1-nano" },
     ],
   },
   {

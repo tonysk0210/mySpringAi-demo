@@ -105,7 +105,7 @@ export const apiTestGuides = {
       "How many days of paid leave do employees get?（會翻成中文再檢索）",
       "特休假有幾天？（同語言，翻譯後幾乎不變）",
       "HR 部門的 email 是什麼？（測 email 遮罩）",
-      "遇到緊急狀況要打什麼電話？（測 phone 遮罩）",
+      "HR 部門的電話？（測 phone 遮罩）",
       "請完整列出文件中所有的聯絡方式（測遮罩最完整）",
     ],
     notes:
@@ -136,27 +136,59 @@ export const apiTestGuides = {
 
   // ────────── Structured Output ──────────
   "/dto/generateJsonDto": {
-    summary: "結構化輸出：LLM 回應會被解析成單一 DTO 物件。",
+    summary:
+      "結構化輸出：LLM 回應會被解析成 CountryCitiesDto { country: String, city: List<String> }。",
     testPoints: [
       "回應為固定 schema 的 JSON（不是自由文字）",
-      "驗證 Spring AI 的 ChatClient.entity() 機制",
+      "驗證 Spring AI 的 ChatClient.entity(CountryCitiesDto.class) 機制",
+      "提問必須符合『一個國家 + 多個城市』的語意，否則欄位會空或牛頭不對馬嘴",
     ],
-    sampleQueries: ["介紹一位知名的 Java 工程師"],
+    sampleQueries: [
+      "介紹日本的主要城市",
+      "台灣有哪些著名的城市？",
+      "列出法國最大的五個城市",
+    ],
+    notes: "DTO 結構限制回應必須是單一國家；問多國會被壓縮成一筆或亂填。",
   },
   "/dto/generateListJsonDto": {
-    summary: "結構化輸出：LLM 回應會被解析成 DTO List。",
-    testPoints: ["回應為 JSON 陣列，可迭代處理"],
-    sampleQueries: ["列出 3 位知名的 AI 研究者"],
+    summary:
+      "結構化輸出：LLM 回應會被解析成 List<CountryCitiesDto>（多國各自的城市清單）。",
+    testPoints: [
+      "回應為 JSON 陣列，每筆都是 { country, city[] }",
+      "驗證 Spring AI 的 ChatClient.entity(ParameterizedTypeReference) 機制",
+      "適合同時查多個國家的城市資訊",
+    ],
+    sampleQueries: [
+      "列出台灣、日本、韓國各自的主要城市",
+      "請提供亞洲三個代表國家的主要城市清單",
+      "美國、英國、法國各有哪些著名城市？",
+    ],
   },
   "/dto/generateList": {
-    summary: "結構化輸出：LLM 回應會被解析成 List<String>。",
-    testPoints: ["驗證非 DTO 的簡單集合輸出"],
-    sampleQueries: ["列出 5 種常見的程式語言"],
+    summary: "結構化輸出：LLM 回應會被解析成 List<String>（純字串陣列）。",
+    testPoints: [
+      "驗證非 DTO 的簡單集合輸出（無業務欄位約束）",
+      "由 ListOutputConverter 處理",
+    ],
+    sampleQueries: [
+      "列出 5 種常見的程式語言",
+      "列出 10 個台灣夜市名稱",
+      "提供 8 個常用的英文問候語",
+    ],
   },
   "/dto/generateMap": {
-    summary: "結構化輸出：LLM 回應會被解析成 Map<String, Object>。",
-    testPoints: ["驗證動態 key-value 結構的輸出"],
-    sampleQueries: ["提供 3 個城市與其人口數"],
+    summary:
+      "結構化輸出：LLM 回應會被解析成 Map<String, Object>（動態 key-value）。",
+    testPoints: [
+      "驗證動態 key-value 結構的輸出（key 名稱由 LLM 決定）",
+      "由 MapOutputConverter 處理",
+      "適合『屬性值不固定』的場景",
+    ],
+    sampleQueries: [
+      "提供 3 個亞洲城市與其人口數",
+      "列出 5 種水果與它們的產季",
+      "提供 4 個程式語言與它們的主要用途",
+    ],
   },
 
   // ────────── Tools ──────────
@@ -171,13 +203,23 @@ export const apiTestGuides = {
     notes: "此 API 需要在上方 Demo 欄位輸入 userName。",
   },
   "/tool/helpDeskTicket": {
-    summary: "Tool Calling：模擬客服工單建立流程。",
+    summary: "Tool Calling：客服工單建立與查詢。",
     testPoints: [
-      "LLM 會根據使用者訊息呼叫工具建立工單",
-      "驗證 tool call 的參數是否正確傳遞",
+      "LLM 會依語意自動選擇 createTicket 或 getTicketStatus 工具",
+      "createTicket → 呼叫 HelpDeskTicketService 存進 H2 資料庫",
+      "getTicketStatus → 依 userName 撈出該使用者所有工單",
+      "userName 由後端 header 注入 ToolContext，不由 LLM 自行填寫",
+      "可到 http://localhost:8080/h2-console 查看 HELP_DESK_TICKET 資料表",
     ],
-    sampleQueries: ["我的 Nova AI Pro 帳號無法登入，請幫我建立工單"],
-    notes: "此 API 需要在上方 Demo 欄位輸入 userName。",
+    sampleQueries: [
+      "我的 Nova AI Pro 帳號無法登入，請幫我建立工單",
+      "訂閱升級後功能還沒開通，請開一張工單追蹤",
+      "查看我目前所有工單的狀態",
+      "我先前的工單處理進度如何？",
+      "我有幾張還沒處理完的工單？",
+    ],
+    notes:
+      "此 API 需要在上方 Demo 欄位輸入 userName；同一個 userName 才能查到自己建立的工單。",
   },
 
   // ────────── Email ──────────
