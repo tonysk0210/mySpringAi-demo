@@ -53,7 +53,7 @@ export const apiTestGuides = {
 
   // ────────── RAG ──────────
   "/rag/rag": {
-    summary: "Manual RAG：手動 similaritySearch + 自組 prompt。",
+    summary: "Manual RAG：手動 Similarity Search + 自組 System Prompt。",
     testPoints: [
       "檢索『星辰科技』虛構知識庫（rag-collection）",
       "驗證 LLM 依知識庫回答，不會亂編",
@@ -72,13 +72,14 @@ export const apiTestGuides = {
     summary:
       "自動 RAG（PDF）：RetrievalAugmentationAdvisor 檢索 pdf-collection。",
     testPoints: [
-      "檢索 Eazybytes HR 政策 PDF 的向量結果",
+      "檢索 ApexTech Solutions HR 政策 PDF 的向量結果（繁體中文）",
       "由 Advisor 自動處理檢索、增強、生成",
       "對照 /rag/rag 觀察『手動 vs 自動』的實作差異",
     ],
     sampleQueries: [
-      "How many days of paid leave do employees get?",
-      "What is the work from home policy?",
+      "員工每年可以請幾天特休假？",
+      "遠端工作政策是什麼？",
+      "試用期多久？",
     ],
   },
   "/rag/ragTavily": {
@@ -94,11 +95,21 @@ export const apiTestGuides = {
     summary:
       "完整 pipeline RAG：Query 翻譯（Pre）→ 檢索 → PII 遮罩（Post）→ 生成。",
     testPoints: [
-      "Pre-retrieval：把中文 query 翻譯成英文再檢索（提升英文語料的命中率）",
-      "Post-retrieval：把檢索結果中的 email / phone 遮罩",
-      "觀察 log 可看到 query 被改寫的過程",
+      "Pre-retrieval：把 query 翻譯成繁體中文再檢索（PDF 是中文，同語言命中率較高）",
+      "Post-retrieval：檢索結果中的 email / phone 會被替換成 [機敏資訊遮罩_EMAIL] / [機敏資訊遮罩_PHONE]",
+      "觀察 console log 可看到 query 被改寫的過程",
+      "用英文提問最能看出翻譯效果",
+      "驗證遮罩：console log 的 [USER] 區塊應該看到遮罩符號（不是原始 email/phone）",
     ],
-    sampleQueries: ["特休假有幾天？（Pre 會翻成英文再檢索）"],
+    sampleQueries: [
+      "How many days of paid leave do employees get?（會翻成中文再檢索）",
+      "特休假有幾天？（同語言，翻譯後幾乎不變）",
+      "HR 部門的 email 是什麼？（測 email 遮罩）",
+      "遇到緊急狀況要打什麼電話？（測 phone 遮罩）",
+      "請完整列出文件中所有的聯絡方式（測遮罩最完整）",
+    ],
+    notes:
+      "遮罩發生在 LLM 收到 context 之前 → LLM 回答本來就不會有 email/phone，要看 console log 才能確認遮罩生效。",
   },
 
   // ────────── Semantic Cache ──────────

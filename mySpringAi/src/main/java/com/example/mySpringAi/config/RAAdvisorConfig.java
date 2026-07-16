@@ -86,10 +86,11 @@ public class RAAdvisorConfig {
                                                                                @Qualifier("openaiBuilder") ChatClient.Builder chatClientBuilder,
                                                                                @Value("classpath:/promptTemplate/RagPdfPromptTemplate.st") Resource ragPdfPromptTemplate) {
         // chatClientBuilder 是 prototype scope（見 ChatClientBuilderConfig），每次注入都是新實例，直接使用不需要 clone
-        // 1. 建立翻譯器；將使用者問題翻譯成英文，因為 pdf-collection 是英文文件，同語言 embedding 命中率較高。
+        // 1. 建立翻譯器；將使用者問題翻譯成繁體中文，因為 pdf-collection 是繁體中文文件（ApexTech Solutions HR Policy Manual），同語言 embedding 命中率較高。
+        //    若使用者本來就用中文提問，翻譯後語意大致不變；用英文提問時才會看到明顯翻譯效果。
         QueryTransformer translationTransformer = TranslationQueryTransformer.builder()
                 .chatClientBuilder(chatClientBuilder)
-                .targetLanguage("english")
+                .targetLanguage("traditional chinese")
                 .build();
 
         // 2. 包裝 translationTransformer，額外記錄翻譯前後的 query，方便 debug retrieval 使用的實際查詢文字。
@@ -101,13 +102,13 @@ public class RAAdvisorConfig {
         };
 
         return RetrievalAugmentationAdvisor.builder()
-                // 3.1 Pre-retrieval：query 翻譯成英文（因為 pdf-collection 是英文文件，同語言 embedding 命中率較高）
+                // 3.1 Pre-retrieval：query 翻譯成繁體中文（因為 pdf-collection 是繁體中文文件，同語言 embedding 命中率較高）
                 .queryTransformers(loggingTranslatedTransformer)
                 .documentRetriever(
                         VectorStoreDocumentRetriever.builder()
                                 .vectorStore(vectorStore)
                                 .topK(3)
-                                .similarityThreshold(0.5)
+                                .similarityThreshold(0.7)
                                 .build())
                 // 3.2 Post-retrieval：遮罩 email / phone 等 PII，避免敏感資訊送給 LLM
                 .documentPostProcessors(MaskingDocumentPostProcessor.getInstance())
