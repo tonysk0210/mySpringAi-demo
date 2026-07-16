@@ -115,7 +115,7 @@ export default function ImageImageOptionsPage() {
         { role: "user", prompt: message, model, quality, size },
         {
           role: "assistant",
-          b64Json: response.data.b64Json,
+          imageBase64: response.data.imageBase64,
           savedPath: response.data.savedPath,
         },
       ]);
@@ -188,7 +188,7 @@ export default function ImageImageOptionsPage() {
               <strong>Assistant</strong>
               <img
                 className="generated-image"
-                src={`data:image/png;base64,${latestResult.b64Json}`}
+                src={`data:image/png;base64,${latestResult.imageBase64}`}
                 alt="Generated"
               />
               <p className="saved-path">Saved to: {latestResult.savedPath}</p>

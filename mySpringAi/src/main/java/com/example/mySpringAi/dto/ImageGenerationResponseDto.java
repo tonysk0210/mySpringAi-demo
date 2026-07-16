@@ -1,4 +1,4 @@
 package com.example.mySpringAi.dto;
 
-public record ImageGenerationResponseDto(String b64Json, String savedPath) {
+public record ImageGenerationResponseDto(String imageBase64, String savedPath) {
 }

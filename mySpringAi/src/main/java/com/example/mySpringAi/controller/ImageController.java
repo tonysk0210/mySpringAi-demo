@@ -34,7 +34,7 @@ public class ImageController {
 
     /**
      * 基本圖片生成：丟提示文字即可，其他全用 OpenAI Image 預設值（預設模型、尺寸、品質）。
-     * 對比 /image-options：本 endpoint 不帶 options，適合快速產生單張圖片；回傳 b64Json 讓前端內嵌顯示，同時保留寫檔到 ./image-output/image.png。
+     * 對比 /image-options：本 endpoint 不帶 options，適合快速產生單張圖片；回傳 imageBase64 讓前端內嵌顯示，同時保留寫檔到 ./image-output/image.png。
      */
     @PostMapping("/image")
     ImageGenerationResponseDto generateImage(@RequestBody MessageChatPayload payload) throws IOException {
@@ -44,13 +44,13 @@ public class ImageController {
         ImageResponse imageResponse = imageModel.call(new ImagePrompt(payload.message()));
 
         // 2. 從 imageResponse 中取得圖片的 B64 字串
-        String b64Json = imageResponse.getResults().get(0).getOutput().getB64Json();
+        String imageBase64 = imageResponse.getResults().get(0).getOutput().getB64Json();
 
         // 3. 將 B64 字串解碼為 byte[]，並儲存至 ./image-output/image.png
-        Path path = writeImage(b64Json, "image.png");
+        Path path = writeImage(imageBase64, "image.png");
 
         log.info("圖片已儲存至: {}", path.toAbsolutePath());
-        return new ImageGenerationResponseDto(b64Json, path.toAbsolutePath().toString());
+        return new ImageGenerationResponseDto(imageBase64, path.toAbsolutePath().toString());
     }
 
     /**
@@ -77,22 +77,22 @@ public class ImageController {
                         .build()));
 
         // 2. 從 imageResponse 中取得圖片的 B64 字串
-        String b64Json = imageResponse.getResult().getOutput().getB64Json();
+        String imageBase64 = imageResponse.getResult().getOutput().getB64Json();
 
         // 3. 將 B64 字串解碼為 byte[]，並儲存至 ./image-output/image-options.png
-        Path path = writeImage(b64Json, "image-options.png");
+        Path path = writeImage(imageBase64, "image-options.png");
 
         log.info("圖片已儲存至: {}", path.toAbsolutePath());
-        return new ImageGenerationResponseDto(b64Json, path.toAbsolutePath().toString());
+        return new ImageGenerationResponseDto(imageBase64, path.toAbsolutePath().toString());
     }
 
     /**
      * 把 OpenAI 回傳的 base64 字串解碼後寫入 ./image-output/{fileName}，回傳寫檔路徑。
      * 兩個 endpoint 都共用這段流程，抽出來避免重複；順便補上 createDirectories 讓第一次跑不會失敗。
      */
-    private static Path writeImage(String b64Json, String fileName) throws IOException {
+    private static Path writeImage(String imageBase64, String fileName) throws IOException {
         // 1. base64 字串 → 原始 PNG bytes
-        byte[] imageBytes = Base64.getDecoder().decode(b64Json);
+        byte[] imageBytes = Base64.getDecoder().decode(imageBase64);
         // 2. 組相對路徑；實際落點取決於 JVM 啟動時的 working directory（Spring Boot 從 module root 跑則為 mySpringAi/image-output/）
         Path path = Paths.get("image-output", fileName);
         // 3. 確保 image-output/ 目錄存在；createDirectories 是 idempotent，已存在則 no-op
