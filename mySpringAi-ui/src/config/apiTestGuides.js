@@ -117,6 +117,7 @@ export const apiTestGuides = {
     summary: "Redis 語意快取：相似 query 命中快取，跳過 LLM。",
     testPoints: [
       "第一次問會呼叫 LLM 並存快取；第二次問相似問題會直接從 Redis 拿",
+      "第二次詢問相似問題時，可從後端 console log 判斷是否有再次向 LLM 發送 request",
       "觀察 token 用量的差異（TokenUsageAuditAdvisor log）",
       "同義句也能命中（不是純字串比對）",
     ],
@@ -129,7 +130,8 @@ export const apiTestGuides = {
     summary: "Qdrant 語意快取：使用向量庫做 caching。",
     testPoints: [
       "與 Redis 版對照，都是語意相似度快取但底層儲存不同",
-      "可到 Qdrant Dashboard 觀察 caching-collection 內容",
+      "第二次詢問相似問題時，可從後端 console log 判斷是否有再次向 LLM 發送 request",
+      "可到 Qdrant Dashboard（http://localhost:6333/dashboard#/collections）觀察 caching-collection 內容",
     ],
     sampleQueries: ["什麼是 Docker？", "介紹一下 Docker（預期：命中快取）"],
   },
@@ -205,7 +207,12 @@ export const apiTestGuides = {
   "/tool/helpDeskTicket": {
     summary: "Tool Calling：客服工單建立與查詢。",
     testPoints: [
-      "LLM 會依語意自動選擇 createTicket 或 getTicketStatus 工具",
+      "每次處理工單問題時，會先呼叫 getTicketStatus，再比對現有工單的 issue",
+      "已有語意相近的工單時，不會重複建立，而是回覆現有工單的 id 與 status",
+      "沒有相似工單時，才會呼叫 createTicket，並回覆新工單的 id 與 eta",
+      "每次查詢狀態都會重新呼叫 getTicketStatus，不使用對話記憶中的舊資料",
+      "查詢結果應列出 id、issue、status、eta",
+      "可直接回答的一般問題會優先回答，不建立工單",
       "createTicket → 呼叫 HelpDeskTicketService 存進 H2 資料庫",
       "getTicketStatus → 依 userName 撈出該使用者所有工單",
       "userName 由後端 header 注入 ToolContext，不由 LLM 自行填寫",
@@ -225,7 +232,17 @@ export const apiTestGuides = {
   // ────────── Email ──────────
   "/email/emailResponse": {
     summary: "Email 自動回覆：根據來信內容生成回覆草稿。",
-    testPoints: ["驗證 prompt template 的參數注入與 email 語氣"],
-    sampleQueries: ["客戶抱怨產品運送延遲三天，請生成道歉信"],
+    testPoints: [
+      "驗證 customerName 與 customerMessage 是否正確注入 prompt template",
+      "回信應針對客戶問題提供具體回應，並維持專業、友善的語氣",
+      "面對客訴時，回信應提供適當的安撫與保證",
+      "輸出應只有電子郵件內文，不包含主旨、署名或簽名",
+    ],
+    sampleQueries: [
+      "我的包裹已經延遲三天，請問何時可以收到？",
+      "升級方案並完成付款後，帳號功能仍未開通。",
+      "收到的商品有損壞，希望協助更換新品。",
+    ],
+    notes: "點擊建議提問會填入 Customer message；送出前仍需填寫 Customer name。",
   },
 };

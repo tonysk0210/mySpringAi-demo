@@ -20,13 +20,7 @@ const MODELS = [
   "dall-e-3",
 ];
 const QUALITIES = ["auto", "low", "medium", "high"];
-const SIZES = [
-  "1024x1024",
-  "1024x1536",
-  "1536x1024",
-  "1792x1024",
-  "1024x1792",
-];
+const SIZES = ["1024x1024", "1024x1536", "1536x1024", "1792x1024", "1024x1792"];
 
 function responseToText(data) {
   return typeof data === "string" ? data : JSON.stringify(data, null, 2);
@@ -65,7 +59,9 @@ export default function ImageImageOptionsPage() {
   const [prompt, setPrompt] = useState(savedInput?.prompt || "");
   // options 三個下拉框的 state；初始值優先從 savedInput 回填，否則落到 DEFAULT_*。
   const [model, setModel] = useState(savedInput?.model || DEFAULT_MODEL);
-  const [quality, setQuality] = useState(savedInput?.quality || DEFAULT_QUALITY);
+  const [quality, setQuality] = useState(
+    savedInput?.quality || DEFAULT_QUALITY,
+  );
   const [size, setSize] = useState(savedInput?.size || DEFAULT_SIZE);
   const [isLoading, setIsLoading] = useState(false);
   const controllerRef = useRef(null);
@@ -163,7 +159,7 @@ export default function ImageImageOptionsPage() {
             onClick={clearAll}
             disabled={isLoading || (!hasResult && !hasChanges)}
           >
-            Clear 清除
+            Clear image 清除暫存圖片
           </button>
         </div>
 

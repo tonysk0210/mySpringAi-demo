@@ -75,7 +75,23 @@ public class RAAdvisorConfig {
         return RetrievalAugmentationAdvisor.builder()
                 // 1. 設定 Tavily 文件檢索器；advisor 收到使用者問題後，會透過它呼叫 Tavily 搜尋並取得相關 Document。
                 .documentRetriever(tavilyWebSearchDocumentRetriever)
-                // 2. 設定 advisor 執行順序；-10 早於 PrettyLoggerAdvisor(order=-1)，讓 logger 顯示 RAG 增強後的 UserMessage。
+                // 2. 設定 query augmenter；將檢索到的 Document 內容與使用者問題套進 prompt template
+                .queryAugmenter(
+                        ContextualQueryAugmenter.builder()
+                                .promptTemplate(new PromptTemplate("""
+                                        請只根據以下資料回答問題。
+                                        
+                                        資料：
+                                        {context}
+                                        
+                                        問題：
+                                        {query}
+                                        
+                                        回答：
+                                        """))
+                                .build()
+                )
+                // 3. 設定 advisor 執行順序；-10 早於 PrettyLoggerAdvisor(order=-1)，讓 logger 顯示 RAG 增強後的 UserMessage。
                 .order(-10)
                 .build();
     }

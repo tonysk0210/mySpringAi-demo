@@ -148,7 +148,7 @@ export default function ImageImagePage() {
             onClick={clearAll}
             disabled={isLoading || (!hasResult && !prompt)}
           >
-            Clear 清除
+            Clear image 清除暫存圖片
           </button>
         </div>
 

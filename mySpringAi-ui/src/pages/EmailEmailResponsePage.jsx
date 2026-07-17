@@ -2,9 +2,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
 import apiClient from "../api/client";
 import { useDemo } from "../context/useDemo";
+import { apiTestGuides } from "../config/apiTestGuides";
 
 // 本頁對應的後端 endpoint；集中成常數避免多處硬編碼。
 const ENDPOINT = "/email/emailResponse";
+const TEST_GUIDE = apiTestGuides[ENDPOINT];
 
 // 將 API 回應統一轉成可顯示文字：字串直接使用，物件或陣列則格式化為 JSON。
 function responseToText(data) {
@@ -172,7 +174,7 @@ export default function EmailEmailResponsePage() {
               isLoading || (!hasResult && !customerName && !customerMessage)
             }
           >
-            Clear 清除
+            Clear email 清除郵件
           </button>
         </div>
 
@@ -184,6 +186,50 @@ export default function EmailEmailResponsePage() {
               <span>✉</span>
               <h2>準備生成客戶回信</h2>
               <p>填寫右下方的客戶名稱與訊息，按下 Generate 送出。</p>
+              {TEST_GUIDE && (
+                <div
+                  className="test-guide"
+                  role="note"
+                  aria-label="API 測試說明"
+                >
+                  <p className="test-guide-summary">{TEST_GUIDE.summary}</p>
+                  {TEST_GUIDE.testPoints?.length > 0 && (
+                    <>
+                      <p className="test-guide-heading">🎯 測試重點</p>
+                      <ul>
+                        {TEST_GUIDE.testPoints.map((point, index) => (
+                          <li key={`tp-${index}`}>{point}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {TEST_GUIDE.sampleQueries?.length > 0 && (
+                    <>
+                      <p className="test-guide-heading">💬 建議提問</p>
+                      <ul>
+                        {TEST_GUIDE.sampleQueries.map((query, index) => (
+                          <li key={`sq-${index}`}>
+                            <button
+                              type="button"
+                              className="sample-query"
+                              onClick={() => {
+                                setCustomerMessage(query);
+                                textareaRef.current?.focus();
+                              }}
+                              title="點擊填入 Customer message"
+                            >
+                              {query}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {TEST_GUIDE.notes && (
+                    <p className="test-guide-notes">⚠️ {TEST_GUIDE.notes}</p>
+                  )}
+                </div>
+              )}
             </div>
           )}
           {/* ② 結果卡片：依 role 顯示為 Assistant 或 Error；pre 保留換行。 */}
