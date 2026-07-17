@@ -8,9 +8,11 @@
 }
 
 * { box-sizing: border-box; }
+::selection { color: #fff; background: rgba(139, 124, 255, .55); }
 html { min-width: 320px; background: #080b12; }
-body { margin: 0; min-width: 320px; min-height: 100vh; }
-button, input, textarea { font: inherit; }
+body { margin: 0; min-width: 320px; min-height: 100vh; color: #e8edf7; background: #080b12; }
+button, input, textarea, select { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid #a99fff; outline-offset: 3px; }
 #root { min-height: 100vh; }
