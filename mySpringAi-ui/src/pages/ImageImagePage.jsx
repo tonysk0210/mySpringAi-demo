@@ -172,7 +172,7 @@ export default function ImageImagePage() {
           <h1>Generate Image</h1>
           <p>輸入文字描述，用 OpenAI Image 預設模型與尺寸生成一張圖片。</p>
         </div>
-        <code>{ENDPOINT}</code>
+        <code>API 端口：{ENDPOINT}</code>
       </header>
 
       <section className="chat-panel">

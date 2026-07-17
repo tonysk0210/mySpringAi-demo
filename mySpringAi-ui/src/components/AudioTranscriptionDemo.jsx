@@ -143,7 +143,7 @@ export default function AudioTranscriptionDemo({
           <h1>{title}</h1>
           <p>{description}</p>
         </div>
-        <code>{endpoint}</code>
+        <code>API 端口：{endpoint}</code>
       </header>
 
       <section className="chat-shell audio-shell">

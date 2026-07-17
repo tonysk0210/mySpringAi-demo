@@ -4,6 +4,7 @@ import com.example.mySpringAi.advisor.PrettyLoggerAdvisor;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,6 +22,7 @@ import java.nio.file.Paths;
  * （例如 tool calling 場景下，一次 API 內會遞增為 #1、#2、#3…）。
  */
 @Configuration
+@Slf4j
 @RequiredArgsConstructor // Lombok：自動產生包含 final 欄位的建構子（等同於建構子注入 prettyLoggerAdvisor）
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -34,6 +36,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        log.info("初始化 Spring MVC Interceptor：註冊 PrettyLoggerAdvisor 計數器重設攔截器，路徑=/**");
         registry.addInterceptor(new HandlerInterceptor() {
             /**
              * preHandle 於 Controller 方法執行「之前」呼叫。
@@ -43,6 +46,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
              */
             @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+                log.info("HandlerInterceptor preHandle：method={}, uri={}，重設 PrettyLoggerAdvisor 計數器",
+                        request.getMethod(), request.getRequestURI());
                 prettyLoggerAdvisor.reset();
                 return true;
             }
@@ -54,6 +59,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        log.info("初始化 Spring MVC 靜態資源映射：/generated-images/** -> {}", IMAGE_OUTPUT_DIRECTORY);
         registry.addResourceHandler("/generated-images/**")
                 .addResourceLocations(IMAGE_OUTPUT_DIRECTORY.toUri().toString());
     }

@@ -7,7 +7,7 @@ export default function ComingSoonPage({ title, endpoint, description }) {
           <h1>{title}</h1>
           <p>{description}</p>
         </div>
-        <code>{endpoint}</code>
+        <code>API 端口：{endpoint}</code>
       </header>
       <section className="coming-soon-card">
         <span>◇</span>

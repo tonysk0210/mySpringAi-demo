@@ -162,7 +162,7 @@ export default function AudioSpeechDemo({
           <h1>{title}</h1>
           <p>{description}</p>
         </div>
-        <code>{endpoint}</code>
+        <code>API 端口：{endpoint}</code>
       </header>
       <section className="chat-shell audio-shell">
         {/* 工具列：顯示功能名稱，並在有結果或錯誤時開放清除。 */}

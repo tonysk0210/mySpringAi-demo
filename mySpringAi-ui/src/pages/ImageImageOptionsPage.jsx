@@ -188,7 +188,7 @@ export default function ImageImageOptionsPage() {
           <h1>Generate Image with Options</h1>
           <p>透過下拉選單指定模型、品質與尺寸；未選則使用後端預設。</p>
         </div>
-        <code>{ENDPOINT}</code>
+        <code>API 端口：{ENDPOINT}</code>
       </header>
 
       <section className="chat-panel">

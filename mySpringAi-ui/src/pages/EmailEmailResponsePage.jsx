@@ -158,7 +158,7 @@ export default function EmailEmailResponsePage() {
           <h1>Automatic Email Response</h1>
           <p>輸入客戶名稱與訊息，AI 會產生一封專業的繁體中文回信。</p>
         </div>
-        <code>{ENDPOINT}</code>
+        <code>API 端口：{ENDPOINT}</code>
       </header>
 
       <section className="chat-panel">
