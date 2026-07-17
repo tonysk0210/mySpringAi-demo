@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -29,12 +30,13 @@ public class ImageController {
     private static final String DEFAULT_MODEL = "gpt-image-1";
     private static final String DEFAULT_QUALITY = "auto";
     private static final String DEFAULT_SIZE = "1024x1024";
+    private static final String GENERATED_IMAGES_URL_PREFIX = "/generated-images/";
 
     private final ImageModel imageModel;
 
     /**
      * 基本圖片生成：丟提示文字即可，其他全用 OpenAI Image 預設值（預設模型、尺寸、品質）。
-     * 對比 /image-options：本 endpoint 不帶 options，適合快速產生單張圖片；回傳 imageBase64 讓前端內嵌顯示，同時保留寫檔到 ./image-output/image.png。
+     * 對比 /image-options：本 endpoint 不帶 options，適合快速產生單張圖片；圖片以唯一檔名寫入 ./image-output，並回傳可供前端載入的 URL。
      */
     @PostMapping("/image")
     ImageGenerationResponseDto generateImage(@RequestBody MessageChatPayload payload) throws IOException {
@@ -46,11 +48,12 @@ public class ImageController {
         // 2. 從 imageResponse 中取得圖片的 B64 字串
         String imageBase64 = imageResponse.getResults().get(0).getOutput().getB64Json();
 
-        // 3. 將 B64 字串解碼為 byte[]，並儲存至 ./image-output/image.png
-        Path path = writeImage(imageBase64, "image.png");
+        // 3. 使用 UUID 產生唯一檔名，避免後續產圖覆蓋既有圖片
+        String fileName = "image-" + UUID.randomUUID() + ".png";
+        Path path = writeImage(imageBase64, fileName);
 
         log.info("圖片已儲存至: {}", path.toAbsolutePath());
-        return new ImageGenerationResponseDto(imageBase64, path.toAbsolutePath().toString());
+        return new ImageGenerationResponseDto(GENERATED_IMAGES_URL_PREFIX + fileName);
     }
 
     /**
@@ -79,11 +82,12 @@ public class ImageController {
         // 2. 從 imageResponse 中取得圖片的 B64 字串
         String imageBase64 = imageResponse.getResult().getOutput().getB64Json();
 
-        // 3. 將 B64 字串解碼為 byte[]，並儲存至 ./image-output/image-options.png
-        Path path = writeImage(imageBase64, "image-options.png");
+        // 3. 使用 UUID 產生唯一檔名，避免後續產圖覆蓋既有圖片
+        String fileName = "image-options-" + UUID.randomUUID() + ".png";
+        Path path = writeImage(imageBase64, fileName);
 
         log.info("圖片已儲存至: {}", path.toAbsolutePath());
-        return new ImageGenerationResponseDto(imageBase64, path.toAbsolutePath().toString());
+        return new ImageGenerationResponseDto(GENERATED_IMAGES_URL_PREFIX + fileName);
     }
 
     /**
@@ -97,7 +101,7 @@ public class ImageController {
         Path path = Paths.get("image-output", fileName);
         // 3. 確保 image-output/ 目錄存在；createDirectories 是 idempotent，已存在則 no-op
         Files.createDirectories(path.getParent());
-        // 4. 寫入 PNG bytes；同名檔會被直接覆蓋（每個 endpoint 固定用同一個檔名）
+        // 4. 寫入 PNG bytes；呼叫端使用 UUID 唯一檔名，因此不會覆蓋既有圖片
         Files.write(path, imageBytes);
         return path;
     }

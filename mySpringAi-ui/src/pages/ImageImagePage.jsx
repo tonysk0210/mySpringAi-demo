@@ -6,6 +6,13 @@ import { useDemo } from "../context/useDemo";
 // 本頁後端 endpoint；同時用於 API 呼叫、slot 的 key、以及頁面顯示。
 const ENDPOINT = "/image/image";
 
+// 後端回傳不含 API base URL 的資源路徑；補上 Axios 共用 baseURL，讓 Vite proxy 與正式環境都走相同入口。
+function toApiImageUrl(imageUrl) {
+  const baseUrl = (apiClient.defaults.baseURL || "").replace(/\/$/, "");
+  const resourcePath = imageUrl.startsWith("/") ? imageUrl : `/${imageUrl}`;
+  return `${baseUrl}${resourcePath}`;
+}
+
 // 將 API 回應轉成可顯示文字：字串直接使用，物件/陣列則格式化為 JSON。
 function responseToText(data) {
   return typeof data === "string" ? data : JSON.stringify(data, null, 2);
@@ -32,20 +39,19 @@ export default function ImageImagePage() {
     useDemo();
   const userKey = userName.trim() || "anonymous";
 
-  // slot：這頁「上次操作留下的紀錄」，存在 Context state 裡。
-  // 內容是兩個物件：第一個是使用者上次輸入的 prompt，第二個是 AI 回傳的圖片或錯誤訊息；
-  // 從沒操作過就是 []。切到別頁再回來、或按 F5 都能看到上次的內容；每次生成整組覆蓋。
+  // slot：本頁歷次生成紀錄，存在 Context state 並同步至 sessionStorage。
+  // 每次生成會追加 user + assistant/error，不覆蓋先前圖片；切頁或重新整理後仍可還原 URL 歷史。
   const slot = useMemo(
     () => messagesByUserAndEndpoint[userKey]?.[ENDPOINT] || [],
     [messagesByUserAndEndpoint, userKey],
   );
 
-  // 從 slot 拿出兩塊資料，分別用在兩個地方：
-  //   savedInput   → 用來把「上次填的 prompt」填回下方輸入框
-  //   latestResult → 用來把「上次生成的圖片或錯誤訊息」顯示在畫面中間
-  const savedInput = slot.find((m) => m.role === "user");
-  const latestResult = slot.find(
-    (m) => m.role === "assistant" || m.role === "error",
+  // 輸入框回填最後一次 prompt；結果區則顯示所有 URL 圖片與錯誤紀錄。
+  const savedInput = slot.filter((message) => message.role === "user").at(-1);
+  const results = slot.filter(
+    (message) =>
+      (message.role === "assistant" && message.imageUrl) ||
+      message.role === "error",
   );
 
   // 輸入框綁定的 state；第一次打開頁面時用 savedInput 填回上次的值，沒有就空字串。
@@ -59,12 +65,28 @@ export default function ImageImagePage() {
   // 元件卸載時取消未完成的 request，避免處理過期回應。
   useEffect(() => () => controllerRef.current?.abort(), []);
 
+  // 舊版曾把完整 Base64 放入 sessionStorage；載入頁面時移除舊格式，避免繼續占用瀏覽器配額。
+  useEffect(() => {
+    setMessagesByUserAndEndpoint((current) => {
+      const currentSlot = current[userKey]?.[ENDPOINT] || [];
+      if (!currentSlot.some((message) => message.imageBase64)) return current;
+
+      return {
+        ...current,
+        [userKey]: {
+          ...(current[userKey] || {}),
+          [ENDPOINT]: currentSlot.filter((message) => !message.imageBase64),
+        },
+      };
+    });
+  }, [setMessagesByUserAndEndpoint, userKey]);
+
   // 進入頁面或送出完成後將焦點放回輸入框。
   useEffect(() => {
     if (!isLoading) textareaRef.current?.focus();
   }, [isLoading]);
 
-  // 覆寫（非累積）本 endpoint 在 Context state 中的 slot；spread 保留其他使用者與其他 endpoint 的資料。
+  // 覆寫本 endpoint 的 slot，供 Clear 使用。
   function writeSlot(next) {
     setMessagesByUserAndEndpoint((current) => ({
       ...current,
@@ -73,6 +95,20 @@ export default function ImageImagePage() {
         [ENDPOINT]: next,
       },
     }));
+  }
+
+  // 追加一次生成紀錄；以 setter 取得最新 state，避免非同步回應覆蓋既有歷史。
+  function appendSlot(entries) {
+    setMessagesByUserAndEndpoint((current) => {
+      const currentSlot = current[userKey]?.[ENDPOINT] || [];
+      return {
+        ...current,
+        [userKey]: {
+          ...(current[userKey] || {}),
+          [ENDPOINT]: [...currentSlot, ...entries],
+        },
+      };
+    });
   }
 
   async function handleSubmit(event) {
@@ -87,28 +123,28 @@ export default function ImageImagePage() {
     controllerRef.current = controller;
 
     try {
-      // 後端 payload 只需 message；回傳 { imageBase64, savedPath }。
+      // 後端 payload 只需 message；回傳唯一圖片的 { imageUrl }。
       const response = await apiClient.post(
         ENDPOINT,
         { message },
         { signal: controller.signal },
       );
-      // 成功：整組覆蓋 slot，assistant 位置存 imageBase64 與 savedPath。
-      writeSlot([
+      // 成功：將 prompt 與圖片 URL 追加至歷史；Context/sessionStorage 不再保存 Base64。
+      appendSlot([
         { role: "user", prompt: message },
         {
           role: "assistant",
-          imageBase64: response.data.imageBase64,
-          savedPath: response.data.savedPath,
+          prompt: message,
+          imageUrl: toApiImageUrl(response.data.imageUrl),
         },
       ]);
     } catch (error) {
       const errorMessage = errorToText(error);
-      // 失敗：同樣整組覆蓋 slot，assistant 位置換成 error；主動取消時不寫入。
+      // 失敗也追加至歷史；主動取消時不寫入。
       if (errorMessage) {
-        writeSlot([
+        appendSlot([
           { role: "user", prompt: message },
-          { role: "error", content: errorMessage },
+          { role: "error", prompt: message, content: errorMessage },
         ]);
       }
     } finally {
@@ -123,7 +159,7 @@ export default function ImageImagePage() {
     writeSlot([]);
   }
 
-  const hasResult = !!latestResult;
+  const hasResult = results.length > 0;
 
   return (
     <article className="api-page">
@@ -148,7 +184,7 @@ export default function ImageImagePage() {
             onClick={clearAll}
             disabled={isLoading || (!hasResult && !prompt)}
           >
-            Clear image 清除暫存圖片
+            Clear images 清除圖片紀錄
           </button>
         </div>
 
@@ -162,24 +198,24 @@ export default function ImageImagePage() {
               <p>在下方輸入描述，按下 Generate 送出。</p>
             </div>
           )}
-          {/* ② 成功結果：base64 內嵌成 <img>，下方顯示後端寫檔路徑。 */}
-          {hasResult && latestResult.role === "assistant" && (
-            <div className="message assistant">
-              <strong>Assistant</strong>
-              <img
-                className="generated-image"
-                src={`data:image/png;base64,${latestResult.imageBase64}`}
-                alt="Generated"
-              />
-              <p className="saved-path">Saved to: {latestResult.savedPath}</p>
-            </div>
-          )}
-          {/* ③ 失敗結果：顯示 errorToText 產生的訊息。 */}
-          {hasResult && latestResult.role === "error" && (
-            <div className="message error">
-              <strong>Error</strong>
-              <pre>{latestResult.content}</pre>
-            </div>
+          {/* ②③ 歷史結果：成功顯示 URL 圖片與 prompt，失敗顯示 errorToText 產生的訊息。 */}
+          {results.map((result, index) =>
+            result.role === "assistant" ? (
+              <div className="message assistant" key={result.imageUrl}>
+                <strong>Assistant</strong>
+                <img
+                  className="generated-image"
+                  src={result.imageUrl}
+                  alt={result.prompt || "Generated"}
+                />
+                <p className="saved-path">Prompt: {result.prompt}</p>
+              </div>
+            ) : (
+              <div className="message error" key={`error-${index}`}>
+                <strong>Error</strong>
+                <pre>{result.content}</pre>
+              </div>
+            ),
           )}
           {/* ④ loading：等待後端回應時的三點動畫；可與已有結果同時存在。 */}
           {isLoading && (

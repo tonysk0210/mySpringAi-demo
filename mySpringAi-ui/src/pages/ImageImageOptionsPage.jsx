@@ -5,6 +5,13 @@ import { useDemo } from "../context/useDemo";
 
 const ENDPOINT = "/image/image-options";
 
+// 後端回傳不含 API base URL 的資源路徑；補上 Axios 共用 baseURL，讓 Vite proxy 與正式環境都走相同入口。
+function toApiImageUrl(imageUrl) {
+  const baseUrl = (apiClient.defaults.baseURL || "").replace(/\/$/, "");
+  const resourcePath = imageUrl.startsWith("/") ? imageUrl : `/${imageUrl}`;
+  return `${baseUrl}${resourcePath}`;
+}
+
 // 後端 ImageController 內建的 fallback 值（前端顯示用；需與後端保持同步）。
 const DEFAULT_MODEL = "gpt-image-1";
 const DEFAULT_QUALITY = "auto";
@@ -16,8 +23,6 @@ const MODELS = [
   "gpt-image-1-mini",
   "gpt-image-1.5",
   "gpt-image-2",
-  "chatgpt-image-latest",
-  "dall-e-3",
 ];
 const QUALITIES = ["auto", "low", "medium", "high"];
 const SIZES = ["1024x1024", "1024x1536", "1536x1024", "1792x1024", "1024x1792"];
@@ -51,9 +56,11 @@ export default function ImageImageOptionsPage() {
     () => messagesByUserAndEndpoint[userKey]?.[ENDPOINT] || [],
     [messagesByUserAndEndpoint, userKey],
   );
-  const savedInput = slot.find((m) => m.role === "user");
-  const latestResult = slot.find(
-    (m) => m.role === "assistant" || m.role === "error",
+  const savedInput = slot.filter((message) => message.role === "user").at(-1);
+  const results = slot.filter(
+    (message) =>
+      (message.role === "assistant" && message.imageUrl) ||
+      message.role === "error",
   );
 
   const [prompt, setPrompt] = useState(savedInput?.prompt || "");
@@ -69,6 +76,22 @@ export default function ImageImageOptionsPage() {
 
   useEffect(() => () => controllerRef.current?.abort(), []);
 
+  // 舊版曾把完整 Base64 放入 sessionStorage；載入頁面時移除舊格式，避免繼續占用瀏覽器配額。
+  useEffect(() => {
+    setMessagesByUserAndEndpoint((current) => {
+      const currentSlot = current[userKey]?.[ENDPOINT] || [];
+      if (!currentSlot.some((message) => message.imageBase64)) return current;
+
+      return {
+        ...current,
+        [userKey]: {
+          ...(current[userKey] || {}),
+          [ENDPOINT]: currentSlot.filter((message) => !message.imageBase64),
+        },
+      };
+    });
+  }, [setMessagesByUserAndEndpoint, userKey]);
+
   useEffect(() => {
     if (!isLoading) textareaRef.current?.focus();
   }, [isLoading]);
@@ -81,6 +104,20 @@ export default function ImageImageOptionsPage() {
         [ENDPOINT]: next,
       },
     }));
+  }
+
+  // 追加一次生成紀錄；以 setter 取得最新 state，避免非同步回應覆蓋既有歷史。
+  function appendSlot(entries) {
+    setMessagesByUserAndEndpoint((current) => {
+      const currentSlot = current[userKey]?.[ENDPOINT] || [];
+      return {
+        ...current,
+        [userKey]: {
+          ...(current[userKey] || {}),
+          [ENDPOINT]: [...currentSlot, ...entries],
+        },
+      };
+    });
   }
 
   async function handleSubmit(event) {
@@ -99,21 +136,24 @@ export default function ImageImageOptionsPage() {
         { message, model, quality, size },
         { signal: controller.signal },
       );
-      // slot 的 user 物件多存三個 options 欄位；下次進頁面能一併回填下拉選單。
-      writeSlot([
+      // 將 prompt、options 與唯一圖片 URL 追加至歷史；Context/sessionStorage 不再保存 Base64。
+      appendSlot([
         { role: "user", prompt: message, model, quality, size },
         {
           role: "assistant",
-          imageBase64: response.data.imageBase64,
-          savedPath: response.data.savedPath,
+          prompt: message,
+          model,
+          quality,
+          size,
+          imageUrl: toApiImageUrl(response.data.imageUrl),
         },
       ]);
     } catch (error) {
       const errorMessage = errorToText(error);
       if (errorMessage) {
-        writeSlot([
+        appendSlot([
           { role: "user", prompt: message, model, quality, size },
-          { role: "error", content: errorMessage },
+          { role: "error", prompt: message, content: errorMessage },
         ]);
       }
     } finally {
@@ -130,7 +170,7 @@ export default function ImageImageOptionsPage() {
     writeSlot([]);
   }
 
-  const hasResult = !!latestResult;
+  const hasResult = results.length > 0;
   // 「與預設狀態不同」才需要 Clear——prompt 有值 或 任一 option 被改過。
   const hasChanges =
     !!prompt ||
@@ -159,7 +199,7 @@ export default function ImageImageOptionsPage() {
             onClick={clearAll}
             disabled={isLoading || (!hasResult && !hasChanges)}
           >
-            Clear image 清除暫存圖片
+            Clear images 清除圖片紀錄
           </button>
         </div>
 
@@ -171,22 +211,26 @@ export default function ImageImageOptionsPage() {
               <p>選擇 options（可略）並輸入描述，按下 Generate 送出。</p>
             </div>
           )}
-          {hasResult && latestResult.role === "assistant" && (
-            <div className="message assistant">
-              <strong>Assistant</strong>
-              <img
-                className="generated-image"
-                src={`data:image/png;base64,${latestResult.imageBase64}`}
-                alt="Generated"
-              />
-              <p className="saved-path">Saved to: {latestResult.savedPath}</p>
-            </div>
-          )}
-          {hasResult && latestResult.role === "error" && (
-            <div className="message error">
-              <strong>Error</strong>
-              <pre>{latestResult.content}</pre>
-            </div>
+          {results.map((result, index) =>
+            result.role === "assistant" ? (
+              <div className="message assistant" key={result.imageUrl}>
+                <strong>Assistant</strong>
+                <img
+                  className="generated-image"
+                  src={result.imageUrl}
+                  alt={result.prompt || "Generated"}
+                />
+                <p className="saved-path">Prompt: {result.prompt}</p>
+                <p className="saved-path">
+                  {result.model} · {result.quality} · {result.size}
+                </p>
+              </div>
+            ) : (
+              <div className="message error" key={`error-${index}`}>
+                <strong>Error</strong>
+                <pre>{result.content}</pre>
+              </div>
+            ),
           )}
           {isLoading && (
             <div className="message assistant typing">
