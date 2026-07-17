@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
 import apiClient from "../api/client";
+import { apiTestGuides } from "../config/apiTestGuides";
 import { useDemo } from "../context/useDemo";
 
 // 本頁後端 endpoint；同時用於 API 呼叫、slot 的 key、以及頁面顯示。
 const ENDPOINT = "/image/image";
+const TEST_GUIDE = apiTestGuides[ENDPOINT];
 
 // 後端回傳不含 API base URL 的資源路徑；補上 Axios 共用 baseURL，讓 Vite proxy 與正式環境都走相同入口。
 function toApiImageUrl(imageUrl) {
@@ -196,6 +198,50 @@ export default function ImageImagePage() {
               <span>✦</span>
               <h2>準備生成圖片</h2>
               <p>在下方輸入描述，按下 Generate 送出。</p>
+              {TEST_GUIDE && (
+                <div
+                  className="test-guide"
+                  role="note"
+                  aria-label="API 測試說明"
+                >
+                  <p className="test-guide-summary">{TEST_GUIDE.summary}</p>
+                  {TEST_GUIDE.testPoints?.length > 0 && (
+                    <>
+                      <p className="test-guide-heading">🎯 測試重點</p>
+                      <ul>
+                        {TEST_GUIDE.testPoints.map((point, index) => (
+                          <li key={`tp-${index}`}>{point}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {TEST_GUIDE.sampleQueries?.length > 0 && (
+                    <>
+                      <p className="test-guide-heading">💬 建議提問</p>
+                      <ul>
+                        {TEST_GUIDE.sampleQueries.map((query, index) => (
+                          <li key={`sq-${index}`}>
+                            <button
+                              type="button"
+                              className="sample-query"
+                              onClick={() => {
+                                setPrompt(query);
+                                textareaRef.current?.focus();
+                              }}
+                              title="點擊填入圖片描述"
+                            >
+                              {query}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {TEST_GUIDE.notes && (
+                    <p className="test-guide-notes">⚠️ {TEST_GUIDE.notes}</p>
+                  )}
+                </div>
+              )}
             </div>
           )}
           {/* ②③ 歷史結果：成功顯示 URL 圖片與 prompt，失敗顯示 errorToText 產生的訊息。 */}
