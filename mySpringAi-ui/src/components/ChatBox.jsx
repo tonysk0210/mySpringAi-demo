@@ -188,7 +188,7 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
           {/* ① 空狀態：沒有任何訊息時顯示引導畫面 + 該 API 的測試說明（若有設定於 apiTestGuides）。 */}
           {!messages.length && (
             <div className="empty-chat">
-              <span>✦</span>
+              <span>💬</span>
               <h2>開始測試這個 API 端點</h2>
               <p>在下方輸入訊息，送出你的第一個請求。</p>
               {/*

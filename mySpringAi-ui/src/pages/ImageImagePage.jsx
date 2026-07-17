@@ -195,7 +195,22 @@ export default function ImageImagePage() {
           {/* ① 空狀態：從未生成過且非 loading 時顯示引導。 */}
           {!hasResult && !isLoading && (
             <div className="empty-chat">
-              <span>✦</span>
+              <span aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="16" rx="2" />
+                  <circle cx="8.5" cy="9" r="1.5" />
+                  <path d="m4 17 5-5 4 4 2-2 5 4" />
+                </svg>
+              </span>
               <h2>準備生成圖片</h2>
               <p>在下方輸入描述，按下 Generate 送出。</p>
               {TEST_GUIDE && (
