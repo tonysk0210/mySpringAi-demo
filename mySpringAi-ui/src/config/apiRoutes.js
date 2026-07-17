@@ -8,24 +8,24 @@ export const apiGroups = [
     routes: [
       {
         path: "/openai/chat-noMemory",
-        label: "OpenAI · No Memory",
+        label: "OpenAI · 無記憶對話",
         model: "gpt-4.1-mini",
       },
       {
         path: "/openai/chat-inMemory",
-        label: "OpenAI · In-memory",
+        label: "OpenAI · 記憶體對話記憶",
         model: "gpt-4.1-mini",
         requiresUserName: true,
       },
       {
         path: "/openai/chat-jdbc",
-        label: "OpenAI · JDBC",
+        label: "OpenAI · JDBC 對話記憶",
         model: "gpt-4.1-mini",
         requiresUserName: true,
       },
       {
         path: "/ollama/chat-jdbc",
-        label: "Ollama · JDBC",
+        label: "Ollama · JDBC 對話記憶",
         model: "llama3.2:1b",
         requiresUserName: true,
       },
@@ -34,30 +34,58 @@ export const apiGroups = [
   {
     label: "RAG",
     routes: [
-      { path: "/rag/rag", label: "Manual RAG", model: "gpt-4.1-mini" },
-      { path: "/rag/ragPdf", label: "PDF Advisor", model: "gpt-4.1-mini" },
+      { path: "/rag/rag", label: "手動向量檢索 RAG", model: "gpt-4.1-mini" },
       {
-        path: "/rag/preAndPostRAAdvisor",
-        label: "Pre/Post Advisor",
+        path: "/rag/ragPdf",
+        label: "PDF Retrieval Advisor",
         model: "gpt-4.1-mini",
       },
-      { path: "/rag/ragTavily", label: "Tavily Search", model: "gpt-4.1-mini" },
+      {
+        path: "/rag/preAndPostRAAdvisor",
+        label: "完整 Pre/Post RAG Pipeline",
+        model: "gpt-4.1-mini",
+      },
+      {
+        path: "/rag/ragTavily",
+        label: "Tavily 即時網路搜尋",
+        model: "gpt-4.1-mini",
+      },
     ],
   },
   {
     label: "Semantic Cache",
     routes: [
-      { path: "/cache/redisCaching-chat", label: "Redis Cache", model: "gpt-4.1-mini" },
-      { path: "/cache/qdrantCaching-chat", label: "Qdrant Cache", model: "gpt-4.1-mini" },
+      {
+        path: "/cache/redisCaching-chat",
+        label: "Redis 語意快取",
+        model: "gpt-4.1-mini",
+      },
+      {
+        path: "/cache/qdrantCaching-chat",
+        label: "Qdrant 語意快取",
+        model: "gpt-4.1-mini",
+      },
     ],
   },
   {
     label: "Structured Output",
     routes: [
-      { path: "/dto/generateJsonDto", label: "JSON DTO", model: "gpt-4.1-mini" },
-      { path: "/dto/generateListJsonDto", label: "DTO List", model: "gpt-4.1-mini" },
-      { path: "/dto/generateList", label: "String List", model: "gpt-4.1-mini" },
-      { path: "/dto/generateMap", label: "Map", model: "gpt-4.1-mini" },
+      {
+        path: "/dto/generateJsonDto",
+        label: "單一 JSON DTO",
+        model: "gpt-4.1-mini",
+      },
+      {
+        path: "/dto/generateListJsonDto",
+        label: "JSON DTO 陣列",
+        model: "gpt-4.1-mini",
+      },
+      { path: "/dto/generateList", label: "字串陣列", model: "gpt-4.1-mini" },
+      {
+        path: "/dto/generateMap",
+        label: "Key-Value Map",
+        model: "gpt-4.1-mini",
+      },
     ],
   },
   {
@@ -65,13 +93,13 @@ export const apiGroups = [
     routes: [
       {
         path: "/tool/time",
-        label: "Time Tool · JDBC",
+        label: "時間查詢 Tool · JDBC 記憶",
         model: "gpt-4.1-mini",
         requiresUserName: true,
       },
       {
         path: "/tool/helpDeskTicket",
-        label: "Help Desk · JDBC",
+        label: "客服工單 Tool · JDBC 記憶",
         model: "gpt-4.1-mini",
         requiresUserName: true,
       },
@@ -80,29 +108,49 @@ export const apiGroups = [
   {
     label: "Email",
     routes: [
-      { path: "/email/emailResponse", label: "Email Response", model: "gpt-4.1-mini" },
+      {
+        path: "/email/emailResponse",
+        label: "自動產生客服回信",
+        model: "gpt-4.1-mini",
+      },
     ],
   },
   {
     label: "Image",
     routes: [
-      { path: "/image/image", label: "Generate Image", model: "gpt-image-1-mini" },
-      { path: "/image/image-options", label: "Image Options", model: "gpt-image-1" },
+      {
+        path: "/image/image",
+        label: "基礎圖片生成",
+        model: "gpt-image-1-mini",
+      },
+      {
+        path: "/image/image-options",
+        label: "進階圖片生成 Options",
+        model: "gpt-image-1",
+      },
     ],
   },
   {
     label: "Audio",
     routes: [
-      { path: "/audio/transcribe", label: "Transcribe", model: "whisper-1" },
       {
-        path: "/audio/transcribe-options",
-        label: "Transcribe Options",
+        path: "/audio/transcribe",
+        label: "基礎音訊轉文字",
         model: "whisper-1",
       },
-      { path: "/audio/text-to-speech", label: "Text to Speech", model: "gpt-4o-mini-tts" },
+      {
+        path: "/audio/transcribe-options",
+        label: "進階音訊轉文字 Options",
+        model: "whisper-1",
+      },
+      {
+        path: "/audio/text-to-speech",
+        label: "基礎文字轉語音",
+        model: "gpt-4o-mini-tts",
+      },
       {
         path: "/audio/text-to-speech-options",
-        label: "Speech Options",
+        label: "進階文字轉語音 Options",
         model: "gpt-4o-mini-tts",
       },
     ],

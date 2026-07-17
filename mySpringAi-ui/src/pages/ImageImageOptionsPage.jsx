@@ -185,8 +185,8 @@ export default function ImageImageOptionsPage() {
       <header className="page-header">
         <div>
           <p className="eyebrow">POST ENDPOINT</p>
-          <h1>Generate Image with Options</h1>
-          <p>透過下拉選單指定模型、品質與尺寸；未選則使用後端預設。</p>
+          <h1>進階圖片生成 Options</h1>
+          <p>指定圖片模型、品質與尺寸產生圖片，並保存每次生成使用的 Options 與 URL。</p>
         </div>
         <code>API 端口：{ENDPOINT}</code>
       </header>

@@ -1,4 +1,10 @@
-import ChatBox from '../components/ChatBox'
+import ChatBox from "../components/ChatBox";
 export default function DtoGenerateJsonDtoPage() {
-  return <ChatBox title="Generate JSON DTO" description="Generate and inspect one CountryCitiesDto response." endpoint="/dto/generateJsonDto" />
+  return (
+    <ChatBox
+      title="產生單一 JSON DTO"
+      description="將模型回應解析為一個 CountryCitiesDto，包含國家與城市陣列。"
+      endpoint="/dto/generateJsonDto"
+    />
+  );
 }

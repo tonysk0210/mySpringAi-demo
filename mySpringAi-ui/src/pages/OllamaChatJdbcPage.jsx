@@ -1,4 +1,4 @@
 import ChatBox from '../components/ChatBox'
 export default function OllamaChatJdbcPage() {
-  return <ChatBox title="Ollama JDBC Chat" description="Test a local Ollama model with JDBC conversation memory." endpoint="/ollama/chat-jdbc" requiresUserName />
+  return <ChatBox title="Ollama JDBC 對話" description="使用本機 llama3.2:1b，並以 H2 JDBC 依 userName 保存對話記憶。" endpoint="/ollama/chat-jdbc" requiresUserName />
 }

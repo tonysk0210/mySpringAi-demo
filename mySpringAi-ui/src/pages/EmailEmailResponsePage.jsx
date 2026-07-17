@@ -155,8 +155,8 @@ export default function EmailEmailResponsePage() {
       <header className="page-header">
         <div>
           <p className="eyebrow">POST ENDPOINT</p>
-          <h1>Automatic Email Response</h1>
-          <p>輸入客戶名稱與訊息，AI 會產生一封專業的繁體中文回信。</p>
+          <h1>自動產生客服回信</h1>
+          <p>將客戶名稱與來信內容注入 Prompt Template，產生專業友善的繁體中文回信內文。</p>
         </div>
         <code>API 端口：{ENDPOINT}</code>
       </header>

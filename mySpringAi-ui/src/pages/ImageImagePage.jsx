@@ -169,8 +169,8 @@ export default function ImageImagePage() {
       <header className="page-header">
         <div>
           <p className="eyebrow">POST ENDPOINT</p>
-          <h1>Generate Image</h1>
-          <p>輸入文字描述，用 OpenAI Image 預設模型與尺寸生成一張圖片。</p>
+          <h1>基礎圖片生成</h1>
+          <p>使用 OpenAI Image 預設模型與尺寸產生圖片，並以唯一 URL 保留生成紀錄。</p>
         </div>
         <code>API 端口：{ENDPOINT}</code>
       </header>

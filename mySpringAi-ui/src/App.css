@@ -1,5 +1,5 @@
 :root {
-  --sidebar-width: 284px;
+  --sidebar-width: 336px;
   --surface: #10151f;
   --surface-raised: #151b27;
   --border: #242c3b;
@@ -41,9 +41,10 @@
 .nav-group { margin: 0 0 18px; }
 .nav-group h2 { margin: 0 10px 7px; color: #657087; font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
 .nav-group a { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 37px; padding: 8px 10px; border-radius: 8px; color: #aeb7c8; font-size: 13px; text-decoration: none; transition: .18s ease; }
+.nav-group a > span { white-space: nowrap; }
 .nav-group a:hover { color: #fff; background: rgba(255,255,255,.045); }
 .nav-group a.active { color: #fff; background: linear-gradient(90deg, rgba(139,124,255,.18), rgba(75,214,208,.07)); box-shadow: inset 2px 0 var(--accent); }
-.nav-group a small { padding: 2px 5px; color: #778196; border: 1px solid #303747; border-radius: 5px; font-size: 8px; letter-spacing: .06em; }
+.nav-group a small { flex: 0 0 auto; padding: 2px 5px; color: #778196; border: 1px solid #303747; border-radius: 5px; font-size: 8px; letter-spacing: .06em; white-space: nowrap; }
 
 .main-content { min-height: 100vh; margin-left: var(--sidebar-width); padding: 52px clamp(28px, 5vw, 76px); background: radial-gradient(circle at 90% 0%, rgba(77, 70, 160, .13), transparent 28%), #080b12; }
 .api-page { width: min(1060px, 100%); margin: 0 auto; }
