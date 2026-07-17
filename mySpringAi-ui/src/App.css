@@ -49,7 +49,8 @@
 .identity-field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139,124,255,.12); }
 
 .nav-group { margin: 0 0 18px; }
-.nav-group h2 { margin: 0 10px 7px; color: #657087; font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+.nav-group h2 { display: flex; align-items: center; gap: 9px; margin: 0 9px 9px; color: #b8afff; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-shadow: 0 0 18px rgba(139,124,255,.28); text-transform: uppercase; }
+.nav-group h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(139,124,255,.42), rgba(75,214,208,.08), transparent); }
 .nav-group a { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 37px; padding: 8px 10px; border: 1px solid transparent; border-radius: 9px; color: #aeb7c8; font-size: 13px; text-decoration: none; transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease; }
 .nav-group a > span { white-space: nowrap; }
 .nav-group a:hover { color: #fff; background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.035); transform: translateX(2px); }
