@@ -4,6 +4,7 @@ import apiClient from "../api/client";
 import { apiTestGuides } from "../config/apiTestGuides";
 import { useDemo } from "../context/useDemo";
 import RequestStatus from "../components/RequestStatus";
+import SubmitButton from "../components/SubmitButton";
 
 // 本頁後端 endpoint；同時用於 API 呼叫、slot 的 key、以及頁面顯示。
 const ENDPOINT = "/image/image";
@@ -146,9 +147,7 @@ export default function ImageImagePage() {
       const errorMessage = errorToText(error);
       // 失敗也追加至歷史；主動取消時不寫入。
       if (errorMessage) {
-        appendSlot([
-          { role: "error", prompt: message, content: errorMessage },
-        ]);
+        appendSlot([{ role: "error", prompt: message, content: errorMessage }]);
       }
     } finally {
       // 卸載造成的取消不再更新 state；正常結束或錯誤則關掉 loading。
@@ -169,9 +168,12 @@ export default function ImageImagePage() {
       {/* 頁面標頭：POST endpoint 標記、標題、描述。 */}
       <header className="page-header">
         <div>
-          <p className="eyebrow">POST ENDPOINT</p>
+          <p className="eyebrow">OPENAI IMAGE</p>
           <h1>基礎圖片生成</h1>
-          <p>使用 OpenAI Image 預設模型與尺寸產生圖片，並以唯一 URL 保留生成紀錄。</p>
+          <p>
+            使用 OpenAI Image 預設模型與尺寸產生圖片，並以唯一 URL
+            保留生成紀錄。
+          </p>
         </div>
         <code>API 端口：{ENDPOINT}</code>
       </header>
@@ -300,15 +302,13 @@ export default function ImageImagePage() {
               rows="3"
               disabled={isLoading}
             />
-            <button
-              type="submit"
+            <SubmitButton
+              isLoading={isLoading}
               disabled={!prompt.trim() || isLoading}
-              aria-label="Generate image"
-            >
-              {isLoading ? "…" : "↑"}
-            </button>
+              label="產生圖片"
+            />
           </div>
-          <small>填完描述後按 ↑ 送出</small>
+          <small>填完描述後按右側按鈕送出</small>
         </form>
       </section>
     </article>

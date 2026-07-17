@@ -4,6 +4,7 @@ import apiClient from "../api/client";
 import { useDemo } from "../context/useDemo";
 import { apiTestGuides } from "../config/apiTestGuides";
 import RequestStatus from "../components/RequestStatus";
+import SubmitButton from "../components/SubmitButton";
 
 // 本頁對應的後端 endpoint；集中成常數避免多處硬編碼。
 const ENDPOINT = "/email/emailResponse";
@@ -157,9 +158,12 @@ export default function EmailEmailResponsePage() {
       {/* 頁面標頭：說明 endpoint、標題、簡短描述。 */}
       <header className="page-header">
         <div>
-          <p className="eyebrow">POST ENDPOINT</p>
+          <p className="eyebrow">EMAIL DRAFTING </p>
           <h1>自動產生客服回信</h1>
-          <p>將客戶名稱與來信內容注入 Prompt Template，產生專業友善的繁體中文回信內文。</p>
+          <p>
+            將客戶名稱與來信內容注入 Prompt
+            Template，產生專業友善的繁體中文回信內文。
+          </p>
         </div>
         <code>API 端口：{ENDPOINT}</code>
       </header>
@@ -276,17 +280,15 @@ export default function EmailEmailResponsePage() {
                 disabled={isLoading}
               />
             </div>
-            <button
-              type="submit"
+            <SubmitButton
+              isLoading={isLoading}
               disabled={
                 !customerName.trim() || !customerMessage.trim() || isLoading
               }
-              aria-label="Generate email response"
-            >
-              {isLoading ? "…" : "↑"}
-            </button>
+              label="產生客服回信"
+            />
           </div>
-          <small>填完兩欄後按 ↑ 送出</small>
+          <small>填完兩欄後按右側按鈕送出</small>
         </form>
       </section>
     </article>

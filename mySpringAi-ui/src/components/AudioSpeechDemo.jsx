@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import apiClient from "../api/client";
 import { apiTestGuides } from "../config/apiTestGuides";
+import SubmitButton from "./SubmitButton";
 
 /*
  * Blob 在這個元件中的用途（文字轉語音）：
@@ -158,7 +159,7 @@ export default function AudioSpeechDemo({
       {/* 頁面標題與後端 endpoint。 */}
       <header className="page-header">
         <div>
-          <p className="eyebrow">OpenAI Audio</p>
+          <p className="eyebrow">OPENAI AUDIO</p>
           <h1>{title}</h1>
           <p>{description}</p>
         </div>
@@ -323,13 +324,11 @@ export default function AudioSpeechDemo({
               }}
               placeholder="輸入要轉成語音的文字…"
             />
-            <button
-              type="submit"
+            <SubmitButton
+              isLoading={isLoading}
               disabled={isLoading}
-              aria-label="Generate speech"
-            >
-              ↑
-            </button>
+              label="產生語音"
+            />
           </div>
           <small>音訊直接回傳瀏覽器，不會保存在後端；離開頁面後即釋放。</small>
         </form>

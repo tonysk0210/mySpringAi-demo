@@ -4,6 +4,7 @@ import apiClient from "../api/client";
 import { apiTestGuides } from "../config/apiTestGuides";
 import { useDemo } from "../context/useDemo";
 import RequestStatus from "../components/RequestStatus";
+import SubmitButton from "../components/SubmitButton";
 
 const ENDPOINT = "/image/image-options";
 const TEST_GUIDE = apiTestGuides[ENDPOINT];
@@ -155,9 +156,7 @@ export default function ImageImageOptionsPage() {
     } catch (error) {
       const errorMessage = errorToText(error);
       if (errorMessage) {
-        appendSlot([
-          { role: "error", prompt: message, content: errorMessage },
-        ]);
+        appendSlot([{ role: "error", prompt: message, content: errorMessage }]);
       }
     } finally {
       if (!controller.signal.aborted) setIsLoading(false);
@@ -185,9 +184,12 @@ export default function ImageImageOptionsPage() {
     <article className="api-page">
       <header className="page-header">
         <div>
-          <p className="eyebrow">POST ENDPOINT</p>
+          <p className="eyebrow">OPENAI IMAGE</p>
           <h1>進階圖片生成 Options</h1>
-          <p>指定圖片模型、品質與尺寸產生圖片，並保存每次生成使用的 Options 與 URL。</p>
+          <p>
+            指定圖片模型、品質與尺寸產生圖片，並保存每次生成使用的 Options 與
+            URL。
+          </p>
         </div>
         <code>API 端口：{ENDPOINT}</code>
       </header>
@@ -361,15 +363,13 @@ export default function ImageImageOptionsPage() {
               rows="3"
               disabled={isLoading}
             />
-            <button
-              type="submit"
+            <SubmitButton
+              isLoading={isLoading}
               disabled={!prompt.trim() || isLoading}
-              aria-label="Generate image"
-            >
-              {isLoading ? "…" : "↑"}
-            </button>
+              label="依選項產生圖片"
+            />
           </div>
-          <small>選擇 options 後填描述，按 ↑ 送出</small>
+          <small>選擇 options 後填描述，再按右側按鈕送出</small>
         </form>
       </section>
     </article>

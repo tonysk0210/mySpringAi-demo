@@ -4,6 +4,7 @@ import apiClient from "../api/client";
 import { useDemo } from "../context/useDemo";
 import { apiTestGuides } from "../config/apiTestGuides";
 import RequestStatus from "./RequestStatus";
+import SubmitButton from "./SubmitButton";
 
 // 將 API 回應統一轉成 ChatBox 可顯示的文字：字串直接使用，物件或陣列則格式化為 JSON。
 function responseToText(data) {
@@ -171,10 +172,7 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
       <section className="chat-panel">
         <div className="chat-toolbar">
           <div>
-            <RequestStatus
-              isLoading={isLoading}
-              lastRole={lastMessageRole}
-            />
+            <RequestStatus isLoading={isLoading} lastRole={lastMessageRole} />
             {requiresUserName && (
               <span className="user-chip">
                 使用者名稱: {userName || "not set"}
@@ -299,13 +297,11 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
               rows="3"
               disabled={isLoading}
             />
-            <button
-              type="submit"
+            <SubmitButton
+              isLoading={isLoading}
               disabled={!input.trim() || isLoading}
-              aria-label="Send message"
-            >
-              {isLoading ? "…" : "↑"}
-            </button>
+              label="發送訊息"
+            />
           </div>
           <small>Enter 送出 · Shift + Enter 換行</small>
         </form>

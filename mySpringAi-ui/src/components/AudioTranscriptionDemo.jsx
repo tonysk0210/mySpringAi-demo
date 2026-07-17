@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import apiClient from "../api/client";
+import SubmitButton from "./SubmitButton";
 
 /*
  * Blob 在這個元件中的用途（音訊轉文字）：
@@ -139,7 +140,7 @@ export default function AudioTranscriptionDemo({
       {/* 頁面標題與後端 endpoint。 */}
       <header className="page-header">
         <div>
-          <p className="eyebrow">OpenAI Audio</p>
+          <p className="eyebrow">OPENAI AUDIO</p>
           <h1>{title}</h1>
           <p>{description}</p>
         </div>
@@ -263,13 +264,11 @@ export default function AudioTranscriptionDemo({
                 }}
               />
             </label>
-            <button
-              type="submit"
+            <SubmitButton
+              isLoading={isLoading}
               disabled={isLoading}
-              aria-label="Transcribe audio"
-            >
-              ↑
-            </button>
+              label="開始轉錄音訊"
+            />
           </div>
           <small>檔案上限 25 MB；來源音檔不會保存在後端。</small>
         </form>

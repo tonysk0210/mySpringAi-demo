@@ -11241,3 +11241,80 @@ Caused by: java.lang.ClassNotFoundException: com.example.mySpringAi.config.WebMv
 2026-07-17T15:39:58.793+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-1] [                                                 ] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2026-07-17T15:39:58.793+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-1] [                                                 ] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2026-07-17T15:39:58.796+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-1] [                                                 ] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-07-17T16:17:03.517+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-7] [fabb6471e0ff03b5a21ef51706853fdf-5dcd4538fc6c15f1] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #1 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:17:06.244+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-7] [fabb6471e0ff03b5a21ef51706853fdf-5dcd4538fc6c15f1] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #1 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:17:06.246+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-7] [fabb6471e0ff03b5a21ef51706853fdf-98172f94dcd87909] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=29, completionTokens=13, totalTokens=42, cacheReadInputTokens=0}
+2026-07-17T16:26:40.024+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-3] [93f47a7779c760d23e710b6b404d0ec2-814a8d4be9374023] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #2 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hi
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:26:42.209+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-3] [93f47a7779c760d23e710b6b404d0ec2-814a8d4be9374023] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #2 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！有什麼我可以幫忙的嗎？
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:26:42.210+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-3] [93f47a7779c760d23e710b6b404d0ec2-10d2c8ba1a4a4918] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=29, completionTokens=13, totalTokens=42, cacheReadInputTokens=0}
+2026-07-17T16:32:54.470+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-10] [eb5061c32f6874da5cb9e552996e7acc-4eddd7795f931570] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #3 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        客戶 ant 傳送了以下訊息：
+║               我的包裹已經延遲三天，請問何時可以收到？
+║               請撰寫一封禮貌且有幫助的電子郵件回覆，針對客戶提出的問題進行回應。
+║               請保持專業且友善的語氣，並提供適當的安撫與保證。
+║               請僅回覆電子郵件內文，不需包含主旨、署名或簽名。
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:32:57.541+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-10] [eb5061c32f6874da5cb9e552996e7acc-4eddd7795f931570] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #3 ══════════════════════════════════════════════════
+║ [ASSISTANT]   親愛的 ant 您好，
+║               感謝您與我們聯繫，並告知包裹延遲的情況。非常抱歉此次延誤給您帶來不便，我們深感抱歉。
+║               目前我們已經聯繫物流合作夥伴確認包裹的最新狀態，根據最新資訊，您的包裹預計會在未來一至兩個工作天內送達。我們會持續追蹤並確保包裹能儘快送到您的手中。
+║               若您在等待期間有任何疑問或需要進一步協助，請隨時與我們聯繫，我們將竭誠為您服務。
+║               感謝您的耐心與理解，祝您有美好的一天。
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:32:57.541+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-10] [eb5061c32f6874da5cb9e552996e7acc-6208681909df8f68] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=142, completionTokens=172, totalTokens=314, cacheReadInputTokens=0}
+2026-07-17T16:42:28.538+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-6] [ca8b6b168cd2396238bc7d92d1c78c31-95ebd41657371ca9] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #4 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        客戶 ant 傳送了以下訊息：
+║               我的包裹已經延遲三天，請問何時可以收到？
+║               請撰寫一封禮貌且有幫助的電子郵件回覆，針對客戶提出的問題進行回應。
+║               請保持專業且友善的語氣，並提供適當的安撫與保證。
+║               請僅回覆電子郵件內文，不需包含主旨、署名或簽名。
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:42:32.248+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-6] [ca8b6b168cd2396238bc7d92d1c78c31-95ebd41657371ca9] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #4 ══════════════════════════════════════════════════
+║ [ASSISTANT]   親愛的 ant 您好，
+║               感謝您聯繫我們，並告知包裹延遲的情況。非常抱歉因延誤給您帶來的不便與困擾。
+║               我們已立即向物流部門查詢您的訂單狀態，並確認包裹目前正在運送途中。根據最新資訊，預計將於未來一至兩個工作天內送達您的指定地址。我們會持續關注包裹動態，確保您能盡快收到商品。
+║               若您在此期間有任何疑問或需要進一步協助，請隨時與我們聯繫，我們將竭誠為您服務。
+║               再次感謝您的耐心與理解，祝您有美好的一天！
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:42:32.249+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-6] [ca8b6b168cd2396238bc7d92d1c78c31-02e162d626f5c479] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=142, completionTokens=173, totalTokens=315, cacheReadInputTokens=0}
+2026-07-17T16:42:41.517+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-8] [5733e8e32e82d621711719683a822a25-ff4d33b8fb98b9af] c.e.m.controller.AudioController         : TTS 請求: characters=2
+2026-07-17T16:47:10.095+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-3] [b3ce656ed8435956c9e7778276ad4bec-9270ffcb0aaed71c] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #5 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        hihi
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:47:11.118+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-3] [b3ce656ed8435956c9e7778276ad4bec-9270ffcb0aaed71c] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #5 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！有什麼我可以幫忙的嗎？😊
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:47:11.118+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-3] [b3ce656ed8435956c9e7778276ad4bec-f3ce5710e74dc476] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=30, completionTokens=14, totalTokens=44, cacheReadInputTokens=0}
+2026-07-17T16:47:14.304+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-6] [1eb0a43d6635fe9793df62cae813d6fe-ae47b2c2ef182a28] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ► LLM Request #6 ══════════════════════════════════════════════════
+║ [SYSTEM]      回答時請使用清楚、易理解且專業的繁體中文。
+║ [USER]        ge
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:47:15.716+08:00 DEBUG 8492 --- [mySpringAi] [http-nio-8080-exec-6] [1eb0a43d6635fe9793df62cae813d6fe-ae47b2c2ef182a28] c.e.m.advisor.PrettyLoggerAdvisor        : 
+╔══ ◄ LLM Response #6 ══════════════════════════════════════════════════
+║ [ASSISTANT]   您好！請問您需要什麼幫助呢？您可以提供更多資訊或問題內容，我會盡力協助您。
+╚════════════════════════════════════════════════════════════════════
+2026-07-17T16:47:15.716+08:00  INFO 8492 --- [mySpringAi] [http-nio-8080-exec-6] [1eb0a43d6635fe9793df62cae813d6fe-75173538552843ae] c.e.m.advisor.TokenUsageAuditAdvisor     : Token 使用量 : DefaultUsage{promptTokens=29, completionTokens=30, totalTokens=59, cacheReadInputTokens=0}
