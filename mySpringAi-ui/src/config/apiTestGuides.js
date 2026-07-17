@@ -277,4 +277,36 @@ export const apiTestGuides = {
     ],
     notes: "並非所有模型都支援相同的品質與尺寸組合；若 OpenAI 拒絕參數，後端會回傳對應錯誤。",
   },
+
+  // ────────── Audio · Speech ──────────
+  "/audio/text-to-speech": {
+    summary: "基礎文字轉語音：使用後端預設 voice，產生可播放及下載的 MP3。",
+    testPoints: [
+      "確認輸入文字可轉成語意正確、語調自然的語音",
+      "API 回傳音訊 Blob，前端建立臨時 Blob URL 供播放器與下載連結使用",
+      "再次生成、按 Clear 或離開 route 時，舊 Blob URL 會被撤銷並釋放資源",
+      "音訊未存入 Context 或 sessionStorage，切換 route 或重新整理後不會保留",
+    ],
+    sampleQueries: [
+      "您好，歡迎使用 Spring AI 語音服務。",
+      "下一站是台北車站，請準備下車。",
+      "今天陽光明媚，很適合到戶外走走！",
+    ],
+    notes: "音訊只存在目前頁面的瀏覽器記憶體；需要保留時請先下載。",
+  },
+  "/audio/text-to-speech-options": {
+    summary: "進階文字轉語音：可指定 voice、speed 與輸出格式。",
+    testPoints: [
+      "使用相同文字切換不同 voice，比較音色與表達方式",
+      "調整 speed，比較語速對清晰度與自然度的影響",
+      "切換 mp3、opus、aac、flac、wav 或 pcm，確認下載副檔名與輸出格式",
+      "API 回傳音訊 Blob；再次生成、Clear 或離開 route 時會撤銷舊 Blob URL",
+    ],
+    sampleQueries: [
+      "這是一段用來比較不同聲音角色的測試內容。",
+      "請以清楚且穩定的節奏，朗讀這段產品使用說明。",
+      "各位旅客您好，本班列車即將抵達終點站。",
+    ],
+    notes: "部分瀏覽器可能無法直接播放 pcm；仍可透過 Download 下載結果。",
+  },
 };

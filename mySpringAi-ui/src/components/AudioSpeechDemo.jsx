@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import apiClient from "../api/client";
+import { apiTestGuides } from "../config/apiTestGuides";
 
 /*
  * Blob 在這個元件中的用途（文字轉語音）：
@@ -60,6 +61,8 @@ export default function AudioSpeechDemo({
   description,
   withOptions = false,
 }) {
+  const testGuide = apiTestGuides[endpoint];
+
   // 要轉換的文字與進階語音選項。
   const [message, setMessage] = useState("");
   const [voice, setVoice] = useState("alloy");
@@ -177,7 +180,52 @@ export default function AudioSpeechDemo({
         {/* 顯示空狀態、loading、音訊播放器或錯誤。 */}
         <div className="messages audio-result-area">
           {!audioUrl && !error && !isLoading && (
-            <div className="empty-state">輸入文字並產生可直接播放的音訊。</div>
+            <div className="empty-chat">
+              <span aria-hidden="true">♫</span>
+              <h2>準備產生語音</h2>
+              <p>在下方輸入文字，送出後即可播放或下載音訊。</p>
+              {testGuide && (
+                <div
+                  className="test-guide"
+                  role="note"
+                  aria-label="API 測試說明"
+                >
+                  <p className="test-guide-summary">{testGuide.summary}</p>
+                  {testGuide.testPoints?.length > 0 && (
+                    <>
+                      <p className="test-guide-heading">🎯 測試重點</p>
+                      <ul>
+                        {testGuide.testPoints.map((point, index) => (
+                          <li key={`tp-${index}`}>{point}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {testGuide.sampleQueries?.length > 0 && (
+                    <>
+                      <p className="test-guide-heading">💬 建議提問</p>
+                      <ul>
+                        {testGuide.sampleQueries.map((query, index) => (
+                          <li key={`sq-${index}`}>
+                            <button
+                              type="button"
+                              className="sample-query"
+                              onClick={() => setMessage(query)}
+                              title="點擊填入語音文字"
+                            >
+                              {query}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {testGuide.notes && (
+                    <p className="test-guide-notes">⚠️ {testGuide.notes}</p>
+                  )}
+                </div>
+              )}
+            </div>
           )}
           {isLoading && (
             <div
