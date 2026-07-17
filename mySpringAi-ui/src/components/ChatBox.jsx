@@ -3,6 +3,7 @@ import axios from "axios";
 import apiClient from "../api/client";
 import { useDemo } from "../context/useDemo";
 import { apiTestGuides } from "../config/apiTestGuides";
+import RequestStatus from "./RequestStatus";
 
 // 將 API 回應統一轉成 ChatBox 可顯示的文字：字串直接使用，物件或陣列則格式化為 JSON。
 function responseToText(data) {
@@ -54,6 +55,7 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
     () => messagesByUserAndEndpoint[userKey]?.[endpoint] || [],
     [endpoint, messagesByUserAndEndpoint, userKey],
   );
+  const lastMessageRole = messages[messages.length - 1]?.role;
 
   // 訊息或 loading 狀態改變時的捲動策略：
   // - 空狀態（沒有訊息且非載入中）：捲到頂部，讓 ✦ 與 guide bubble 完整可見。
@@ -127,7 +129,9 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
     } catch (error) {
       // 將 Axios 錯誤轉成可顯示訊息；主動取消時不顯示錯誤。
       const errorMessage = errorToText(error);
-      if (errorMessage) appendMessage({ role: "error", content: errorMessage });
+      if (errorMessage) {
+        appendMessage({ role: "error", content: errorMessage });
+      }
     } finally {
       // 正常完成或失敗時結束 loading；卸載造成的取消不再更新 state。
       if (!controller.signal.aborted) setIsLoading(false);
@@ -167,7 +171,10 @@ function ChatBox({ title, description, endpoint, requiresUserName = false }) {
       <section className="chat-panel">
         <div className="chat-toolbar">
           <div>
-            <span className="status-dot" /> Ready
+            <RequestStatus
+              isLoading={isLoading}
+              lastRole={lastMessageRole}
+            />
             {requiresUserName && (
               <span className="user-chip">
                 使用者名稱: {userName || "not set"}

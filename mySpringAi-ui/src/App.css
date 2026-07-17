@@ -67,8 +67,13 @@
 
 .chat-panel { overflow: hidden; border: 1px solid rgba(53,64,86,.78); border-radius: 18px; background: rgba(16,21,31,.9); box-shadow: var(--shadow-panel); backdrop-filter: blur(14px); }
 .chat-toolbar { display: flex; align-items: center; justify-content: space-between; min-height: 50px; padding: 0 18px; color: var(--muted); border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
-.status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #56d99b; box-shadow: 0 0 9px rgba(86,217,155,.7); }
-.user-chip { margin-left: 13px; padding-left: 13px; border-left: 1px solid var(--border); color: #aab4c6; text-transform: none; letter-spacing: 0; }
+.status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #778196; box-shadow: 0 0 8px rgba(119,129,150,.4); transition: background .2s ease, box-shadow .2s ease; }
+.status-dot.status-loading { background: #f2bd62; box-shadow: 0 0 10px rgba(242,189,98,.7); animation: status-pulse 1s ease-in-out infinite alternate; }
+.status-dot.status-success { background: #56d99b; box-shadow: 0 0 9px rgba(86,217,155,.7); }
+.status-dot.status-error { background: var(--danger); box-shadow: 0 0 9px rgba(255,124,141,.7); }
+.status-dot.status-incomplete { background: #f2bd62; box-shadow: 0 0 8px rgba(242,189,98,.48); }
+@keyframes status-pulse { to { opacity: .45; transform: scale(.78); } }
+.user-chip { display: inline-flex; align-items: center; margin-left: 13px; padding: 4px 9px; color: #dcd8ff; background: linear-gradient(135deg, rgba(139,124,255,.16), rgba(75,214,208,.07)); border: 1px solid rgba(139,124,255,.3); border-radius: 999px; box-shadow: 0 0 16px rgba(139,124,255,.1); font-weight: 700; text-transform: none; letter-spacing: .01em; }
 .chat-toolbar button { color: #8f9aae; background: transparent; border: 0; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
 .chat-toolbar button:hover:not(:disabled) { color: #fff; }
 .chat-toolbar button:disabled { opacity: .35; cursor: default; }

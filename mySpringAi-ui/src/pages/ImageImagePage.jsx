@@ -3,6 +3,7 @@ import axios from "axios";
 import apiClient from "../api/client";
 import { apiTestGuides } from "../config/apiTestGuides";
 import { useDemo } from "../context/useDemo";
+import RequestStatus from "../components/RequestStatus";
 
 // 本頁後端 endpoint；同時用於 API 呼叫、slot 的 key、以及頁面顯示。
 const ENDPOINT = "/image/image";
@@ -120,6 +121,8 @@ export default function ImageImagePage() {
     if (isLoading) return;
 
     setIsLoading(true);
+    // 先保存 user 紀錄；若切換 Route 導致 request 取消，回來時可顯示「請求未完成」。
+    appendSlot([{ role: "user", prompt: message }]);
 
     const controller = new AbortController();
     controllerRef.current = controller;
@@ -133,7 +136,6 @@ export default function ImageImagePage() {
       );
       // 成功：將 prompt 與圖片 URL 追加至歷史；Context/sessionStorage 不再保存 Base64。
       appendSlot([
-        { role: "user", prompt: message },
         {
           role: "assistant",
           prompt: message,
@@ -145,7 +147,6 @@ export default function ImageImagePage() {
       // 失敗也追加至歷史；主動取消時不寫入。
       if (errorMessage) {
         appendSlot([
-          { role: "user", prompt: message },
           { role: "error", prompt: message, content: errorMessage },
         ]);
       }
@@ -178,9 +179,10 @@ export default function ImageImagePage() {
       <section className="chat-panel">
         {/* 工具列：狀態指示 + Clear 按鈕（loading 中或沒東西可清時 disable）。 */}
         <div className="chat-toolbar">
-          <div>
-            <span className="status-dot" /> Ready
-          </div>
+          <RequestStatus
+            isLoading={isLoading}
+            lastRole={slot[slot.length - 1]?.role}
+          />
           <button
             type="button"
             onClick={clearAll}

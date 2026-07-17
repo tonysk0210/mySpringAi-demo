@@ -3,6 +3,7 @@ import axios from "axios";
 import apiClient from "../api/client";
 import { apiTestGuides } from "../config/apiTestGuides";
 import { useDemo } from "../context/useDemo";
+import RequestStatus from "../components/RequestStatus";
 
 const ENDPOINT = "/image/image-options";
 const TEST_GUIDE = apiTestGuides[ENDPOINT];
@@ -127,6 +128,8 @@ export default function ImageImageOptionsPage() {
     const message = prompt.trim();
     if (isLoading || !message) return;
     setIsLoading(true);
+    // 先保存 user 紀錄；若切換 Route 導致 request 取消，回來時可顯示「請求未完成」。
+    appendSlot([{ role: "user", prompt: message, model, quality, size }]);
 
     const controller = new AbortController();
     controllerRef.current = controller;
@@ -140,7 +143,6 @@ export default function ImageImageOptionsPage() {
       );
       // 將 prompt、options 與唯一圖片 URL 追加至歷史；Context/sessionStorage 不再保存 Base64。
       appendSlot([
-        { role: "user", prompt: message, model, quality, size },
         {
           role: "assistant",
           prompt: message,
@@ -154,7 +156,6 @@ export default function ImageImageOptionsPage() {
       const errorMessage = errorToText(error);
       if (errorMessage) {
         appendSlot([
-          { role: "user", prompt: message, model, quality, size },
           { role: "error", prompt: message, content: errorMessage },
         ]);
       }
@@ -193,9 +194,10 @@ export default function ImageImageOptionsPage() {
 
       <section className="chat-panel">
         <div className="chat-toolbar">
-          <div>
-            <span className="status-dot" /> Ready
-          </div>
+          <RequestStatus
+            isLoading={isLoading}
+            lastRole={slot[slot.length - 1]?.role}
+          />
           <button
             type="button"
             onClick={clearAll}

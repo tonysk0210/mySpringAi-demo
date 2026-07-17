@@ -3,6 +3,7 @@ import axios from "axios";
 import apiClient from "../api/client";
 import { useDemo } from "../context/useDemo";
 import { apiTestGuides } from "../config/apiTestGuides";
+import RequestStatus from "../components/RequestStatus";
 
 // 本頁對應的後端 endpoint；集中成常數避免多處硬編碼。
 const ENDPOINT = "/email/emailResponse";
@@ -106,6 +107,8 @@ export default function EmailEmailResponsePage() {
     if (isLoading) return;
 
     setIsLoading(true);
+    // 先保存 user 紀錄；若切換 Route 導致 request 取消，回來時可顯示「請求未完成」。
+    writeSlot([{ role: "user", customerName: name, customerMessage: message }]);
 
     // 為本次 request 建立取消控制器，供卸載時中止請求。
     const controller = new AbortController();
@@ -164,9 +167,10 @@ export default function EmailEmailResponsePage() {
       <section className="chat-panel">
         {/* 工具列：狀態指示與 Clear 按鈕；loading 中或無內容可清時按鈕 disable。 */}
         <div className="chat-toolbar">
-          <div>
-            <span className="status-dot" /> Ready
-          </div>
+          <RequestStatus
+            isLoading={isLoading}
+            lastRole={slot[slot.length - 1]?.role}
+          />
           <button
             type="button"
             onClick={clearAll}
