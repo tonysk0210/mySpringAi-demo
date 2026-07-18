@@ -31,6 +31,7 @@ public class BeanInspector {
         }*/
 
         System.out.println(
+                // 將陣列中的 Bean 名稱轉換為可讀的字串格式
                 Arrays.toString(
                         ctx.getBeanNamesForType(ToolCallbackProvider.class) // mcpToolCallbacks
                 )
